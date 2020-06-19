@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>7D-Position Group</title>
+	<style type="text/css">
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		.block {
+			width: 400px;
+			margin: 50px auto;
+			height: 250px;
+			border: 2px solid #F00;
+			position: relative;
+		}
+		
+		.box {
+			width: 100px;
+			height: 100px;
+			text-align: center;
+			line-height: 100px;
+		}
+		
+		.boxA {
+			background-color: #0C3;
+			position: absolute;
+			left: 40px;
+			top: 40px;
+			z-index: 1002;
+		}
+		
+		.boxB {
+			background-color: #39C;
+			position: absolute;
+			left: 80px;
+			top: 100px;
+			z-index: 999;
+		}
+		
+		.boxC {
+			background-color: #C09;
+			position: absolute;
+			left: 170px;
+			top: 20px;
+			z-index: 1000;
+		}
+		
+		.boxD {
+			background-color: #F99;
+			position: absolute;
+			left: 240px;
+			top: 50px;
+			z-index: 1001;
+		}
+	</style>
+</head>
+<body>
+	<div class="block">
+        <div class="box boxA">Box A</div>
+        <div class="box boxB">Box B</div>
+        <div class="box boxC">Box C</div>
+        <div class="box boxD">Box D</div>
+    </div>
+</body>
+</html>
