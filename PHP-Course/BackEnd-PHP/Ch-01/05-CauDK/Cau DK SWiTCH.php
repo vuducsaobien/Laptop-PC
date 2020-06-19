@@ -5,63 +5,58 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Câu điều kiện SWiTCH</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
     <script src='main.js'></script>
     <style type="text/css">
-		* {
-			margin: 0px;
-			padding: 0px;
-		}
-		
-        .content {
-            margin: 20px auto;
-            width: 600px;
-            border: 1px solid #999;
-            padding: 10px;
-        }
-
-        .content h1 {
-            color: red;
-            text-align: center;
-        }
-
-        .content div.row span {
-            display: inline-block;
-            width: 255px;
-            text-align: right;
-        }
-
-        .content div.row input[type=text] {
-            padding: 3px 5px;
-            display: block;
-            margin: 0px auto 20px auto;
-        }
-
-        .content div.row input[type=submit] {
-            padding: 3px 5px;
-            display: block;
-            margin: 0px auto 20px auto;
-        }
-
-        .content div.row p {
-            font-weight: bold;
-            font-size: 20px;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
     <?php
 
-    $n1     = " ";
-    $n2     = " ";
-    $caculate     = " ";
+        $n1         = "";
+        $caculate   = "";
+        $n2         = "";
+        
+        if (isset ($_POST["number1"]) && isset ($_POST["caculate"]) && isset ($_POST["number2"]) ) {
+            $n1         = $_POST["number1"];
+            $caculate   = $_POST["caculate"]; 
+            $n2         = $_POST["number2"];
+            $flag = true; 
 
-    if(isset($_POST["number1"]) && isset ($_POST["number2"]) && isset($_POST["caculate"])) {
-        $n1     = $_POST["number1"];
-        $n2     = $_POST["number2"];
-        $caculate     = $_POST["caculate"];
-    }
+                if (is_numeric ($n1) && is_numeric ($n2)) {
+                    switch ($caculate) {
+                        case '+':
+                            $result = $n1 + $n2;
+                            break;
+    
+                        case '-':
+                            $result = $n1 - $n2;
+                            break;
+    
+                        case '*':
+                        case 'x':
+                            $result = $n1 * $n2;
+                            break;
+    
+                        case '/':
+                        case ':':
+                            $result = $n1 / $n2;
+                            break;
+    
+                        case '%':
+                            $result = $n1 % $n2;
+                            break;
+                        
+                        default:
+                        $result = $n1 + $n2;
+                        $caculate = "+";
+                            break;
+                    } 
+                } else { 
+                        $result = "Không thực hiện được!!";
+                        $flag = false; 
+                    }
+        }
     ?>
 
 
@@ -71,17 +66,17 @@
         <form action="#" method="POST" name="main-form">
             <div class="row">
                 <span>Số thứ Nhất</span>
-                <input type="text" name="number1" value="<?php echo $n1;?>" />
+                <input type="text" name="number1" value="<?php echo $n1; ?>" />
             </div>
 
             <div class="row">
                 <span>Phép toán</span>
-                <input type="text" name="number2" value="<?php echo $n2;?>" />
+                <input type="text" name="caculate" value="<?php echo $caculate; ?>" />
             </div>
 
             <div class="row">
                 <span>Số thứ Hai</span>
-                <input type="text" name="caculate" value="<?php echo $caculate;?>" />
+                <input type="text" name="number2" value="<?php echo $n2; ?>" />
             </div>
 
             <div class="row">
@@ -89,7 +84,15 @@
             </div>
 
             <div class="row">
-                <p>Kết quả 25 % 2 = 1</p>
+                <p>
+                    <?php
+                        if ( $flag == true) {
+                            echo "Kết quả " . $n1 . " " . $caculate . " " . $n2 . " = " . $result; 
+                        } else {
+                            echo $result;
+                        }
+                    ?>
+                </p>
             </div>
 
         </form>
