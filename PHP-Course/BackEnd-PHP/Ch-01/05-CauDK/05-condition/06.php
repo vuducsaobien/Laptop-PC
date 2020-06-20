@@ -226,3 +226,23 @@ $mon = "";
     </div>
 </body>
 </html>
+
+
+<div class = "result">
+	<img src = "images/<?php echo $image; ?>.jpg" 
+		 alt = "<?php echo $image;?>" />
+	<p><?php echo $name;?> <span>(<?php echo $image?> : <?php echo $time;?>)
+
+
+<div class = "result">
+<img src = "images/<?php echo $image; ?>.jpg" 
+		alt = "<?php echo $image;?>" />
+<p><?php echo $name;?> <span>(<?php echo $image?> : <?php echo $time;?>)
+
+<?php 
+'        <div class="result">
+            <img src="images/' . $image . '.jpg" alt="' . $image . '" />
+            <p>' . $name . '<span>(' . $image . ' - ' . $time . ')</span></p>
+        </div>;
+	'
+?>

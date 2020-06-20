@@ -226,3 +226,16 @@ $mon = "";
     </div>
 </body>
 </html>
+
+<?php 
+	for($i = 0; $i <= 10; $i = $i++) {
+		echo $i . "<br />";
+	}
+?>
+
+<?php 
+	$i = 1;
+	while ($i <= 10) {
+		echo $i . "<br />";
+	}
+?>
