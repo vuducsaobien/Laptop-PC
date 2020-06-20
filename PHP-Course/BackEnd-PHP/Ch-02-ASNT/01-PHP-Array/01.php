@@ -1,15 +1,13 @@
 	<?php
-        $n = 20;
-        $str = "PHP";
+        $course   = array("PHP" , "Zend FrameWork" , "Joomla" );
 
-        var_dump ($n);
-        echo "<br/>";
-        var_dump ($str);
+        echo "<pre>";
+        print_r ($course);
+        echo "</pre>";
 
-        echo "<br/>";
-        echo "<br/>";
-
-        echo gettype ($n);
-        echo "<br/>";
-        echo gettype ($str);
+        if (!empty ($course)) {
+                foreach ($course as $key => $value) {
+                        echo $value . "<br/>";
+                }
+        }
 	?>
