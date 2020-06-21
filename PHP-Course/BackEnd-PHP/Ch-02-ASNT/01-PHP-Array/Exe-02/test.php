@@ -1,17 +1,18 @@
 <?php
-    $data = file("question.txt") or die("Cannot read file");
-    array_shift($data);
+    $data = file("question.txt") or die ("Cannot read file");
+    array_shift($data);
 
-    foreach($data as $key => $value) {
+    $arrayQuestions = array();
+    foreach($data as $key => $value) {
 
-    $tmp                 = explode("|", $value);
-    $id                  = $tmp[0];
-    $question            = $tmp[1];
-    $arrayQuestions[$id] = array("question" => $question);
+    $tmp                 = explode("|", $value);
+    $id                  = $tmp[0];
+    $question            = $tmp[1];
+    $arrayQuestions[$id] = $question;
 }
 
-echo "<pre>";
+echo "<pre>";
 print_r($arrayQuestions);
-echo "</pre>";
+echo "</pre>";
 
 ?>
