@@ -1,34 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+	
+	.content {
+		width: 500px;
+		padding: 10px;
+		border: 2px solid #ddd;
+		height: auto;
+		margin: 10px auto;
+	}
+</style>
+</head>
+<body>
+	<div class="content">
 <?php
-//$student["SV001"] = array ("name" => "John", "sex" => 1, "score" => array(4,5,6));
-//$student["SV002"] = array ("name" => "Peter", "sex" => 1, "score" => array(5,6,7));
-//$student["SV003"] = array ("name" => "Marry", "sex" => 0, "score" => array(7,8,9));
+		$group = array ("1" => "Admin", "2" => "Manager", "3" => "Member", "4" => "Guest");
 
-$student = array (
-        "SV001" => array("name"         => "John",
-                         "sex"          => 1,
-                         "score"        => array(4,5,6)
-                        ),
-        "SV002" => array("name"         => "Peter",
-                         "sex"          => 1,
-                         "score"        => array(5,6,7)
-                        ),
-        "SV003" => array("name"         => "Marry",
-                         "sex"          => 0,
-                         "score"        => array(7,8,9)
-                        ),
-                );
-        
-        
-
-
-if (!empty($student)) {
-        foreach ($student as $key => $value) {
-                $name = $value["name"];
-                $sex = ($value["sex"]==1) ? "Boy" : "Girl";
-
-                $score = array_sum($value["score"]);
-
-                echo "Name: " . $name . " - Sex: " .$sex . " - Total score: " . $score . "<br />";
-        }
-}
+		$xhtml = "";
+		if (!empty($group)) {
+				$xhtml .='<select name="group" id="group" style="width: 200px">';
+				$xhtml .='<option value="1">Admin</option>';
+				$xhtml .='<option value="2">Manager</option>';
+				$xhtml .='<option value="3">Member</option>';
+				$xhtml .='<option value="4">Guest</option>';
+				$xhtml .= '</select>';
+		}
+		echo $xhtml;
 ?>
+	</div>
+</body>
+</html>
+
+
+
+
