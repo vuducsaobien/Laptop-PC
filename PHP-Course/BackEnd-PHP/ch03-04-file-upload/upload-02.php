@@ -11,4 +11,10 @@
 	
 	if($flagSize == true && $flagExtension==true){
 		@move_uploaded_file($fileUpload['tmp_name'], './files/' . $fileName);
+	} else {
+		if (!$flagSize)
+		echo "File quá lớn";
+	} if (!$flagExtension) {
+		echo "File ko hop le";
 	}
+	

@@ -39,6 +39,7 @@
 	            		<input type="checkbox" name="checkbox[]" value="<?php echo $id;?>">
 	            	</p>
 	                <p class="name"><?php echo $tile;?><span><?php echo $description;?></span></p>
+					<p><?php echo '<img src="nancy.jpg" alt="ss" width=50px>' ?></p>
 	                <p class="id"><?php echo $id;?></p>
 	                <p class="size"><?php echo $size;?></p>
 	                <p class="action">
