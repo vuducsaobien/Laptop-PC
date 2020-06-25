@@ -11,4 +11,19 @@
      *  
      */
 
-  
+$list       = explode("/",$str);
+echo "<pre>";
+print_r($list);
+echo "</pre>";
+echo $list[0];
+
+
+$result = array();
+
+for ($i = 0; $i <count($list); $i+=2){
+    $result[ $list[$i] ] = $list[$i+1];
+}
+
+echo "<pre>";
+print_r($result);
+echo "</pre>";
