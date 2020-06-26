@@ -16,11 +16,13 @@
 </head>
 <body>
 <?php
-
 	require_once 'functions.php';
 	
-	$title				= '';
-	$description		= '';
+	$id = $_GET['id'];
+	$content		 	= file_get_contents("./files/$id");
+	$content 	 		= explode('||', $content);
+	$title	 	 		= $content[0];
+	$description 		= $content[1];
 	$errorTitle			= '';
 	$errorDescription	= '';
 
@@ -39,12 +41,11 @@
 		if (checkEmpty($description)) 				$errorDescription = '<p class="error">Dữ liệu ko dc rỗng</p>';
 		if (checkLength($description, 10, 5000))	$errorDescription .= '<p class="error">Mô tả dài từ 10 - 5000 ký tự</p>';
 
-		// A - Z, a - z, 0 - 9. Put String to File, Tạo ra 1 File Mới.
+		// A - Z, a - z, 0 - 9. Put String to File, Đè chông File .txt mới vào File cũ 
 		if ($errorTitle == '' && $errorDescription == ''){
 
 			$data	= $title . '||' . $description;
-			$name	= createFileName(5);
-			$fileName = "files/DUC-$name.txt";
+			$fileName = "files/$id";
 
 			if (file_put_contents($fileName, $data)){
 				$title		 = '';
@@ -55,7 +56,7 @@
 	}
 ?>
 	<div id="wrapper">
-    	<div class="title">PHP FILE - ADD-2</div>
+    	<div class="title">PHP FILE - EDIT</div>
         <div id="form">   
 			<form action="#" method="post" name="add-form">
 				<div class="row">
@@ -70,10 +71,6 @@
                     <?php echo $errorDescription; ?>
                 </div>
 
-				<div class="row">
-					<p>Image</p>
-					<input type="submit" value="Chọn ảnh đê" name="image">
-				</div>	
 
 				<div class="row">
 					<input type="submit" value="Save" name="submit">

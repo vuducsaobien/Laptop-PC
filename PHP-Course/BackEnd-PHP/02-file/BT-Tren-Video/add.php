@@ -71,11 +71,6 @@
                 </div>
 
 				<div class="row">
-					<p>Image</p>
-					<input type="submit" value="Chọn ảnh đê" name="image">
-				</div>	
-
-				<div class="row">
 					<input type="submit" value="Save" name="submit">
 					<input type="button" value="Cancel" name="cancel" id="cancel-button">
 				</div>
