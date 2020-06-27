@@ -54,9 +54,9 @@
 		// A-Z, a-z, 0-9: AzG09
 		if($errorTitle == '' && $errorDescription == '' && $errorImage == ''){
 			
-			$name =  randomString(5);
-			$imageName = randomStringFile($fileUpload['name'], 7);
-			$data	= $title . '||' . $description . '||' . $imageName;
+			$name 		=  randomString(5);
+			$imageName  = randomStringFile($fileUpload['name'], 7);
+			$data		= $title . '||' . $description . '||' . $imageName;
 			$filename	= './files/' .$name . '.txt';
 			if(file_put_contents($filename, $data)){
 				@move_uploaded_file($fileUpload['tmp_name'], './files/' . $imageName);
