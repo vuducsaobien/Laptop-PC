@@ -55,6 +55,7 @@
 
 #wrapper .list .row .imageID{
 	width: 8%;
+	height: 100%;
 }
 
 #wrapper .list .row .id{
@@ -69,7 +70,7 @@
 
 #wrapper .list .row .imageClass{
 	width: 10%;
-	height: 10%;
+	height: 100%;
 }
 
 #wrapper .list .row .action{

@@ -48,7 +48,7 @@
 					</p>
 
 					<p class="imageID"><?php echo $image; ?></p>
-					<img class = "imageClass" src = "<?php echo './images/'.$image; ?>" >
+					<img class = "imageClass" src = "<?php echo "./images/$image" ;?>" >
 
 	                <p class="id"><?php echo $id. '.txt'; ?></p>
 	                <p class="size"><?php echo $size; ?></p>

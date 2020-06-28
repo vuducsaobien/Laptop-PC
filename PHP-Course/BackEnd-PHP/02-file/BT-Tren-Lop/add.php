@@ -18,8 +18,8 @@
 <?php
 
 	require_once 'functions.php';
-	$configs	= parse_ini_file('configs.ini');
 	
+	$configs			= parse_ini_file('configs.ini');
 	$title				= '';
 	$description		= '';
 	$errorTitle			= '';
@@ -28,11 +28,11 @@
 
 	$flag = false;
     if( isset($_POST['title']) && isset($_POST['description'])) {
-        $title         = $_POST["title"];
-		$description   = $_POST["description"];
-		$fileUpload    = $_FILES["image"];
-		$uploadName    = $fileUpload['name'];
-		$uploadTmp	   = $fileUpload['tmp_name'];
+        $title			= $_POST["title"];
+		$description    = $_POST["description"];
+		$fileUpload     = $_FILES["image"];
+		$uploadName     = $fileUpload['name'];
+		$uploadTmp	    = $fileUpload['tmp_name'];
 
 		//Error Title
 		$errorTitle				= '';
@@ -91,7 +91,7 @@
 
 				<div class="row">
 					<p>Hình Ảnh</p>
-					<input type="file" name="image">
+					<input type="file" name="image" value="<?php echo "ss"; ?>">
 					<?php echo $errorImage; ?>
                 </div>
 
