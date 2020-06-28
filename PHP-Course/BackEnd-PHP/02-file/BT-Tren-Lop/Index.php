@@ -32,13 +32,13 @@
 			$title	 	 = $content[0];
 			$description = $content[1];
 			$image 		 = $content[2];
-			echo $id			 = substr($value, 0, 9);
+			$id			 = substr($value, 0, 9);
 			$size		 = convertSize(filesize("./files/$value"));
 ?>
 
 				<div class="row <?php echo $class; ?>">
 	            	<p class="no">
-	            		<input type="checkbox" name="checkbox[]" value="<?php echo $id;?>">
+	            		<input type="checkbox" name="checkbox[]" value="<?php echo "$id.txt";?>">
 	            	</p>
 	                <p class="name">
 						<?php echo $title; ?>
@@ -67,7 +67,7 @@
         
 	        <div id="area-button">
 	        	<a href="add.php">Add File</a>
-	        	<a id="multi-delete" href="#">Delete File</a>
+	        	<a id="multi-delete" href="#">Multi Delete File</a>
 	        </div>
     
     </div>

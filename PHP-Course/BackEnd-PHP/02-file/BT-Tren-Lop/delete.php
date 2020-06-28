@@ -15,16 +15,19 @@
 </head>
 <body>
 <?php
-	$id	= $_GET['id'];
+	$id				= $_GET['id'];
+	$id 			= "$id.txt";
 	$content		= file_get_contents("./files/$id");
 	$content		= explode('||', $content);
 	$title			= $content[0];
 	$description	= $content[1];
+	$image 			= $content[2];
 	// Người dùng đã ấn Delete, Post ID hidden, lấy id để xóa file .txt
 	$flag = false;
 	if (isset($_POST['id'])){
 		$id = $_POST['id'];
 		@unlink("./files/$id");
+		@unlink("./images/$image");
 		$flag = true;
 	}
 
@@ -47,9 +50,13 @@
 				<span><?php echo $description; ?></span>
 			</div>
 			<div class="row">
-				<input type="hidden" name="id" value="<?php echo $id;?>">
-				<input type="submit" value="Delete" name="submit">
-				<input type="button" value="Cancel" name="cancel" id="cancel-button">
+				<p>Image:</p>
+				<span><?php echo $image; ?></span>
+			</div>
+			<div class="row">
+				<input type="hidden" value="<?php echo $id;?>"  name="id" >
+				<input type="submit" value="Delete" 			name="submit">
+				<input type="button" value="Cancel" 			name="cancel" id="cancel-button">
 			</div>
 
 			<?php

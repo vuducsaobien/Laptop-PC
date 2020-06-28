@@ -11,10 +11,19 @@
 $checkBox       = $_POST['checkbox'];
 
 if(!empty($checkBox)){
+
+    foreach($checkBox as $key => $value){
+        $content		= file_get_contents("./files/$value");
+        $content		= explode('||', $content);
+        $file           = $content[2];
+        @unlink("./images/$file");
+    }
+    
     foreach($checkBox as $key => $value){
         @unlink("./files/$value");
     }
 }
+
 
 ?>
 	<div id="wrapper">

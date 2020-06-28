@@ -31,9 +31,6 @@
         $title         = $_POST["title"];
 		$description   = $_POST["description"];
 		$fileUpload    = $_FILES["image"];
-		echo '<pre>';
-	print_r($fileUpload);
-	echo '</pre>';
 		$uploadName    = $fileUpload['name'];
 		$uploadTmp	   = $fileUpload['tmp_name'];
 
@@ -48,7 +45,7 @@
 		if (checkLength($description, 10, 5000))	$errorDescription .= '<p class="error">Mô tả dài từ 10 - 5000 ký tự</p>';
 
 		// Error Image
-		$errorImage		= '';
+		$errorImage				= '';
 		if ($uploadName == "" ){
 			$errorImage .= '<p class="error">Hãy chọn Image</p>';
 		} else {

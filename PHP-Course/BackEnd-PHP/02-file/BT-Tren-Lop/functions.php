@@ -18,16 +18,6 @@ function checkLength($value, $min, $max){
     return $flag;
 }
 
-// // Tạo tên File tự động, A - Z, a - z, 0 - 9 ?
-// function createFileName($length = 3){
-//     $arrCharacter = array_merge(range('A', 'Z'), range('a', 'z'), range('0', '9'));
-//     $arrCharacter = implode( $arrCharacter, '');
-//     $arrCharacter = str_shuffle($arrCharacter);
-
-//     $result       = substr($arrCharacter, 0, $length);
-//     return $result;
-//     }
-
 // Random file name
 function randomString($fileName, $length = 5){
     $ext            = pathinfo($fileName, PATHINFO_EXTENSION);
