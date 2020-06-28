@@ -31,7 +31,8 @@
 			$content 	 = explode('||', $content);
 			$title	 	 = $content[0];
 			$description = $content[1];
-			$id	 		 = substr($value, 0, 13);
+			$image 		 = $content[2];
+			echo $id			 = substr($value, 0, 9);
 			$size		 = convertSize(filesize("./files/$value"));
 ?>
 
@@ -45,7 +46,11 @@
 								<?php echo $description; ?>
 							</span>
 					</p>
-	                <p class="id"><?php echo $id; ?></p>
+
+					<p class="imageID"><?php echo $image; ?></p>
+					<img class = "imageClass" src = "<?php echo './images/'.$image; ?>" >
+
+	                <p class="id"><?php echo $id. '.txt'; ?></p>
 	                <p class="size"><?php echo $size; ?></p>
 	                <p class="action">
 	                	<a href="edit.php?id=<?php echo $id; ?>">Edit</a> |

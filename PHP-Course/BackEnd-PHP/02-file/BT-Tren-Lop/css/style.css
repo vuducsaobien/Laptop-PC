@@ -53,12 +53,23 @@
 	text-align: justify;
 }
 
+#wrapper .list .row .imageID{
+	width: 8%;
+}
+
 #wrapper .list .row .id{
 	width: 8%;
 }
 
 #wrapper .list .row .size{
 	width: 8%;
+}
+
+
+
+#wrapper .list .row .imageClass{
+	width: 10%;
+	height: 10%;
 }
 
 #wrapper .list .row .action{

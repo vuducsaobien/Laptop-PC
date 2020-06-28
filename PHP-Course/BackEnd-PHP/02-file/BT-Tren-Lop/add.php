@@ -18,6 +18,7 @@
 <?php
 
 	require_once 'functions.php';
+	$configs	= parse_ini_file('configs.ini');
 	
 	$title				= '';
 	$description		= '';
@@ -29,11 +30,12 @@
     if( isset($_POST['title']) && isset($_POST['description'])) {
         $title         = $_POST["title"];
 		$description   = $_POST["description"];
-		$fileUpload   = $_FILES["image"];
+		$fileUpload    = $_FILES["image"];
 		echo '<pre>';
-print_r($fileUpload);
-echo '</pre>';
-
+	print_r($fileUpload);
+	echo '</pre>';
+		$uploadName    = $fileUpload['name'];
+		$uploadTmp	   = $fileUpload['tmp_name'];
 
 		//Error Title
 		$errorTitle				= '';
@@ -45,23 +47,28 @@ echo '</pre>';
 		if (checkEmpty($description)) 				$errorDescription = '<p class="error">Dữ liệu ko dc rỗng</p>';
 		if (checkLength($description, 10, 5000))	$errorDescription .= '<p class="error">Mô tả dài từ 10 - 5000 ký tự</p>';
 
-		//Error Image
+		// Error Image
 		$errorImage		= '';
-		if ($fileUpload['name'] = null ){
-			echo $errorImage .= '<p class="error">Hãy chọn Image</p>';
+		if ($uploadName == "" ){
+			$errorImage .= '<p class="error">Hãy chọn Image</p>';
 		} else {
-			$flagSize	=
-			
-		}				
-
+			$flagSize 	   = checkSize($fileUpload['size'], $configs['min_size'], $configs['max_size']);
+			$flagExtension = checkExtension($uploadName, explode('|', $configs['extension']));
+				if ($flagExtension == false){
+					$errorImage .= '<p class="error">Extension File sai</p>';
+				}
+				if ($flagSize == false){
+					$errorImage .= '<p class="error">Size File sai</p>';
+				}
+			}
 		// A - Z, a - z, 0 - 9. Put String to File, Tạo ra 1 File Mới.
-		if ($errorTitle == '' && $errorDescription == ''){
-
-			$data	= $title . '||' . $description;
-			$name	= createFileName(5);
-			$fileName = "files/DUC-$name.txt";
-
+		if ($errorTitle == '' && $errorDescription == '' && $errorImage == ''){
+			$image = 'DUC-' . randomString($uploadName, 5);
+			$txt  = 'DUC-' . randomString(5) . 'txt';
+			$fileName  = "./files/$txt";
+			$data		= $title . '||' . $description . '||' . $image;
 			if (file_put_contents($fileName, $data)){
+				@move_uploaded_file($uploadTmp, "./images/$image");
 				$title		 = '';
 				$description = '';
 				$flag		 = true;
@@ -87,13 +94,11 @@ echo '</pre>';
 
 				<div class="row">
 					<p>Hình Ảnh</p>
-					<input type="file" value="Chọn ảnh đê" name="image">
+					<input type="file" name="image">
 					<?php echo $errorImage; ?>
                 </div>
 
-
 				<div class="row">
-					
 					<input type="submit" value="Save" name="submit">
 					<input type="button" value="Cancel" name="cancel" id="cancel-button">
 				</div>

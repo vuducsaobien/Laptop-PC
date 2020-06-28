@@ -18,15 +18,25 @@ function checkLength($value, $min, $max){
     return $flag;
 }
 
-// Tạo tên File tự động, A - Z, a - z, 0 - 9 ?
-function createFileName($length = 3){
-    $arrCharacter = array_merge(range('A', 'Z'), range('a', 'z'), range('0', '9'));
-    $arrCharacter = implode( $arrCharacter, '');
-    $arrCharacter = str_shuffle($arrCharacter);
+// // Tạo tên File tự động, A - Z, a - z, 0 - 9 ?
+// function createFileName($length = 3){
+//     $arrCharacter = array_merge(range('A', 'Z'), range('a', 'z'), range('0', '9'));
+//     $arrCharacter = implode( $arrCharacter, '');
+//     $arrCharacter = str_shuffle($arrCharacter);
 
-    $result       = substr($arrCharacter, 0, $length);
+//     $result       = substr($arrCharacter, 0, $length);
+//     return $result;
+//     }
+
+// Random file name
+function randomString($fileName, $length = 5){
+    $ext            = pathinfo($fileName, PATHINFO_EXTENSION);
+    $arrCharacter   = array_merge(range('A','Z'), range('a','z'), range(0,9));
+    $arrCharacter   = implode($arrCharacter, '');
+    $arrCharacter   = str_shuffle($arrCharacter);
+    $result		    = substr($arrCharacter, 0, $length) . '.' . $ext;
     return $result;
-    }
+}
 
 // echo '<pre>';
 // print_r($data);
@@ -49,4 +59,19 @@ function convertSize($size, $totalDigit = 2, $ditance = ' '){
     $result = round($size, $totalDigit) . $ditance . $unit;
     return $result;
 }
-?>
+
+// Check file size
+function checkSize($size, $min, $max){
+    $flag = false;
+    if($size >= $min && $size <= $max) $flag = true;
+    return $flag;
+}
+
+// Check file extensions
+function checkExtension($fileName, $arrExtension){
+    $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+    $flag = false;
+    if(in_array(strtolower($ext), $arrExtension)==true)
+    $flag = true;
+    return $flag;
+}

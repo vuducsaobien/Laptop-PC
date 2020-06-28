@@ -8,10 +8,10 @@
 	
 	// Check file extensions
 	function checkExtension($fileName, $arrExtension){
-		echo $fileName;
-		echo '<pre>';
-print_r($arrExtension);
-echo '</pre>';
+		$ext = pathinfo($fileName, PATHINFO_EXTENSION);
+		$flag = false;
+		if(in_array(strtolower($ext), $arrExtension)==true) $flag = true;
+		return $flag;
 	}
 	
 	// Random file name
@@ -26,6 +26,3 @@ echo '</pre>';
 		$result		= substr($arrCharacter, 0, $length) . '.' . $ext;
 		return $result;
 	}
-// echo '<pre>';
-// print_r($data);
-// echo '</pre>';

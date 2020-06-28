@@ -17,19 +17,26 @@
 <body>
 <?php
 	require_once 'functions.php';
+	$configs			= parse_ini_file('configs.ini');
 	
 	$id = $_GET['id'];
+	$id = "$id.txt";
 	$content		 	= file_get_contents("./files/$id");
 	$content 	 		= explode('||', $content);
 	$title	 	 		= $content[0];
 	$description 		= $content[1];
+	$image 				= $content[2];
 	$errorTitle			= '';
 	$errorDescription	= '';
+	$errorImage			= '';
 
 	$flag = false;
     if( isset($_POST['title']) && isset($_POST['description'])) {
-        $title         = $_POST["title"];
-		$description   = $_POST["description"];
+        $title          = $_POST['title'];
+		$description    = $_POST['description'];
+		$fileUpload     = $_FILES['image'];
+		$uploadName     = $fileUpload['name'];
+		$uploadTmp	    = $fileUpload['tmp_name'];
 
 		//Error Title
 		$errorTitle				= '';
@@ -41,10 +48,26 @@
 		if (checkEmpty($description)) 				$errorDescription = '<p class="error">Dữ liệu ko dc rỗng</p>';
 		if (checkLength($description, 10, 5000))	$errorDescription .= '<p class="error">Mô tả dài từ 10 - 5000 ký tự</p>';
 
-		// A - Z, a - z, 0 - 9. Put String to File, Đè chông File .txt mới vào File cũ 
-		if ($errorTitle == '' && $errorDescription == ''){
+		// Error Image
+		$errorImage				 = '';
+		if ($uploadName == "" ){
+			$errorImage .= '<p class="error">Hãy chọn Image</p>';
+		} else {
+			$flagSize 	   = checkSize($fileUpload['size'], $configs['min_size'], $configs['max_size']);
+			$flagExtension = checkExtension($uploadName, explode('|', $configs['extension']));
+			
+			if ($flagSize == false){
+				$errorImage .= '<p class="error">Size File sai</p>';
+			}
+			if ($flagExtension == false){
+				$errorImage .= '<p class="error">Extension File sai</p>';
+			}
+		}
 
-			$data	= $title . '||' . $description;
+		// A - Z, a - z, 0 - 9. Put String to File, Đè chông File .txt mới vào File cũ 
+		if ($errorTitle == '' && $errorDescription == '' && $errorImage == ''){
+
+			$data		= $title . '||' . $description . '||' . $image;
 			$fileName = "files/$id";
 
 			if (file_put_contents($fileName, $data)){
@@ -58,7 +81,7 @@
 	<div id="wrapper">
     	<div class="title">PHP FILE - EDIT</div>
         <div id="form">   
-			<form action="#" method="post" name="add-form">
+			<form action="#" method="post" name="add-form" enctype="multipart/form-data">
 				<div class="row">
 					<p>Title</p>
 					<input type="text" name="title" value="<?php echo $title; ?>">
@@ -69,6 +92,12 @@
 					<p>Description</p>
 					<textarea name="description" rows="5" cols="100"><?php echo $description; ?></textarea>
                     <?php echo $errorDescription; ?>
+                </div>
+
+				<div class="row">
+					<p>Hình Ảnh</p>
+					<input type="file" name="image" value="<?php echo $title; ?>">
+					<?php echo $errorImage; ?>
                 </div>
 
 

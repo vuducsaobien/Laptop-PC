@@ -48,6 +48,7 @@
 			if ($flagExtension == false) {
 				$errorImage .= '<p class="error">Đuôi File sai</p>';
 			}
+
 		}
 
 		// A-Z, a-z, 0-9: AzG09
@@ -64,6 +65,7 @@
 				$flag			= true;
 			}
 		}
+		
 	} 
 ?>
 	<div id="wrapper">
