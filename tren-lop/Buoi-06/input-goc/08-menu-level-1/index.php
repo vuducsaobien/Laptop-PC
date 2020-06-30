@@ -9,30 +9,18 @@
       <div class="menuBackground">
          <div class="center">
             <ul class="dropDownMenu">
-               <li ><a href="index.php">Home </a></li>
-               <li class="active">
-                  <a href="data/about.php">About</a>
-                  <ul>
-                     <li>
-                        <a href="data/service.php">Service</a>
-                     </li>
-                     <li>
-                        <a href="data/company.php">Company</a>
-                     </li>
-                  </ul>
-               </li>
-               <li ><a href="data/contact.php">Contact </a></li>
+               <li >              <a href="index.php">Home           </a></li>
+               <li class="active"><a href="data/about.php">About     </a></li>
+               <li >              <a href="data/contact.php">Contact </a></li>
             </ul>
          </div>
       </div>
       <div class="breadcrumb">
          <a href="index.php">Home</a>
          <span>></span>
-         <a href="data/about.php">About</a>
-         <span>></span>
-         <span>Company</span>
+         <span>About</span>
       </div>
 
-      <h3>Company</h3>
+      <h3>About</h3>
    </body>
 </html>
