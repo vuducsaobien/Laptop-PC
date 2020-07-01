@@ -45,7 +45,7 @@
 
 <div class="menuBackground">
     <div class="center">
-    <?php  echo $xhtml; ?>
+        <?php  echo $xhtml; ?>
     </div>
 </div>
 

@@ -1,10 +1,7 @@
 <?php include_once ('html/data.php');
 
-    // echo "<pre>";
-    // echo print_r($arrMenu);
-    // echo "</pre>";
     $xhtmlLV1 = '<ul class="dropDownMenu">';
-    $menuCurrent = basename($_SERVER['PHP_SELF'], ".php");
+    $menuCurrent = basename($_SERVER['PHP_SELF'] , ".php");
     foreach ($arrMenu as $keyMenuLV1 => $menuLV1){
         $classActive = '';
         if ($menuCurrent == $keyMenuLV1){
