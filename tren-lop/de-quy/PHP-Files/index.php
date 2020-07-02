@@ -9,22 +9,38 @@ function showAll($path, &$newString){
 		
 		if ($value != '.' && $value != '..'){
 			$dir = "$path/$value";
+			$level = 1;
+			$doc = '';
 
 			if (is_dir($dir)){ // Điều kiện dừng
-				$newString .= "<li>D: $value" ;
+				
+				$a = explode('/',$dir);
+
+				$level = (count ($a)-2);
+				$icon = '<img style="max-width: 20px" src ="images/folder.jpg">';
+				$newString .= "<li>$icon: $value-$level" ;
 
 				showAll($dir, $newString);
 				$newString .= '</li>';
 			} else {
-				$newString .= "<li>F: $value </li>";
+				$extension = pathinfo($value, PATHINFO_EXTENSION);
+				$iconFile = 'recycle.jpg';
+				if ($extension == 'ini' || $extension == 'txt'){
+					$iconFile = 'doc.jpg';
+				}
+				
+				if ($extension == 'mp4' || $extension == 'mp3'){
+					$iconFile = 'audio.jpg';
+				}
+				$newString .= '<li><img style="width: 20px" src ="./images/'.$iconFile.'">'. $value .'</li>';
 			}
-
+			
 		}
 
 	}
 	$newString .= '</ul>';
 }
 
-showAll('.', $newString);
+showAll('./data', $newString);
 echo $newString;
 
