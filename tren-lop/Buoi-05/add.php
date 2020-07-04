@@ -12,12 +12,13 @@
 	});
 </script>
 
-<title>PHP FILE - ADD - File Làm BT trên lớp</title>
+<title>PHP FILE - Add</title>
 </head>
 <body>
 <?php
 
 	require_once 'functions.php';
+	require_once 'define.php';
 	
 	$configs			= parse_ini_file('configs.ini');
 	$title				= '';
@@ -25,9 +26,9 @@
 	$errorTitle			= '';
 	$errorDescription	= '';
 	$errorImage			= '';
-
+	
 	$flag = false;
-    if( isset($_POST['title']) && isset($_POST['description'])) {
+	if( isset($_POST['title']) && isset($_POST['description']) ) {
         $title			= $_POST["title"];
 		$description    = $_POST["description"];
 		$fileUpload     = $_FILES["image"];
@@ -62,10 +63,10 @@
 		if ($errorTitle == '' && $errorDescription == '' && $errorImage == ''){
 			$image = 'DUC-' . randomString($uploadName, 5);
 			$txt  = 'DUC-' . randomString(5) . 'txt';
-			$fileName  = "./files/$txt";
+			$fileName  = TXT ."/$txt";
 			$data		= $title . '||' . $description . '||' . $image;
 			if (file_put_contents($fileName, $data)){
-				@move_uploaded_file($uploadTmp, "./images/$image");
+				@move_uploaded_file($uploadTmp, IMAGE ."/$image");
 				$title		 = '';
 				$description = '';
 				$flag		 = true;
@@ -74,7 +75,7 @@
 	}
 ?>
 	<div id="wrapper">
-    	<div class="title">PHP FILE - ADD-2</div>
+    	<div class="title">PHP FILE - Add</div>
         <div id="form">   
 			<form action="#" method="post" name="add-form" enctype="multipart/form-data">
 				<div class="row">

@@ -12,16 +12,16 @@
 	});
 </script>
 
-<title>PHP FILE - ADD - File Làm BT trên lớp</title>
+<title>PHP FILE - Edit</title>
 </head>
 <body>
 <?php
 	require_once 'functions.php';
+	require_once 'define.php';
 	$configs			= parse_ini_file('configs.ini');
-	
-	$id = $_GET['id'];
-	$id = "$id.txt";
-	$content		 	= file_get_contents("./files/$id");
+	$id 				= $_GET['id'];
+	$id 				= "$id.txt";
+	$content		 	= file_get_contents( TXT ."/$id" );
 	$content 	 		= explode('||', $content);
 	$title	 	 		= $content[0];
 	$description 		= $content[1];
@@ -49,37 +49,44 @@
 		if (checkLength($description, 10, 5000))	$errorDescription .= '<p class="error">Mô tả dài từ 10 - 5000 ký tự</p>';
 
 		// Error Image
-		$errorImage				 = '';
-		if ($uploadName == "" ){
-			$errorImage .= '<p class="error">Hãy chọn Image</p>';
-		} else {
+		$flagImageChange = false;
+		$errorImage 	 = '';
+		if ($uploadName != ''){
+			$flagImageChange = true;
 			$flagSize 	   = checkSize($fileUpload['size'], $configs['min_size'], $configs['max_size']);
 			$flagExtension = checkExtension($uploadName, explode('|', $configs['extension']));
-			
-			if ($flagSize == false){
-				$errorImage .= '<p class="error">Size File sai</p>';
-			}
-			if ($flagExtension == false){
-				$errorImage .= '<p class="error">Extension File sai</p>';
-			}
+
+			if (!$flagSize) 	 $errorImage .= '<p class="error">Size File sai</p>';
+			if (!$flagExtension) $errorImage .= '<p class="error">Extension File sai</p>';
 		}
 
-		// A - Z, a - z, 0 - 9. Put String to File, Đè chông File .txt mới vào File cũ 
+		// A - Z, a - z, 0 - 9. Put String to File, Đè chông File .txt mới vào File cũ, Xử lý File Image.
 		if ($errorTitle == '' && $errorDescription == '' && $errorImage == ''){
+			$fileName 		= TXT ."/$id";
 
-			$data		= $title . '||' . $description . '||' . $image;
-			$fileName = "files/$id";
+			if ($flagImageChange){
+				$imageChange = 'DUC-' . randomString($uploadName, 5);
+				@unlink(IMAGE ."/$image");
 
+			} else {
+				$imageChange = $image;
+			}
+
+			$data		= $title . '||' . $description . '||' . $imageChange;
 			if (file_put_contents($fileName, $data)){
+				@move_uploaded_file($uploadTmp, IMAGE ."/$imageChange");
 				$title		 = '';
 				$description = '';
+				$image		 = $uploadName;
 				$flag		 = true;
 			}
 		}
 	}
+			
+		
 ?>
 	<div id="wrapper">
-    	<div class="title">PHP FILE - EDIT</div>
+    	<div class="title">PHP FILE - Edit</div>
         <div id="form">   
 			<form action="#" method="post" name="add-form" enctype="multipart/form-data">
 				<div class="row">
@@ -95,8 +102,8 @@
                 </div>
 
 				<div class="row">
-					<p>Hình Ảnh</p>
-					<input type="file" name="image" value="<?php echo $title; ?>">
+					<p><?php echo $image; ?></p>
+					<input type="file" name="image" >
 					<?php echo $errorImage; ?>
                 </div>
 

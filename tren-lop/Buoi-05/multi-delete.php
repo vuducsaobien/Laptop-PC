@@ -3,26 +3,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<title>PHP FILE</title>
+<title>PHP FILE - Multi Delete</title>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
 <?php
 require_once 'functions.php';
+require_once 'define.php';
 
 if( isset ($_POST['checkbox'])  ){
 
     $checkBox = $_POST['checkbox'];
 
     foreach($checkBox as $key => $value){
-        $content		= file_get_contents("./files/$value");
+        $content		= file_get_contents(TXT ."/$value");
         $content		= explode('||', $content);
         $file           = $content[2];
-        @unlink("./images/$file");
+        @unlink(IMAGE ."/$file");
     }
     
     foreach($checkBox as $key => $value){
-        @unlink("./files/$value");
+        @unlink(TXT ."/$value");
         $flag = true;
     }
 

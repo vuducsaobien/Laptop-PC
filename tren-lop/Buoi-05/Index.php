@@ -20,20 +20,21 @@
 			<form action="multi-delete.php" method="post" name="main-form" id="main-form">
 <?php
 	require_once 'functions.php';
+	require_once 'define.php';
 
-	$data = scandir('./files');
+	$data = scandir ( TXT );
 	$i = 0;
 	
 	foreach ($data as $key => $value){
 		if ($value == '.' || $value == '..' || preg_match('#.txt$#imsU', $value) == false) continue;
 			$class		 = ($i % 2 == 0) ? 'odd' : 'even';
-			$content	 = file_get_contents("./files/$value");
+			$content	 = file_get_contents( TXT ."/$value" );
 			$content 	 = explode('||', $content);
 			$title	 	 = $content[0];
 			$description = $content[1];
 			$image 		 = $content[2];
 			$id			 = substr($value, 0, 9);
-			$size		 = convertSize(filesize("./files/$value"));
+			$size		 = convertSize(filesize( TXT ."/$value" ));
 ?>
 
 				<div class="row <?php echo $class; ?>">
@@ -47,9 +48,7 @@
 							</span>
 					</p>
 
-					<!-- <p class="imageID"><?php echo $image; ?></p>
-					<img class = "imageClass" src = "<?php echo "./images/$image" ;?>" > -->
-					<p class="image"><img src="<?php echo "./images/$image" ;?>" alt=""></p>
+					<p class="image"><img src="<?php echo "./data/images/$image" ;?>" alt=""></p>
 
 	                <p class="id"><?php echo $id. '.txt'; ?></p>
 	                <p class="size"><?php echo $size; ?></p>
@@ -68,7 +67,13 @@
         
 	        <div id="area-button">
 	        	<a href="add.php">Add File</a>
-	        	<a id="multi-delete" href="#">Multi Delete File</a>
+				<?php
+
+				if ($i != 0){
+					echo '<a id="multi-delete" href="#">Multi Delete File</a>';
+				}
+
+				?>
 	        </div>
     
     </div>

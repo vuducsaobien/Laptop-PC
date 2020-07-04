@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<title>PHP FILE</title>
+<title>PHP FILE - Delete</title>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -15,9 +15,10 @@
 </head>
 <body>
 <?php
+	require_once 'define.php';
 	$id				= $_GET['id'];
 	$id 			= "$id.txt";
-	$content		= file_get_contents("./files/$id");
+	$content		= file_get_contents(TXT ."/$id");
 	$content		= explode('||', $content);
 	$title			= $content[0];
 	$description	= $content[1];
@@ -26,20 +27,20 @@
 	$flag = false;
 	if (isset($_POST['id'])){
 		$id = $_POST['id'];
-		@unlink("./files/$id");
-		@unlink("./images/$image");
+		@unlink(TXT ."/$id");
+		@unlink(IMAGE ."/$image");
 		$flag = true;
 	}
 
 ?>
 	<div id="wrapper">
-    	<div class="title">PHP FILE</div>
+    	<div class="title">PHP FILE - Delete</div>
         <div id="form">
 		<?php if ($flag == false) { ?> 
         <form action="" method="post" name="main-form">
 			<div class="row">
 				<p>File:</p>
-				<span><?php echo realpath("./files/$id"); ?></span>
+				<span><?php echo realpath(TXT ."/$id"); ?></span>
 			</div>
 			<div class="row">
 				<p>Title:</p>
@@ -51,7 +52,7 @@
 			</div>
 			<div class="row">
 				<p>Image:</p>
-				<span><?php echo $image; ?></span>
+				<span><?php echo realpath(IMAGE ."/$image"); ?></span>
 			</div>
 			<div class="row">
 				<input type="hidden" value="<?php echo $id;?>"  name="id" >
