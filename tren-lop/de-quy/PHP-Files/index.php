@@ -24,22 +24,27 @@ function showAll($path, &$newString){
 				$newString .= '</li>';
 			} else {
 				$extension = pathinfo($value, PATHINFO_EXTENSION);
-				$iconFile = 'recycle.jpg';
-				if ($extension == 'ini' || $extension == 'txt'){
-					$iconFile = 'doc.jpg';
-				}
+				$arrayExtension = [
+					'doc.jpg' 		=> ['ini' , 'txt'],
+					'video.jpg' 	=> ['mp3' , 'mp4'],
+					'recycle.jpg' 	=> ['ies']
+				];
 				
-				if ($extension == 'mp4' || $extension == 'mp3'){
-					$iconFile = 'audio.jpg';
+				foreach ($arrayExtension as $key => $valueExtension){
+					if( in_array($extension, $valueExtension) ){
+						$iconFile = $key;
+						break;
+					}
 				}
 				$newString .= '<li><img style="width: 20px" src ="./images/'.$iconFile.'">'. $value .'</li>';
-			}
-			
-		}
 
+			}
+		}
 	}
 	$newString .= '</ul>';
 }
+
+
 
 showAll('./data', $newString);
 echo $newString;
