@@ -10,32 +10,10 @@
     	<div class="title">LOGIN</div>
         <div id="form">   
         <?php
-			session_start();
-			require_once 'define.php';
-
-			// $data = file_get_contents(DIR_DATA . 'users.json');
-			// $json = json_decode($data, TRUE);
-			// echo '<pre>';
-			// print_r($json);
-			// exit;
-
-        	if(isset($_SESSION['flagPermission'])==true){
-				$timeoutXML = simplexml_load_file(DIR_DATA . 'timeout.xml');
-				// echo $timeoutXML -> time;
-				if($_SESSION['timeout'] + $timeoutXML -> time > time()){
-					echo '<h3>Xin chào: '.$_SESSION['fullName'].'</h3>';
-					echo '<a href="logout.php">Đăng xuất</a>';
-
-					if($_SESSION['level']=='admin'){
-						header('location: admin.php');
-					} else {
-						header('location: member.php');
-					}
-					
-				}else{
-					session_unset();
-					header('location: login.php');
-				}
+        	session_start();
+        	if($_COOKIE['fullName']!= null){
+				echo '<h3>Xin chào: '.$_COOKIE['fullName'].'</h3>';
+				echo '<a href="logout.php">Đăng xuất</a>';
 			}else{
         ?>
 			<form action="process.php" method="post" name="add-form">

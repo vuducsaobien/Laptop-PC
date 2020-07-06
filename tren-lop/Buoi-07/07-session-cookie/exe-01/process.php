@@ -11,33 +11,51 @@
         <div id="form">   
 			<?php
 				require_once 'functions.php';
+				require_once 'define.php';
+				
 				session_start();
-				if($_SESSION['flagPermission'] == true){
-					if($_SESSION['timeout'] + 20 > time()){
-					echo '<h3>Xin chào: '.$_SESSION['fullName'].'</h3>';
-					echo '<a href="logout.php">Đăng xuất</a>';
+				if(isset($_SESSION['flagPermission'])==true){
+					$timeoutXML = simplexml_load_file(DIR_DATA . 'timeout.xml');
+					echo $timeoutXML -> time;
+
+					if($_SESSION['timeout'] + $timeoutXML > time()){
+						echo '<h3>Xin chào: '.$_SESSION['fullName'].'</h3>';
+						echo '<a href="logout.php">Đăng xuất</a>';
 					}else{
 						session_unset();
 						header('location: login.php');
 					}
+					
 				}else{
-
 					if(!checkEmpty($_POST['username']) && !checkEmpty($_POST['password'])){
-						$username = $_POST['username'];
-						$password = md5($_POST['password']);
-						$data	  = parse_ini_file('users.ini');
-						$userInfo = explode('|', $data[$username]);
+						$username 	= $_POST['username'];
+						$password 	= md5($_POST['password']);
 
-						if($userInfo[0] == $username && $userInfo[1] == $password ){
-							$_SESSION['fullName'] = $userInfo[2];
+						$data = file_get_contents(DIR_DATA . 'users.json');
+						$data = json_decode($data, TRUE);
+						$userInfo = [];
+
+						foreach($data as $user){
+							if($user['username'] == $username && $user['password'] == $password){
+								$userInfo = $user;
+								break;
+							}
+						}
+
+						if(isset($userInfo['username'])){
+							$_SESSION['fullName'] 		= $userInfo['fullname'];
 							$_SESSION['flagPermission'] = true;
-							$_SESSION['timeout'] = time();
-							echo '<h3>Xin chào: '.$_SESSION['fullName'].'</h3>';
-							echo '<a href="logout.php">Đăng xuất</a>';
+							$_SESSION['timeout'] 		= time();
+							$_SESSION['level'] 			= $userInfo['level'];
+							if($_SESSION['level']=='admin'){
+								header('location: admin.php');
+							} else {
+								header('location: member.php');
+							}
+							
 						}else{
 							header('location: login.php');
 						}
-
 					}else{
 						header('location: login.php');
 					}
