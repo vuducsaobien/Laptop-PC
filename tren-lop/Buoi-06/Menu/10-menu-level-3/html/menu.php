@@ -1,6 +1,6 @@
 <?php include_once ('html/data.php');
 
-    $xhtml = '<ul class="dropDownMenu">';
+    $xhtml = '';
     $menuCurrent = basename($_SERVER['PHP_SELF'], ".php");
 
     foreach($arrMenu as $keyMenuLV1 => $menuLV1){
@@ -15,6 +15,7 @@
             $xhtml     .= sprintf('<li class="%s"><a href="%s">%s</a><ul>' , $classActive , $menuLV1['link'] , $menuLV1['name'] ); //About
 
             foreach($arrMenuLV2 as $keyMenuLV2 => $menuLV2){
+
                 if (isset ($menuLV2['child'])){
                     $arrMenuLV3 = $menuLV2['child'];
                     $xhtml     .= sprintf('<li><a href="%s">%s</a><ul>', $menuLV2['link'] , $menuLV2['name'] ); //Service
@@ -26,7 +27,6 @@
 
                 } else {
                     $xhtml .= sprintf('<li><a href="%s">%s</a></li>', $menuLV2['link'] , $menuLV2['name'] ); //Company
-
                 }
 
             }
@@ -35,9 +35,7 @@
         } else {
             $xhtml     .= sprintf('<li class="%s"><a href="%s">%s</a></li>' , $classActive , $menuLV1['link'] , $menuLV1['name']);
         }
-        
     }
-    $xhtml .= '</ul>';
     
  ?>
 
@@ -45,7 +43,9 @@
 
 <div class="menuBackground">
     <div class="center">
-        <?php  echo $xhtml; ?>
+        <ul class="dropDownMenu">
+            <?php  echo $xhtml; ?>
+        </ul>
     </div>
 </div>
 
