@@ -13,15 +13,22 @@
 			session_start();
 			require_once 'define.php';
 
-			// $data = file_get_contents(DIR_DATA . 'users.json');
-			// $json = json_decode($data, TRUE);
+			$data = file_get_contents(DIR_DATA . 'users.json');//Lấy nội dung file
+			// echo $data;
+
+			$json = json_decode($data, TRUE);//Chuyển từ 1 chuỗi thành 1 mảng File Json.
 			// echo '<pre>';
 			// print_r($json);
+			// echo '</pre>';
 			// exit;
 
         	if(isset($_SESSION['flagPermission'])==true){
-				$timeoutXML = simplexml_load_file(DIR_DATA . 'timeout.xml');
+				$timeoutXML = simplexml_load_file(DIR_DATA . 'timeout.xml'); //Đọc file xml
+				// echo '<pre>';
+				// print_r($timeoutXML);
+				// echo '</pre>';
 				// echo $timeoutXML -> time;
+				// exit;
 				if($_SESSION['timeout'] + $timeoutXML -> time > time()){
 					echo '<h3>Xin chào: '.$_SESSION['fullName'].'</h3>';
 					echo '<a href="logout.php">Đăng xuất</a>';

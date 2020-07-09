@@ -8,7 +8,7 @@ $timeoutXML = simplexml_load_file(DIR_DATA . 'timeout.xml');
 
 if(isset($_POST['timeout'])){
 $timeoutXML->time = $_POST['timeout'];
-file_put_contents(DIR_DATA . 'timeout.xml', $timeoutXML->saveXML());
+file_put_contents(DIR_DATA . 'timeout.xml', $timeoutXML->saveXML());  //Lưu File XML saveXML()
 }
 ?>
 
