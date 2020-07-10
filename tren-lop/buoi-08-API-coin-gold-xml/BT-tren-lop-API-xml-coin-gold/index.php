@@ -39,9 +39,9 @@ $array = (array) $c;
 $d = json_encode($array);
 // $e = js
 $e = json_decode($d , true);
-echo '<pre>';
-print_r($e);
-echo '</pre>';
+// echo '<pre>';
+// print_r($e);
+// echo '</pre>';
 // giá vàng lấy RSS
 //tuoi tre , vnexpress RSS
 //Muốn chuyển về 1 mảng [

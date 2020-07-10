@@ -42,57 +42,31 @@
 	    	<div class="container">
 	    		<div class="row d-flex">
 	    			<div class="col-xl-8 py-5 px-md-5">
-	    				<div class="row pt-md-4">
 
-			    			<div class="col-md-12">
-									<div class="blog-entry ftco-animate d-md-flex">
-										<a href="single.html" class="img img-2" style="background-image: url(images/image_1.jpg);"></a>
-										<div class="text text-2 pl-md-4">
-				              <h3 class="mb-2"><a href="single.html">A Loving Heart is the Truest Wisdom</a></h3>
-				              <div class="meta-wrap">
-												<p class="meta">
-				              		<span><i class="icon-calendar mr-2"></i>June 28, 2019</span>
-				              		<span><a href="single.html"><i class="icon-folder-o mr-2"></i>Travel</a></span>
-				              		<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
-				              	</p>
-			              	</div>
-				              <p class="mb-4">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-				              <p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
-				            </div>
-									</div>
-								</div>
+						<?php require_once DIR_HTML . 'vnexpress.php'; ?>
+				<?php
+				$urlVnexpress = 'https://vnexpress.net/rss/giai-tri.rss';
+				$dataVnexpress = simplexml_load_file($urlVnexpress);
+				// $arrayVnexpress = (array) $dataVnexpress;
 
-			    		</div><!-- END-->
-				<?php /////////////
-				$urlGold = 'http://www.sjc.com.vn/xml/tygiavang.xml';
-				$dataGold = simplexml_load_file($urlGold);
-				echo $dataGold -> ratelist -> attributes;
-				
-				echo '<pre>';
-				print_r($dataGold -> ratelist -> attributes);
-				echo '</pre>';
-
-				$array = (array) $dataGold;
-				$arrayRatelist = (array) ($array -> ratelist);
+				// echo '<pre>';
+				// print_r($arrayVnexpress);
+				// echo '</pre>';
+				$item = $dataVnexpress->channel->item[0];
+				$title = $item->title;
+				$day = $item->pubDate;
+				$link = $item->link;
+				$giaiTri = $dataVnexpress->channel->title;
+				$description = $dataVnexpress->channel->item[0]->description;
+				echo (string) $description->img;
+				// echo $danhMuc = substr($giaiTri,8,5);
 
 
 				echo '<pre>';
-				print_r($array);
+				print_r($description);
 				echo '</pre>';
-				
-				// echo count($jsonCoin);
-				// foreach($jsonCoin as $keyCoin => $valueCoin){
-				// 	echo $valueCoin['name'] . ' (';
-				// 	echo strtoupper($valueCoin['symbol']) . ')<br>';
-				// 	echo $valueCoin['current_price'] . ' $<br>';
-				// 	echo round($valueCoin['price_change_percentage_24h'], 2, PHP_ROUND_HALF_UP ) . '%<br>';
-				// 	$a = $valueCoin['total_volume']/1000000000 ;
-				// 	echo $b = '$ ' . number_format($a,2,'.','.') . ' billion<hr>';
-				// }
 
-
-
-
+				exit;
 				?>
 			    		<div class="row">
 			          <div class="col">
@@ -112,49 +86,9 @@
 			    	</div>
 	    			<div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
 				
+				<?php require_once DIR_HTML . 'table-gold.php'; ?>
 				<?php require_once DIR_HTML . 'table-coin.php'; ?>
 
-				<div class="sidebar-box ftco-animate">
-					<h3 class="sidebar-heading">Giá VÀNG mới nhất</h3>
-					<table>
-					<tr>
-						<th>Gold Name</th>
-						<th>Current Price</th>
-						<th>Change 24h (%)</th>
-						<th>Total Volume</th>
-					</tr>
-
-					<?php // Lấy giá GOLD Online
-					// $urlGold = 'http://www.sjc.com.vn/xml/tygiavang.xml';
-					// echo $dataGold = simplexml_load_file($urlGold);
-					// $jsonGold = json_decode($data, TRUE);
-
-					// 	foreach($jsonGold as $keyGold => $valueGold){
-					// 		$Gold = $valueGold['name'] . ' (';
-					// 		$GoldSymblo = strtoupper($valueGold['symbol']) . ')';
-					// 		$GoldName = $Gold . $GoldSymblo;
-					// 		$GoldPrice = '$ ' . $valueGold['current_price'];
-					// 		$GoldPercentage = round($valueGold['price_change_percentage_24h'], 2, PHP_ROUND_HALF_UP ) . ' %';
-					// 		$a = $valueGold['total_volume']/1000000000 ;
-					// 		$GoldVolume = '$ ' . number_format($a,2,'.','.') . ' B<br>';
-
-					// 		$row = '<tr>';
-					// 		$row .= '<td>' .$GoldName .'</td>';
-					// 		$row .= '<td>' .$GoldPrice .'</td>';
-					// 		$row .= '<td>' .$GoldPercentage .'</td>';
-					// 		$row .= '<td>' .$GoldVolume .'</td>';
-					// 		$row .= '</tr>';
-					// 		echo $row;
-					// 	}
-					?>
-
-					</table>
-				</div>
-
-				<?php /////////////?>
-
-
-	              </form>
 	            </div>
 	          </div><!-- END COL -->
 	    		</div>

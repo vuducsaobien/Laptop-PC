@@ -9,7 +9,7 @@
 						<th>Total Volume</th>
 					</tr>
 					
-					<?php // Lấy giá COIN Online
+					<?php // Lấy giá COIN Online API (VNEXPRESS RSS)
 					$urlCoin = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false';
 					$dataCoin = file_get_contents($urlCoin);
 					$jsonCoin = json_decode($dataCoin, TRUE);
