@@ -44,7 +44,7 @@
 	    			<div class="col-xl-8 py-5 px-md-5">
 	    				<div class="row pt-md-4">
 
-			    			<div class="col-md-12">			 /////////
+			    			<div class="col-md-12">
 									<div class="blog-entry ftco-animate d-md-flex">
 										<a href="single.html" class="img img-2" style="background-image: url(images/image_1.jpg);"></a>
 										<div class="text text-2 pl-md-4">
@@ -60,9 +60,40 @@
 				              <p><a href="#" class="btn-custom">Read More <span class="ion-ios-arrow-forward"></span></a></p>
 				            </div>
 									</div>
-								</div>     /////////
+								</div>
 
 			    		</div><!-- END-->
+				<?php /////////////
+				$urlGold = 'http://www.sjc.com.vn/xml/tygiavang.xml';
+				$dataGold = simplexml_load_file($urlGold);
+				echo $dataGold -> ratelist -> attributes;
+				
+				echo '<pre>';
+				print_r($dataGold -> ratelist -> attributes);
+				echo '</pre>';
+
+				$array = (array) $dataGold;
+				$arrayRatelist = (array) ($array -> ratelist);
+
+
+				echo '<pre>';
+				print_r($array);
+				echo '</pre>';
+				
+				// echo count($jsonCoin);
+				// foreach($jsonCoin as $keyCoin => $valueCoin){
+				// 	echo $valueCoin['name'] . ' (';
+				// 	echo strtoupper($valueCoin['symbol']) . ')<br>';
+				// 	echo $valueCoin['current_price'] . ' $<br>';
+				// 	echo round($valueCoin['price_change_percentage_24h'], 2, PHP_ROUND_HALF_UP ) . '%<br>';
+				// 	$a = $valueCoin['total_volume']/1000000000 ;
+				// 	echo $b = '$ ' . number_format($a,2,'.','.') . ' billion<hr>';
+				// }
+
+
+
+
+				?>
 			    		<div class="row">
 			          <div class="col">
 			            <div class="block-27">
@@ -80,59 +111,50 @@
 			        </div>
 			    	</div>
 	    			<div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
-	            <div class="sidebar-box pt-md-4">
-	              <form action="#" class="search-form">
-	                <div class="form-group">
-	                  <span class="icon icon-search"></span>
-	                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
-	                </div>
-	              </form>
-				</div>
 				
-				<?php /////////////?>
-	            <div class="sidebar-box ftco-animate">
-	            	<h3 class="sidebar-heading">Giá Coin tiền điện tử</h3>
-	              <ul class="categories">
-	                <li><a href="#">Fashion <span>(6)</span></a></li>
-	                <li><a href="#">Technology <span>(8)</span></a></li>
-	                <li><a href="#">Travel <span>(2)</span></a></li>
-	                <li><a href="#">Food <span>(2)</span></a></li>
-	                <li><a href="#">Photography <span>(7)</span></a></li>
-	              </ul>
-				</div>
+				<?php require_once DIR_HTML . 'table-coin.php'; ?>
 
 				<div class="sidebar-box ftco-animate">
-	            	<h3 class="sidebar-heading">Giá Vàng tại HCM</h3>
-	              <ul class="categories">
-	                <li><a href="#">Fashion <span>(6)</span></a></li>
-	                <li><a href="#">Technology <span>(8)</span></a></li>
-	                <li><a href="#">Travel <span>(2)</span></a></li>
-	                <li><a href="#">Food <span>(2)</span></a></li>
-	                <li><a href="#">Photography <span>(7)</span></a></li>
-	              </ul>
+					<h3 class="sidebar-heading">Giá VÀNG mới nhất</h3>
+					<table>
+					<tr>
+						<th>Gold Name</th>
+						<th>Current Price</th>
+						<th>Change 24h (%)</th>
+						<th>Total Volume</th>
+					</tr>
+
+					<?php // Lấy giá GOLD Online
+					// $urlGold = 'http://www.sjc.com.vn/xml/tygiavang.xml';
+					// echo $dataGold = simplexml_load_file($urlGold);
+					// $jsonGold = json_decode($data, TRUE);
+
+					// 	foreach($jsonGold as $keyGold => $valueGold){
+					// 		$Gold = $valueGold['name'] . ' (';
+					// 		$GoldSymblo = strtoupper($valueGold['symbol']) . ')';
+					// 		$GoldName = $Gold . $GoldSymblo;
+					// 		$GoldPrice = '$ ' . $valueGold['current_price'];
+					// 		$GoldPercentage = round($valueGold['price_change_percentage_24h'], 2, PHP_ROUND_HALF_UP ) . ' %';
+					// 		$a = $valueGold['total_volume']/1000000000 ;
+					// 		$GoldVolume = '$ ' . number_format($a,2,'.','.') . ' B<br>';
+
+					// 		$row = '<tr>';
+					// 		$row .= '<td>' .$GoldName .'</td>';
+					// 		$row .= '<td>' .$GoldPrice .'</td>';
+					// 		$row .= '<td>' .$GoldPercentage .'</td>';
+					// 		$row .= '<td>' .$GoldVolume .'</td>';
+					// 		$row .= '</tr>';
+					// 		echo $row;
+					// 	}
+					?>
+
+					</table>
 				</div>
+
 				<?php /////////////?>
 
 
 	              </form>
-	            </div>
-
-	            <div class="sidebar-box ftco-animate">
-	            	<h3 class="sidebar-heading">Archives</h3>
-	              <ul class="categories">
-	              	<li><a href="#">Decob14 2018 <span>(10)</span></a></li>
-	                <li><a href="#">September 2018 <span>(6)</span></a></li>
-	                <li><a href="#">August 2018 <span>(8)</span></a></li>
-	                <li><a href="#">July 2018 <span>(2)</span></a></li>
-	                <li><a href="#">June 2018 <span>(7)</span></a></li>
-	                <li><a href="#">May 2018 <span>(5)</span></a></li>
-	              </ul>
-	            </div>
-
-
-	            <div class="sidebar-box ftco-animate">
-	              <h3 class="sidebar-heading">Paragraph</h3>
-	              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut.</p>
 	            </div>
 	          </div><!-- END COL -->
 	    		</div>

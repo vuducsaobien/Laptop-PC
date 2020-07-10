@@ -13,7 +13,7 @@
 			session_start();
 			require_once 'define.php';
 
-			$data = file_get_contents(DIR_DATA . 'users.json');//Lấy nội dung file
+			$data = file_get_contents(DIR_DATA . 'users.json');//Lấy nội dung file JSON
 			// echo $data;
 
 			$json = json_decode($data, TRUE);//Chuyển từ 1 chuỗi thành 1 mảng File Json.
