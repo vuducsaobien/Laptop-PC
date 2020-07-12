@@ -1,7 +1,7 @@
 <?php
 	require_once 'define.php';
 	require_once DIR_HTML . 'functions.php';
-	$urlVnexpress    = 'https://vnexpress.net/rss/cuoi.rss';
+	$urlVnexpress    = 'https://vnexpress.net/rss/giai-tri.rss';
 	$dataVnexpress   = simplexml_load_file($urlVnexpress);
 
 	for($i=0; $i <= 4; $i++){

@@ -12,7 +12,7 @@
 			</nav>
 
 			<div class="colorlib-footer">
-				<h1 id="colorlib-logo" class="mb-4"><a href="index.html" style="background-image: url(images/bg_1.jpg);">Andrea <span>Moore</span></a></h1>
+				<h1 id="colorlib-logo" class="mb-4"><a href="index.html" style="background-image: url(images/bg_1.jpg);">Created by <span>Vũ Văn Đức</span></a></h1>
 				<div class="mb-4">
 					<h3>Subscribe for newsletter</h3>
 					<form action="#" class="colorlib-subscribe-form">
