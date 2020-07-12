@@ -42,32 +42,45 @@
 	    	<div class="container">
 	    		<div class="row d-flex">
 	    			<div class="col-xl-8 py-5 px-md-5">
+						<?php 
+						require_once DIR_HTML . 'vnexpress.php';
+						// $urlVnexpress = 'https://vnexpress.net/rss/giai-tri.rss';
+						// '<a href="https://vnexpress.net/dam-vinh-hung-tinh-tu-ben-ly-nha-ky-4129179.html">
+						// <img src="https://i1-giaitri.vnecdn.net/2020/07/12/ly-nha-ky-top.jpg?w=900&h=0&q=100&dpr=1&fit=crop&s=v158dLXvn5_DUQYbWeFHmw" >
+						// </a></br>Ca sĩ Đàm Vĩnh Hưng choàng vai, hôn má diễn viên Lý Nhã Kỳ trong buổi giao lưu tối 11/7. ]]>';
 
-						<?php require_once DIR_HTML . 'vnexpress.php'; ?>
-				<?php
-				$urlVnexpress = 'https://vnexpress.net/rss/giai-tri.rss';
-				$dataVnexpress = simplexml_load_file($urlVnexpress);
-				// $arrayVnexpress = (array) $dataVnexpress;
+						// $urlVnexpress = 'https://vnexpress.net/rss/giai-tri.rss';//9+71+15+47
+						// $dataVnexpress = simplexml_load_file($urlVnexpress);
+						// $description = $dataVnexpress->channel->item[0]->description;
+						// $item = $dataVnexpress->channel->item[0];
 
-				// echo '<pre>';
-				// print_r($arrayVnexpress);
-				// echo '</pre>';
-				$item = $dataVnexpress->channel->item[0];
-				$title = $item->title;
-				$day = $item->pubDate;
-				$link = $item->link;
-				$giaiTri = $dataVnexpress->channel->title;
-				$description = $dataVnexpress->channel->item[0]->description;
-				echo (string) $description->img;
-				// echo $danhMuc = substr($giaiTri,8,5);
+						// echo '-leng $description = ' . strlen ($description);
+						// echo '<br>';
+						// echo '<br>';
 
+						// echo '-leng $link = ' . strlen($link);
+						// echo '<br>';
+						// echo '$link = ' . $link = $item->link;
+						// echo '<br>';
 
-				echo '<pre>';
-				print_r($description);
-				echo '</pre>';
+						// echo '-leng $srcIMAGE = ' . strlen($srcImage);
+						// echo '<br>';
+						// echo '$srcIMAGE = ' . $srcImage = getImgSrc($description);
+						// echo '<br>';
 
-				exit;
-				?>
+						// echo '-leng $content = ' . $leng = 24+strlen($link)+strlen($srcImage)+5;
+						// echo '<br>';
+						// echo '-$content ='. $content = substr($description,$leng,150);
+						// echo '<br>';
+						// echo substr($content, 4,100);
+						// echo '<br>';
+						// echo strlen($content);
+						// echo '<br>';
+						// echo substr($description,-126,500);
+						// echo '<pre>';
+						// print_r($item);
+						// echo '</pre>';
+						?>
 			    		<div class="row">
 			          <div class="col">
 			            <div class="block-27">
