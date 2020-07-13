@@ -11,6 +11,11 @@
         <div id="form">   
         <?php
 			session_start();
+			echo '<pre>';
+			print_r($_SESSION);
+			echo '</pre>';
+			// exit;
+
 			require_once 'define.php';
 
 			$data = file_get_contents(DIR_DATA . 'users.json');//Lấy nội dung file JSON
@@ -22,6 +27,7 @@
 			// echo '</pre>';
 			// exit;
 
+			//Nếu Guest đã là Admin hoặc Member rồi.
         	if(isset($_SESSION['flagPermission'])==true){
 				$timeoutXML = simplexml_load_file(DIR_DATA . 'timeout.xml'); //Đọc file xml
 				// echo '<pre>';
@@ -29,7 +35,7 @@
 				// echo '</pre>';
 				// echo $timeoutXML -> time;
 				// exit;
-				if($_SESSION['timeout'] + $timeoutXML -> time > time()){
+				if( time() < $_SESSION['timeout'] + $timeoutXML -> time ){
 					echo '<h3>Xin chào: '.$_SESSION['fullName'].'</h3>';
 					echo '<a href="logout.php">Đăng xuất</a>';
 

@@ -4,7 +4,7 @@
 	function checkEmpty($value){
 		$flag = false;
 		if(!isset($value) || trim($value) == ""){
-			$flag = true;
+			$flag = true; //Không tồn tại = true
 		}
 		return $flag;
 	}
@@ -47,4 +47,9 @@
 		$result = round($size, $totalDigit) . $ditance . $unit;
 		return $result;
 	}
+
+// echo '<pre>';
+// print_r($json);
+// echo '</pre>';
+
 ?>
