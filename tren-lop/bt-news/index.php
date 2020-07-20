@@ -31,10 +31,8 @@
 				<div class="row d-flex">
 					<div class="col-xl-8 py-5 px-md-5">
 						<?php
-						// $news = file_get_contents(DIR_DATA . 'rss.txt'); 
-						require_once DIR_HTML . 'vnexpress.php';
+						require_once DIR_HTML . 'content.php';
 						echo $xhtml;
-						// echo $x
 						?>
 					</div>
 

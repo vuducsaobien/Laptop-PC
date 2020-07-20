@@ -2,7 +2,7 @@
 	// require_once 'define.php';
 	// https://vnexpress.net/rss/giai-tri.rss
 	$rssTxt		= file_get_contents('data/rss.txt', true);
-	$url =  str_replace(' ', '', $rssTxt);
+	$url 		= str_replace(' ', '', $rssTxt);
 	$xml   		= simplexml_load_file($url, 'SimpleXMLElement', LIBXML_NOCDATA);
 	$xmlJson 	= json_encode($xml);
 	$xmlArr 	= json_decode($xmlJson, 1);
