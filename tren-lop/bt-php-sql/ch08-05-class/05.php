@@ -11,7 +11,7 @@
 	
 	$database = new Database($params);
 	
-	$ids 	= array(200, 250);
+	$ids 	= array(20);
 
 	
 	echo $database->delete($ids);

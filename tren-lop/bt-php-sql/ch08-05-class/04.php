@@ -16,8 +16,6 @@
 						array('ordering', 100, 'and'),
 						array('status', 1)
 				);
-	echo '<pre>';
-	print_r($where);
-	echo '</pre>';
+				
 	$database->update($data, $where);
 	
