@@ -1,12 +1,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <?php 
-	$connect = @mysql_connect('localhost', 'root', '');
-	
+	$connect = @mysqli_connect('localhost', 'root', '');
 	if(!$connect) die('<h3>Fail</h3>');
-	mysql_select_db('manage_user');
-	
-	mysql_query("SET NAMES 'utf8'");
-	mysql_query("SET CHARACTER SET 'utf8'");
+	mysqli_select_db($connect, 'manage_user');
+	mysqli_query($connect, "SET NAMES 'utf8'");
+	mysqli_query($connect,"SET CHARACTER SET 'utf8'");
 
 	echo $id = $_GET['id'];
 	echo '<br />' .$id = mysql_real_escape_string($id);
