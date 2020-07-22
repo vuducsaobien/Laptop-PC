@@ -23,16 +23,49 @@
 	// 	$y++;
 	// } 
 
-$y = 1;
-foreach ($urlArr as $key => $value){
-	if($i == 3) break;
-	$y++;
+// $y = 1;
+// foreach ($urlArr as $key => $value){
+// 	if($i == 3) break;
+// 	$y++;
 
-	$i = 1;
-	foreach ($urlArr as $key => $value){
-		if($y == 3) break;
-		$i++;
+// 	$i = 1;
+// 	foreach ($urlArr as $key => $value){
+// 		if($y == 3) break;
+// 		$i++;
+// 	} 
+// } 
 
-		
-	} 
-} 
+
+// foreach (array('1','2','3') as $a) {
+// 	echo "$a ";
+// 	foreach (array('3','2','1') as $b) {
+// 		echo "$b ";
+// 		if ($a == $b) { 
+// 			break 2;  // this will break both foreach loops
+// 		}
+// 	}
+// 	echo ". ";  // never reached
+// }
+// 	echo "!";	
+
+// $array = array(1, 2, 3, 4, 5);
+// foreach ($array as $item) {
+// 	echo "$item\n" . '<br>';
+// 	// echo $item;
+// 	$array[] = $item;
+
+//   }
+//   echo '<pre>';
+//   print_r($array);
+//   echo '</pre>';
+
+$array = array(1, 2, 3, 4, 5);
+foreach ($array as $item) {
+	echo "$item\n" . '<br>';
+	// echo $item;
+	$array[] = $item;
+
+  }
+  echo '<pre>';
+  print_r($array);
+  echo '</pre>';

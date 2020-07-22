@@ -8,10 +8,9 @@
 		$b = 'https' . $b;
 	unset($b);
 	}
-
+	$i = 0;
 	foreach ($urlArr as $key => $value){
 		echo $value . '<hr>';
-	// }
 		$xml   		= simplexml_load_file($value, 'SimpleXMLElement', LIBXML_NOCDATA);
 		$xmlJson 	= json_encode($xml);
 		// echo $xmlJson . '<hr>'. '<hr>'. '<hr>'. '<hr>';
@@ -19,15 +18,14 @@
 		$xmlArr 	= json_decode($xmlJson, 1);
 		$channel 	= $xmlArr['channel'];
 		$item 		= $channel['item'];
-		$i 			= 0;
 		$xhtml 		= '';
-
 		if(strpos($url, 'tuoitre') !== false) {
 				$danhMuc 	= substr($channel['title'],0,-11);
 		} else { $danhMuc 	= substr($channel['title'],0,-3); }
 
+		$i 			= 0;
 		foreach ($item as $description){
-			if($i == 2) break;
+			if($i == 2) { break 1;}
 			$title = $description['title'];
 			$link  = $description['link'];
 			$day   = $description['pubDate'];
@@ -39,7 +37,6 @@
 			preg_match_all($pregMatch, $description['description'] . '<end>', $matches);
 			$srcImage    = implode($matches[1]);
 			$description = implode($matches[2]);
-
 			$xhtml 		.= 	
 			'<div class="row pt-md-4">
 				<div class="col-md-12">
@@ -59,9 +56,9 @@
 					</div>
 				</div>
 			</div>';
-			$i +=  3;
+			$i++;
 		}
-		// $i++;
+	$i++;
 	}
 ?>
 
