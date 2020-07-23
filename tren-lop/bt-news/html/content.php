@@ -1,23 +1,61 @@
 <?php
+/*
+$array1 = array(
+    "1" => "A",
+    "2" => "B",
+	"3" => "C",
+	"4" => "D"
+
+);
+
+$array2 = array(
+    "1" => "E",
+	"2" => "F",
+	"3" => "G",
+	"4" => "H",
+	"5" => "I"
+);
+
+foreach($array1 as $arr1) {
+    // print_r($arr1);
+    // echo "<br>";
+	$i = 0;
+    foreach($array2 as $arr2) {
+		if($i == 3) break;
+        print_r($arr2);
+		echo "<br>";
+		$i++;
+
+	}
+
+}
+die;
+
+
+foreach ($array as $item) {
+	echo "$item\n";
+	$array[] = $item;
+  }
+  print_r($array);
+die;
+*/
+
 	$rssTxt	= file_get_contents('data/rss.txt', true);
 	$url 	= preg_replace('/\s+/', '', $rssTxt);
 	$urlArr = explode('https', $url);
 	$a 		= array_shift($urlArr);
-	
 	foreach ($urlArr as &$b){
 		$b = 'https' . $b;
-	unset($b);
 	}
-	$i = 0;
-	foreach ($urlArr as $key => $value){
+	foreach ($urlArr as $value){
 		echo $value . '<hr>';
 		$xml   		= simplexml_load_file($value, 'SimpleXMLElement', LIBXML_NOCDATA);
-		$xmlJson 	= json_encode($xml);
-		// echo $xmlJson . '<hr>'. '<hr>'. '<hr>'. '<hr>';
-		$xmlArr 	= json_decode($xmlJson, 1);
-		$xmlArr 	= json_decode($xmlJson, 1);
+		$xmlArr 	= json_decode(json_encode($xml), 1);
 		$channel 	= $xmlArr['channel'];
 		$item 		= $channel['item'];
+		echo '<pre>';
+		print_r($item);
+		echo '</pre>';
 		$xhtml 		= '';
 		if(strpos($url, 'tuoitre') !== false) {
 				$danhMuc 	= substr($channel['title'],0,-11);
@@ -58,7 +96,6 @@
 			</div>';
 			$i++;
 		}
-	$i++;
 	}
 ?>
 
