@@ -64,15 +64,17 @@ function checkExtension($fileName, $arrExtension){
 
 // // Check Email Like %@gmail.com
 function checkEmail($email, $extensionEmail = 'gmail.com'){
-    $flagEmail = false;
+    $flagEmail = true;
 
     $aaaa = explode('@', $email);
     $bbbb = $aaaa[1];
 
-    if($extensionEmail = $bbbb){
-        $flagEmail = true;
+    if($extensionEmail == $bbbb){
+        $flagEmail = false;
     }
     return $flagEmail;
 }
+
+
 
 ?>
