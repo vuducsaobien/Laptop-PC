@@ -2,8 +2,9 @@
 	$connect = @mysqli_connect('localhost', 'root', '');
 	if(!$connect) die('<h3>Fail</h3>');
 	
-	// UPDATE
+	// UPDATE 1 Array
 	mysqli_select_db($connect, 'manage_user');
+	$data = array('status' => 0, 'ordering' => 100, 'name' => 'Manager 1');
 	
 	function createUpdateSQL($data){
 		$newQuery = "";
@@ -16,10 +17,9 @@
 		return $newQuery;
 	}
 	
-	$data = array('status' => 0, 'ordering' => 100, 'name' => 'Manager 1');
 	
 	$newQuery = createUpdateSQL($data);
-	$query = "UPDATE `group` SET " . $newQuery . " WHERE `id` = 1";
+	$query = "UPDATE `group` SET " . $newQuery . " WHERE `id` = 3";
 	
 	$result = mysqli_query($connect, $query);
 	

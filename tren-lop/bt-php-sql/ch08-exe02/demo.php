@@ -11,36 +11,34 @@
 	
 	$ip 	= $_SERVER['REMOTE_ADDR'];
 	$url	= $_SERVER['PHP_SELF'];
-	
 	// Tìm kiếm userInfo trong online
 	$query[] = "SELECT `id`";
 	$query[] = "FROM `online`";
 	$query[] = "WHERE `ip` = '" . $ip . "'";
 	$query[] = "AND `url` = '" . $url . "'";
-	$query	= implode(" ", $query);
-	
+	$query	 = implode(" ", $query);
+
 	$flagExist = $database->isExist($query);
-	
-	$arrData = array('ip' => $ip, 'url' => $url, 'time' => time());
+	$arrData   = array('ip' => $ip, 'url' => $url, 'time' => time());
 	if($flagExist){
 		// update
 		$where = array(
-						array('ip', $ip, 'and'),
+						array('ip', $ip, 'AND'),
 						array('url', $url)
 				);
+				
 		$database->update($arrData, $where);
 	}else{
 		// insert
 		$database->insert($arrData);
 	}
-	
+
 	// DELETE: time + 10*60 < time()
-	$time = time();
-	$query = "DELETE FROM `online` WHERE `time` + 10 < $time";
+	 $time = time();
+	$query = "DELETE FROM `online` WHERE `time` > $time";
 	$database->query($query);
-	
 	// SELECT
-	$query = array();
+	$query = [];
 	$query[] = "SELECT *";
 	$query[] = "FROM `online`";
 	$query[] = "WHERE `url` = '$url'";
@@ -49,6 +47,7 @@
 	echo '<pre>';
 	print_r($list);
 	echo '</pre>';
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -68,3 +67,4 @@
     </div>
 </body>
 </html>
+

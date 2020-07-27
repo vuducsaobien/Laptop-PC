@@ -5,7 +5,7 @@
 	// DELTE
 	mysqli_select_db($connect, 'manage_user');
 	
-	$ids = array(2, 3);
+	$ids = array(1, 2, 3);
 	$deleteID = '';
 	foreach($ids as $id) {
 		$deleteID .= "'" . $id . "', ";  

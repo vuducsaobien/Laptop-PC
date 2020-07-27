@@ -11,11 +11,10 @@
 	
 	$database = new Database($params);
 	
-	$data 	= array('status' => 1, 'ordering' => 50);
+	$data 	= array('status' => 0, 'ordering' => 10, 'name' => 'ss');
 	$where	= array(
-						array('ordering', 100, 'and'),
+						array('ordering', 9, 'and'),
 						array('status', 1)
 				);
-				
 	$database->update($data, $where);
 	

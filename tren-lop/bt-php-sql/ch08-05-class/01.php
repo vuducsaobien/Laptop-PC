@@ -9,5 +9,14 @@
 						'table'		=> 'group',
 					);
 	$database = new Database($params);
-	
+
+	/*
+	SET CONNECT
+	$link = mysqli_connect('localhost', 'root', '');
+	$database =->setConnect($link);
+	*/
+
+	echo '<pre>';
+	print_r($database);
+	echo '</pre>';
 	

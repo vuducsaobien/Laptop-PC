@@ -33,10 +33,9 @@
 	$query		= implode(" ", $query);
 	$result 	= mysqli_query($connect, $query);
 
-	$i = 1;
-	$xhtml = '';
-
-	if(mysqli_num_rows($result) > 1){
+	$i 		= 1;
+	$xhtml  = '';
+	if(mysqli_num_rows($result) > 0){
 		while($row = mysqli_fetch_assoc($result)){
 			$class 	= ($i % 2 == 0) ? "odd" : "even";
 			$status = ($row['status'] == 0) ? "Inactive" : "Active";

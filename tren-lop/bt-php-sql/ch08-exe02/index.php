@@ -1,6 +1,15 @@
 <?php
-	require_once 'connect.php';
-	
+	require_once 'class/Database.class.php';
+	$params		= array(
+			'server' 	=> 'localhost',
+			'username'	=> 'root',
+			'password'	=> '',
+			'database'	=> 'manage_user',
+			'table'		=> 'online',
+	);
+	$database = new Database($params);
+
+	// require_once 'connect.php';
 	$ip 	= $_SERVER['REMOTE_ADDR'];
 	$url	= $_SERVER['PHP_SELF'];
 	
@@ -11,7 +20,7 @@
 	$query[] = "AND `url` = '" . $url . "'";
 	$query	= implode(" ", $query);
 	
-	$flagExist = $database->exist($query);
+	$flagExist = $database->isExist($query);
 	
 	// INSERT _ UPDATE
 	$arrData = array('ip' => $ip, 'url' => $url, 'time' => time());
@@ -26,12 +35,13 @@
 		// insert
 		$database->insert($arrData);
 	}
-	
+
 	// DELETE: time + 10*60 < time()
 	$time = time();
-	$query = "DELETE FROM `online` WHERE `time` + 10*60 < $time";
+	$query = "DELETE FROM `online` WHERE `time` + 10 < $time";
 	$database->query($query);
 ?>
+
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -49,3 +59,4 @@
     </div>
 </body>
 </html>
+

@@ -24,14 +24,18 @@
 	mysqli_query($connect, "SET NAMES 'utf8'");
 	mysqli_query($connect,"SET CHARACTER SET 'utf8'");
 
+	// C1
+	$query = "SELECT * FROM `group` ORDER BY `ordering` DESC";
+	
+	// C2
 	$query[] 	= "SELECT * ";
 	$query[] 	= "FROM `group`";
 	$query[] 	= "ORDER BY `ordering` DESC";
 	$query		= implode(" ", $query);
 	$result 	= mysqli_query($connect, $query);
 
-	$i = 1;
-	$xhtml = '';
+	$i 		= 1;
+	$xhtml  = '';
 	while($row = mysqli_fetch_assoc($result)){
 		$class 	= ($i % 2 == 0) ? "odd" : "even";
 		$status = ($row['status'] == 0) ? "Inactive" : "Active";
