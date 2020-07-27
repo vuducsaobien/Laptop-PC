@@ -12,15 +12,8 @@ require_once 'functions.php';
 require_once 'define.php';
 
 if( isset ($_POST['checkbox'])  ){
-    echo '<pre>';
-    print_r($_POST);
-    echo '</pre>';
 
-    echo '<pre>';
-    print_r($_GET);
-    echo '</pre>';
-
-    echo $checkBox = $_POST['checkbox'];
+    $checkBox = $_POST['checkbox'];
 
     foreach($checkBox as $key => $value){
         $content		= file_get_contents(DIR_FILES . $value);

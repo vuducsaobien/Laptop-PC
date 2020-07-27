@@ -50,8 +50,7 @@
 					<p class="image"><img src ='.$srcImage.'  alt=""></p>
 
 	                <p class="id">'.$idTxt.'</p>
-					<p class="size">'.$size.'</p>
-					
+	                <p class="size">'.$size.'</p>
 	                <p class="action">
 	                	<a href="edit.php?id='.$id.'">Edit</a> |
 	                	<a href="delete.php?id='.$id.'">Delete</a>
@@ -66,12 +65,13 @@
         
 	        <div id="area-button">
 	        	<a href="add.php">Add File</a>
-
 				<?php
+
 				if ($i != 0){
 					echo '<a id="multi-delete" href="#">Multi Delete File</a>';
-				}?>
+				}
 
+				?>
 	        </div>
     
     </div>
