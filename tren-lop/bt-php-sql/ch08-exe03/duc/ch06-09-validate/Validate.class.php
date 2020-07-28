@@ -15,8 +15,6 @@ class Validate{
 	
 	// Contrucst
 	public function __construct($source){
-		if(array_key_exists('submit', $source)) unset($source['submit']);
-		if(array_key_exists('token', $source)) unset($source['token']);
 		$this->source = $source;
 	}
 	
@@ -59,9 +57,6 @@ class Validate{
 						break;
 					case 'email':
 						$this->validateEmail($element);
-						break;
-					case 'status':
-						$this->validateStatus($element);
 						break;
 				}
 			}
@@ -119,17 +114,9 @@ class Validate{
 		return $xhtml;
 	}
 	
-	public function isValid(){
-	 	if(count($this->errors)>0) return false;
-	 	return true;	
-	}
 	
-	// Validate Status
-	private function validateStatus($element){
-		if($this->source[$element] < 0 || $this->source[$element] > 1){
-			$this->errors[$element] = "Select status";
-		}
-	}
+	
+	
 	
 	
 	

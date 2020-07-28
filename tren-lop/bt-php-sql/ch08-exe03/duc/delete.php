@@ -3,75 +3,64 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<title>PHP FILE - Delete</title>
+<title>PHP FILE</title>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#cancel-button').click(function(){
-			window.location = "index.php";
-		});
-	});
-</script>
+<script type="text/javascript" src="js/my-js.js"></script>
 </head>
 <body>
 <?php
-	require_once 'define.php';
-	$id				= $_GET['id'];
-	$id 			= $id . '.txt';
-	$content		= file_get_contents(DIR_FILES . $id);
-	$content		= explode('||', $content);
-	$title			= $content[0];
-	$description	= $content[1];
-	$image 			= $content[2];
-	$realPathId 	= realpath(DIR_FILES . $id);
-	$realPathImage  = realpath(DIR_IMAGES . $image);
-	// Người dùng đã ấn Delete, Post ID hidden, lấy id để xóa file .txt
-	$flag = false;
-	if (isset($_POST['id'])){
+	require_once 'connect.php';
+	$id	= $_GET['id']; 
+	$query = "SELECT * FROM `group` WHERE `id` = '$id'";
+	$item = $database->singleRecord($query);
+	echo '<pre>';
+	print_r($item);
+	echo '</pre>';
+	
+	if(!empty($item)){
+		$status = ($item['status']==0) ? 'Inactive' : 'Active';
+		$xhtml = '<div class="row">
+						<p>ID:</p>'.$item['id'].'
+					</div>
+					<div class="row">
+						<p>Group name:</p>'.$item['name'].'
+					</div>
+					<div class="row">
+						<p>Status:</p>'.$status.'
+					</div>
+					<div class="row">
+						<p>Ordering:</p>'.$item['ordering'].'
+					</div>
+					<div class="row">
+						<input type="hidden" name="id" value="'.$item['id'].'">
+						<input type="submit" value="Delete" name="submit">
+						<input type="submit" value="Cancel" name="cancel" id="cancel-button">
+					</div>';
+	}else{
+		header('location: error.php');
+		exit();
+	}
+	
+	if(isset($_POST['submit'])){
 		$id = $_POST['id'];
-		@unlink(DIR_IMAGES . $image);
-		@unlink(DIR_FILES . $id);
-		$flag = true;
+		$query = "DELETE FROM `group` WHERE `id` = '$id'";
+		$database->query($query);
+		$xhtml = '<div class="success">Success! <a href="index.php">Click vào đây</a> để quay về trang quản lý.</div>';
 	}
 
-echo    
-	'<div id="wrapper">
-    	<div class="title">PHP FILE - Delete</div>
-        <div id="form">';
-			if ($flag == false){ echo
-				'<form action="" method="post" name="main-form">
-				
-					<div class="row">
-						<p>File:</p>
-						<span>'.$realPathId.'</span>
-					</div>
-
-					<div class="row">
-						<p>Title:</p>
-						<span> '.$title.' </span>
-					</div>
-
-					<div class="row">
-						<p>Description:</p>
-						<span> '.$description.' </span>
-					</div>
-
-					<div class="row">
-						<p>Image:</p>
-						<span>'.$realPathImage.'</span>
-					</div>
-
-					<div class="row">
-						<input type="hidden" value = '.$id.' name="id" >
-						<input type="submit" value="Delete" 			name="submit">
-						<input type="button" value="Cancel" 			name="cancel" id="cancel-button">
-					</div>';
-			} else { echo '<p>Xóa thành công!<a href = "index.php">Ấn vào đây</a> để quay lại</p>'; }
-			echo	'</form>    
+	if(isset($_POST['cancel'])){
+		header('location: Index.php');
+	}
+?>
+	<div id="wrapper">
+    	<div class="title">PHP FILE</div>
+        <div id="form">   
+	        <form action="" method="post" name="main-form">
+	        <?php
+	        	echo $xhtml;
+			?>
+			</form>    
         </div>
-        
-	</div>';
-	?>
-
+    </div>
 </body>
 </html>

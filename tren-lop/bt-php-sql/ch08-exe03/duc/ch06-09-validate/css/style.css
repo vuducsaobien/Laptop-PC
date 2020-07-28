@@ -53,28 +53,12 @@
 	text-align: justify;
 }
 
-
 #wrapper .list .row .id{
 	width: 8%;
 }
 
-#wrapper .list .row .image{
-	width: 8%;
-}
-
-#wrapper .list .row .image img{
-	width: 100%;
-}
-
 #wrapper .list .row .size{
 	width: 8%;
-}
-
-
-
-#wrapper .list .row .imageClass{
-	width: 10%;
-	height: 100%;
 }
 
 #wrapper .list .row .action{
@@ -107,7 +91,7 @@
 	display: inline-block;
 	padding: 5px 10px;
 	border: 1px solid #ad9d9d;
-	width: 70px;
+	width: 100px;
 	text-align: center;
 	text-decoration: none;
 	color: #000;
@@ -126,14 +110,6 @@
 }
 
 #form ul.error{
-	margin: 10px 0px;
-	border: 2px solid #c9e7e3;
-	padding: 15px;
-	background-color: #936595;
-	list-style: inside;
-}
-
-#form div.success{
 	margin: 10px 0px;
 	border: 2px solid #c9e7e3;
 	padding: 15px;
@@ -172,3 +148,4 @@
 #form .row input[type=button], #form .row input[type=submit]{
 	padding: 5px 10px;
 }
+

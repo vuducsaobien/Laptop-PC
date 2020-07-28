@@ -2,18 +2,16 @@
 	require_once 'class/Validate.class.php'; 
 	require_once 'class/HTML.class.php'; 
 	require_once 'connect.php'; 
-	// session_start();
+	session_start();
 	$success 	 = '';
-	// $name 	 	 = '';
-	// $ordering	 = '';
-	// $status		 = '';
+	$name 	 	 = '';
+	$ordering	 = '';
+	$status		 = '';
+	$outValidate['name'] = '';
+	$outValidate['ordering'] = '';
 	
-	// Khi name, ordering đã đúng(Sau khi check Error). 
-	// Giữ lại dữ liệu cho name, ordering
-	// $outValidate = $validate->getResult();
 	$error 			= '';
-	$outValidate	= [];
-	
+	$outValidate	= array();
 	// $id				= $_GET['id'];
 	// $action			= $_GET['action'];
 	$flagRedirect	= false;
@@ -43,42 +41,38 @@
 	// 	exit();
 	// }
 	
-	if(!empty($_POST)){
+	// if(!empty($_POST)){
 	// 	if($_SESSION['token'] == $_POST['token']){ // refresh page
 	// 		unset($_SESSION['token']);
 	// 		header('location: ' . $linkForm);
 	// 		exit();
 	// 	}else{
 	// 		$_SESSION['token'] = $_POST['token'];
-		// }
+	// 	}
 		
 	// 	$source   = array('name' => $_POST['name'], 'status'=> $_POST['status'], 'ordering'=> $_POST['ordering']);
-		// $validate = new Validate($source);
-		$validate = new Validate($_POST);
-		// Check error name, ordering
-		$validate->addRule('name', 'string', 2, 50);
-		$validate->addRule('ordering', 'int', 1, 10);
+	// 	$validate = new Validate($source);
+	// 	$validate->addRule('name', 'string', 2, 50)
+	// 			 ->addRule('ordering', 'int', 1, 10)
 	// 			 ->addRule('status', 'status');
-		$validate->run();
-		$outValidate = $validate->getResult();
+		
+	// 	$validate->run();
 
-		// Show error name, ordering
-		if(!$validate->isValid()){
-			$error = $validate->showErrors();
-		}else{
-
+	// 	$outValidate = $validate->getResult();
+		
+	// 	if(!$validate->isValid()){
+	// 		$error = $validate->showErrors();
+	// 	}else{
 	// 		if($action == 'edit'){
 	// 			$where = array(array('id', $id));
 	// 			$database->update($outValidate, $where);
 	// 		}else if($action == 'add'){
-				// check error (đã đúng) -> insert vào database
-				$database->insert($outValidate);
-				// Sau khi Insert thành công vào database, xóa name, ordering ở Form
-				$outValidate = [];
+	// 			$database->insert($outValidate);
+	// 			$outValidate = array();
 	// 		}
-			$success = '<div class="success">Success</div>'; 
-		}
-	}
+	// 		$success = '<div class="success">Success</div>'; 
+	// 	}
+	// }
 	
 	// $arrStatus 	= array(2=> 'Select status', 0 => 'Inactive', 1 => 'Active');
 	// $status		= HTML::createSelectbox($arrStatus, 'status', $outValidate['status']);
