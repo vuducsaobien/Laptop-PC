@@ -10,10 +10,9 @@
 <body>
 <?php
 	require_once 'connect.php';
-
-	$id		= $_GET['id']; 
-	$query  = "SELECT * FROM `group` WHERE `id` = '$id'";
-	$item   = $database->singleRecord($query);
+	$id	= $_GET['id']; 
+	$query = "SELECT `u`.`id`, CONCAT(`u`.`firstname`, ' ', `u`.`lastname`) AS fullname,`u`.`username`, `u`.`email`, `u`.`birthday`,`u`.`status`,`u`.`ordering` FROM `user` AS `u` WHERE `id` = '$id'";
+	$item = $database->singleRecord($query);
 	
 	if(!empty($item)){
 		$status = ($item['status']==0) ? 'Inactive' : 'Active';
@@ -21,7 +20,19 @@
 						<p>ID:</p>'.$item['id'].'
 					</div>
 					<div class="row">
-						<p>Group name:</p>'.$item['name'].'
+						<p>User name:</p>'.$item['username'].'
+					</div>
+					<div class="row">
+						<p>Full name:</p>'.$item['fullname'].'
+					</div>
+					<div class="row">
+						<p>Email:</p>'.$item['email'].'
+					</div>
+					<div class="row">
+						<p>Birthdat:</p>'.date("d-m-Y",strtotime($item['birthday'])).'
+					</div>
+					<div class="row">
+						<p>Address:</p>'.$item['address'].'
 					</div>
 					<div class="row">
 						<p>Status:</p>'.$status.'
@@ -32,7 +43,7 @@
 					<div class="row">
 						<input type="hidden" name="id" value="'.$item['id'].'">
 						<input type="submit" value="Delete" name="submit">
-						<input type="submit" value="Cancel" name="cancel" id="cancel-button">
+						<input type="button" value="Cancel" name="cancel" id="cancel-button">
 					</div>';
 	}else{
 		header('location: error.php');
@@ -41,13 +52,9 @@
 	
 	if(isset($_POST['submit'])){
 		$id = $_POST['id'];
-		$query = "DELETE FROM `group` WHERE `id` = '$id'";
+		$query = "DELETE FROM `user` WHERE `id` = '$id'";
 		$database->query($query);
-		$xhtml = '<div class="success">Success! <a href="index.php">Click vào đây</a> để quay về trang quản lý.</div>';
-	}
-
-	if(isset($_POST['cancel'])){
-		header('location: Index.php');
+		$xhtml = '<div class="success">Success! Click vào <a href="index.php"> đây</a> để quay về trang quản lý.</div>';
 	}
 ?>
 	<div id="wrapper">

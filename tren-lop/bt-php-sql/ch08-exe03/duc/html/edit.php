@@ -19,7 +19,7 @@
 	// $action			= $_GET['action'];
 	// $flagRedirect	= false;
 	// $titlePage		= '';
-	// $time			= time();
+	$time			= time();
 
 
 
@@ -47,17 +47,17 @@
 	}
 	
 	if(!empty($_POST)){
-	// 	if($_SESSION['token'] == $_POST['token']){ // refresh page
-	// 		unset($_SESSION['token']);
-	// 		header('location: ' . $linkForm);
-	// 		exit();
-	// 	}else{
-	// 		$_SESSION['token'] = $_POST['token'];
-		// }
+		if($_SESSION['token'] == $_POST['token']){ // refresh page
+			unset($_SESSION['token']);
+			header('location: ' . $linkForm);
+			exit();
+		}else{
+			$_SESSION['token'] = $_POST['token'];
+		}
 		
-	// 	$source   = array('name' => $_POST['name'], 'status'=> $_POST['status'], 'ordering'=> $_POST['ordering']);
-		// $validate = new Validate($source);
-		$validate = new Validate($_POST);
+		$source   = array('name' => $_POST['name'], 'status'=> $_POST['status'], 'ordering'=> $_POST['ordering']);
+		$validate = new Validate($source);
+		// $validate = new Validate($_POST);
 		// Check error name, ordering
 		$validate->addRule('name', 'string', 2, 50);
 		$validate->addRule('ordering', 'int', 1, 10);
@@ -135,5 +135,3 @@ echo
 
 </body>
 </html>
-
-*/

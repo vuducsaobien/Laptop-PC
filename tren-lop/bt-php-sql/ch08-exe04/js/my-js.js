@@ -4,11 +4,10 @@ $(document).ready(function(){
 		window.location = 'index.php';
 	});
 	
-	$('#multi-delete').click(function(){
+	$('#multy-delete').click(function(){
 		$('#main-form').submit();
 	});
 	
-	// Check all Check box
 	$('#check-all').change(function(){
 		var checkStatus = this.checked;
 		$('#main-form').find(':checkbox').each(function(){
@@ -16,8 +15,15 @@ $(document).ready(function(){
 		});
 	});
 	
-	// Click a Messege => Messege hide
 	$('.success, .notice, .error').click(function() {
 		 $(this).toggle("slow");
 	});
+	
+	$( "#birthday" ).datepicker({
+    	dateFormat: "dd/mm/yy",
+    	defaultDate: "+3d",
+    	changeYear: true,
+    	changeMonth: true,
+    	yearRange: "2000:2015"
+    });
 });

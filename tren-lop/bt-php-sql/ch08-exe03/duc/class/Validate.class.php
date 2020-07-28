@@ -15,8 +15,8 @@ class Validate{
 	
 	// Contrucst
 	public function __construct($source){
-		if(array_key_exists('submit', $source)) unset($source['submit']);
-		if(array_key_exists('token', $source)) unset($source['token']);
+		// if(array_key_exists('submit', $source)) unset($source['submit']);
+		// if(array_key_exists('token', $source)) unset($source['token']);
 		$this->source = $source;
 	}
 	

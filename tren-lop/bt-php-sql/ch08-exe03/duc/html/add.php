@@ -2,7 +2,7 @@
 	require_once 'class/Validate.class.php'; 
 	require_once 'class/HTML.class.php'; 
 	require_once 'connect.php'; 
-	// session_start();
+	session_start();
 	$success 	 = '';
 	// $name 	 	 = '';
 	// $ordering	 = '';
@@ -13,13 +13,21 @@
 	// $outValidate = $validate->getResult();
 	$error 			= '';
 	$outValidate	= [];
+	echo '<pre>';
+	print_r($_POST);
+	echo '</pre>';
 	
+	echo '<pre>';
+	print_r($_SESSION);
+	echo '</pre>';
+	// die();	
 	// $id				= $_GET['id'];
 	// $action			= $_GET['action'];
 	// $flagRedirect	= false;
 	// $titlePage		= '';
-	// $time			= time();
-
+	$time			= time();
+	echo  $_POST['token'];
+	echo  $_SESSION['token'];
 
 
 	
@@ -44,17 +52,19 @@
 	// }
 	
 	if(!empty($_POST)){
-	// 	if($_SESSION['token'] == $_POST['token']){ // refresh page
-	// 		unset($_SESSION['token']);
+		if($_SESSION['token'] == $_POST['token']){ // user đã refresh page
+			unset($_SESSION['token']);
+			header('location: ' . $_SERVER['PHP_SELF']);
 	// 		header('location: ' . $linkForm);
-	// 		exit();
-	// 	}else{
-	// 		$_SESSION['token'] = $_POST['token'];
-		// }
+
+			exit();
+		}else{
+			$_SESSION['token'] = $_POST['token'];
+		}
 		
-	// 	$source   = array('name' => $_POST['name'], 'status'=> $_POST['status'], 'ordering'=> $_POST['ordering']);
-		// $validate = new Validate($source);
-		$validate = new Validate($_POST);
+		$source   = array('name' => $_POST['name'], 'status'=> $_POST['status'], 'ordering'=> $_POST['ordering']);
+		$validate = new Validate($source);
+		// $validate = new Validate($_POST);
 		// Check error name, ordering
 		$validate->addRule('name', 'string', 2, 50);
 		$validate->addRule('ordering', 'int', 1, 10);
@@ -97,6 +107,12 @@
 <body>
 
 <?php
+/* 
+ở add.php user F5 refresh lại trang, vẫn add, insert vào database
+C1: action vào 1 trang ko tồn tại VD: process.php
+C2: muốn submit ngay tại form
+<input type="hidden" value="'.$time.'" name="token" />
+*/
 echo	
 	'<div id="wrapper">
 		div class="title">ADD GROUP</div>
