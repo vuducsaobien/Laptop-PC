@@ -127,7 +127,7 @@ class Validate{
 	// Validate Status
 	private function validateStatus($element){
 		if($this->source[$element] < 0 || $this->source[$element] > 1){
-			$this->errors[$element] = "Select status";
+			$this->errors[$element] = "Select status !!";
 		}
 	}
 	

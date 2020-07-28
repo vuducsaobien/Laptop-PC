@@ -15,7 +15,6 @@
 	$outValidate	= [];
 	
 	$id				= $_GET['id'];
-	// $id = mysqli_real_escape_string($id); // Attack ịnection
 	// $action			= $_GET['action'];
 	// $flagRedirect	= false;
 	// $titlePage		= '';
@@ -25,13 +24,12 @@
 
 	
 	// if($action == 'edit'){
-		// $id = mysqli_real_escape_string($id); // Attack ịnection
+	// 	$id = mysql_real_escape_string($id);
 	// Load info từ file cũ
-		$query = "SELECT `name`, `status`, `ordering` FROM `group` WHERE id = '" . $id . "'";
+		echo $query = "SELECT `name`, `status`, `ordering` FROM `group` WHERE id = '" . $id . "'";
 		$outValidate	= $database->singleRecord($query);
 	// 	$linkForm		= 'form.php?action=edit&id=' . $id;
-		// edit.php?action=edit&id=900 id = 900 ko tồn tại
-		if(empty($outValidate)){ $flagRedirect	= true;		
+	// 	if(empty($outValidate)) $flagRedirect	= true;		
 	// 	$titlePage		= 'EDIT GROUP';
 	// }else if($action == 'add'){
 	// 	$linkForm		= 'form.php?action=add';
@@ -42,9 +40,9 @@
 	
 	// Redirect page
 	// if($flagRedirect == true) {
-		header('location: error.php');
-		exit();
-	}
+	// 	header('location: error.php');
+	// 	exit();
+	// }
 	
 	if(!empty($_POST)){
 	// 	if($_SESSION['token'] == $_POST['token']){ // refresh page
@@ -72,11 +70,13 @@
 		}else{
 
 	// 		if($action == 'edit'){
-				$where = array(array('id', $id));
-				$database->update($outValidate, $where);
+	// 			$where = array(array('id', $id));
+	// 			$database->update($outValidate, $where);
 	// 		}else if($action == 'add'){
 				// check error (đã đúng) -> insert vào database
-				// Sau khi Update thành công vào database, giữ lại name, ordering ở Form
+				$database->insert($outValidate);
+				// Sau khi Insert thành công vào database, xóa name, ordering ở Form
+				$outValidate = [];
 	// 		}
 			$success = '<div class="success">Success</div>'; 
 		}
@@ -91,7 +91,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<title>EDIT GROUP</title>
+<title><?php echo $titlePage;?></title>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/my-js.js"></script>
 </head>
@@ -100,10 +100,10 @@
 <?php
 echo	
 	'<div id="wrapper">
-		div class="title">EDIT GROUP</div>
+		div class="title">'.$titlePage.'</div>
 		<div id="form">
 			' . $error. $success . '   
-			<form action="#" method="post" name="add-form">
+			<form action="'.$linkForm.'" method="post" name="add-form">
 
 				<div class="row">
 					<p>Name</p>

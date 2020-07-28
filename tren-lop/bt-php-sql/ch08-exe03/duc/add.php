@@ -16,9 +16,9 @@
 	
 	// $id				= $_GET['id'];
 	// $action			= $_GET['action'];
-	$flagRedirect	= false;
-	$titlePage		= '';
-	$time			= time();
+	// $flagRedirect	= false;
+	// $titlePage		= '';
+	// $time			= time();
 
 
 
@@ -58,7 +58,8 @@
 		// Check error name, ordering
 		$validate->addRule('name', 'string', 2, 50);
 		$validate->addRule('ordering', 'int', 1, 10);
-	// 			 ->addRule('status', 'status');
+		$validate->addRule('status', 'status');
+
 		$validate->run();
 		$outValidate = $validate->getResult();
 
@@ -80,15 +81,16 @@
 		}
 	}
 	
-	// $arrStatus 	= array(2=> 'Select status', 0 => 'Inactive', 1 => 'Active');
-	// $status		= HTML::createSelectbox($arrStatus, 'status', $outValidate['status']);
+	// Tạo select box tự động
+	$arrStatus 	= array(2=> 'Select status', 1 => 'Active', 0 => 'Inactive' );
+	$status		= HTML::createSelectbox($arrStatus, 'status', $outValidate['status']);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<title><?php echo $titlePage;?></title>
+<title>ADD GROUP</title>
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/my-js.js"></script>
 </head>
@@ -97,10 +99,10 @@
 <?php
 echo	
 	'<div id="wrapper">
-		div class="title">'.$titlePage.'</div>
+		div class="title">ADD GROUP</div>
 		<div id="form">
 			' . $error. $success . '   
-			<form action="'.$linkForm.'" method="post" name="add-form">
+			<form action="add.php" method="post" name="add-form">
 
 				<div class="row">
 					<p>Name</p>
@@ -109,11 +111,7 @@ echo
 				
 				<div class="row">
 					<p>Status</p>
-					<select name="status">
-						<option value="1">Active</option>
-						<option value="0">InActive</option>
 					'.$status.'
-					</select>
 				</div>
 				
 				<div class="row">

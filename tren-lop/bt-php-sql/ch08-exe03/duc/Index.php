@@ -49,7 +49,8 @@
 			                <p class="size">'.$item['ordering'].'</p>
 			                <p class="size">'.$item['total'].'</p>
 			                <p class="action">
-			                	<a href="form.php?action=edit&id='.$id.'">Edit</a> |
+								<a href="edit.php?action=edit&id='.$id.'">Edit</a> |
+								
 	                			<a href="delete.php?id='.$id.'">Delete Info Group</a>
 			                </p>
 			            </div>';	
@@ -59,7 +60,7 @@
 		$xhtml = '<div class="success">Dữ liệu đang cập nhật';
 	}
 	
-// */	
+// */							<a href="form.php?action=edit&id='.$id.'">Edit</a> |
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -99,7 +100,9 @@
 	    	</form>
     	</div>
         <div id="area-button">
-        	<a href="form.php?action=add">Add Group</a>
+        	<!-- <a href="form.php?action=add">Add Group</a> -->
+			<a href="add.php">Add Group</a>
+
         	<a id="multi-delete" href="#">Delete Group</a>
         </div>
     </div>

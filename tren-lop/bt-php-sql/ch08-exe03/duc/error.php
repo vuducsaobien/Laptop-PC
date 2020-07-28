@@ -10,7 +10,7 @@
     	<div class="title">MESSAGE</div>
 		<div id="form">   
 			<div class="success">
-				Yêu cầu không thực hiện được! Click vào <a href="index.php"> đây</a> để quay về trang quản lý.
+				Yêu cầu không thực hiện được! <a href="index.php">Click vào đây</a> để quay về trang quản lý.
 			</div>
         </div>
         
