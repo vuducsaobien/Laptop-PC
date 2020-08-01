@@ -16,7 +16,6 @@
 	echo '<pre>';
 	print_r($_POST);
 	echo '</pre>';
-	
 	echo '<pre>';
 	print_r($_SESSION);
 	echo '</pre>';
@@ -28,9 +27,6 @@
 	$time			= time();
 	echo  $_POST['token'];
 	echo  $_SESSION['token'];
-
-
-	
 	// if($action == 'edit'){
 	// 	$id = mysql_real_escape_string($id);
 	// 	$query = "SELECT `name`, `status`, `ordering` FROM `group` WHERE id = '" . $id . "'";
@@ -124,7 +120,7 @@ echo
 					<p>Name</p>
 					<input type="text" name="name" value="'.$outValidate['name'].'">
 				</div>
-				
+
 				<div class="row">
 					<p>Status</p>
 					'.$status.'
@@ -146,7 +142,13 @@ echo
 	</div>';
 ?>
 
-
+<!-- <div class="row">
+	<p>Status</p>
+	<select name="status">
+		<option value="1">Active</option>
+		<option value="1">Inactive</option>
+	</select>
+</div> -->
 
 </body>
 </html>

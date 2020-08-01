@@ -13,8 +13,8 @@
 			$_SESSION['token'] = $_POST['token'];
 		}
 		
-		if(isset($_POST['checkbox'])) $checkbox	= $_POST['checkbox'];
-
+		// if(isset($_POST['checkbox'])) $checkbox	= $_POST['checkbox'];
+		$checkbox	= $_POST['checkbox'];
 		if(!empty($checkbox)){
 			$total = $database->delete($checkbox);
 			$messageDelete = '<div class="success">Có '.$total.' dòng được xóa!</div>';
@@ -45,7 +45,7 @@
 			                <p class="size">'.$item['total'].'</p>
 			                <p class="action">
 								<a href="form.php?action=edit&id='.$id.'">Edit</a> |
-	                			<a href="delete.php?id='.$id.'">Delete Info Group</a>
+	                			<a href="delete.php?id='.$id.'">Delete</a>
 			                </p>
 			            </div>';	
 			$i++;
@@ -76,7 +76,7 @@
 	                <p class="id">ID</p>
 	                <p class="size">Status</p>
 	                <p class="size">Ordering</p>
-	                <p class="size">Members</p>
+	                <p class="size">Total Members</p>
 	                <p class="action">Action</p>
 	            </div>
 	            <input type="hidden" value="<?php echo time();?>" name="token" />
@@ -85,7 +85,7 @@
     	</div>
         <div id="area-button">
         	<a href="form.php?action=add">Add Group</a>
-        	<a id="multi-delete" href="#">Delete Group</a>
+        	<a id="multi-delete" href="#">Multi Delete Group</a>
         </div>
     </div>
 </body>

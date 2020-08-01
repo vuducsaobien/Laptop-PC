@@ -11,10 +11,11 @@
 	
 	$database = new Database($params);
 	
-	$data 	= array('status' => 0, 'ordering' => 10, 'name' => 'ss');
+	$data 	= array('status' => 1, 'ordering' => 7, 'name' => 'Ngoc Trinh');
 	$where	= array(
-						array('ordering', 9, 'and'),
-						array('status', 1)
+						array('ordering', 0, 'and'),
+						array('name', 'NANCY')
+						// array('status', 0) createWhereUpdateSQL khong hoat dong
 				);
 	$database->update($data, $where);
 	

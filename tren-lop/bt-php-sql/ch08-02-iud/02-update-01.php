@@ -4,8 +4,10 @@
 	mysqli_select_db($connect, 'manage_user');
 
 	// UPDATE
-	$query = "UPDATE `group` SET `status` = '1', `name` = 'Admin 1', `ordering` = '1'
-				   WHERE `id` = '3' ";
+	$query = "UPDATE `group` SET `status` = '1', 
+								 `name` = 'Admin DUC', 
+								 `ordering` = '1'
+				   WHERE `id` = '200' ";
 	$result = mysqli_query($connect, $query);
 	
 	if($result){

@@ -4,7 +4,7 @@
 	
 	// UPDATE 1 Array
 	mysqli_select_db($connect, 'manage_user');
-	$data = array('status' => 0, 'ordering' => 100, 'name' => 'Manager 1');
+	$data = array('status' => 0, 'ordering' => 100, 'name' => 'NANCY');
 	
 	function createUpdateSQL($data){
 		$newQuery = "";
@@ -19,8 +19,8 @@
 	
 	
 	$newQuery = createUpdateSQL($data);
-	$query = "UPDATE `group` SET " . $newQuery . " WHERE `id` = 3";
-	
+	// $query = "UPDATE `group` SET " . $newQuery . " WHERE `ordering` = '9'";
+	$query = "UPDATE `group` SET " . $newQuery . " WHERE `ordering` = '9' AND `status` = '0'";
 	$result = mysqli_query($connect, $query);
 	
 	if($result){

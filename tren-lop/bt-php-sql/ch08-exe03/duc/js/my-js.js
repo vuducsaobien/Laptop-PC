@@ -1,7 +1,8 @@
 
 $(document).ready(function(){
+
 	$('#cancel-button').click(function(){
-		window.location = 'index.php';
+		window.location = 'Index.php';
 	});
 	
 	$('#multi-delete').click(function(){

@@ -23,13 +23,18 @@ class Database{
 		}
 	}
 
-	// SET CONNECT
+	/*
+	SET CONNECT
+	$link = mysqli_connect('localhost', 'root', '');
+	$database->setConnect($link);
+	*/
+
 	public function setConnect($connect){
 		$this->connect = $connect;
 	}
 	
 	// SET DATABASE
-	// mysqli_select_db('manage_user', $connect);
+	// mysqli_select_db($connect, 'manage_user');
 	public function setDatabase($database = null){
 		if($database != null) {
 			$this->database = $database;
@@ -52,7 +57,9 @@ class Database{
 	public function insert($data, $type = 'single'){
 		if($type == 'single'){
 			$newQuery 	= $this->createInsertSQL($data);
+			// $query  	= "INSERT INTO `group`(".$newQuery['cols'].") VALUES (".$newQuery['vals'].")";
 			$query 		= "INSERT INTO `$this->table`(".$newQuery['cols'].") VALUES (".$newQuery['vals'].")";
+			// mysqli_query($connect, $query);
 			$this->query($query);
 		}else{
 			foreach($data as $value){
@@ -85,8 +92,13 @@ class Database{
 		return mysqli_insert_id($this->connect);
 	}
 
-	// QUERY
+	// QUERY IUD
 	// mysqli_query($connect, $query);
+	// public function query($query){
+	// 	mysqli_query($this->connect, $query);
+	// }
+
+	// QUERY SELECT
 	public function query($query){
 		$this->resultQuery = mysqli_query($this->connect, $query);
 		return $this->resultQuery;
@@ -118,9 +130,11 @@ class Database{
 		$newWhere = [];
 		if(!empty($data)){
 			foreach($data as $value){
-				if (isset($value[0]) && isset($value[1]) && !empty($value[0]) && !empty($value[1] )) {
+				if ( isset ($value[0]) && isset ($value[1]) && 
+				    !empty ($value[0]) && !empty ($value[1] ) ){
 					$newWhere[] = "`$value[0]` = '$value[1]'";
-					if (isset($value[2]) && !empty($value[2] )) {
+
+					if ( isset ($value[2]) && !empty ($value[2]) ){
 						$newWhere[] = $value[2];
 					}
 				}
@@ -157,21 +171,21 @@ class Database{
 	
 	// LIST RECORD Hiển thị tất cả các dòng
 	public function listRecord($resultQuery = null){
-		$result = array();
+		$result = [];
 		$resultQuery = ($resultQuery == null) ? $this->resultQuery : $resultQuery;
 		if(mysqli_num_rows($resultQuery) > 0){
+			// while($row = mysqli_fetch_assoc($this->resultQuery)){
 			while($row = mysqli_fetch_assoc($resultQuery)){
 				$result[] = $row;
 			}
-			mysqli_free_result($resultQuery);
+			mysqli_free_result($resultQuery); // Giải phóng bộ nhớ
 		}
-		
 		return $result;
 	}
 	
 	// SINGLE RECORD Hiển thị dòng đầu tiên
 	public function singleRecord($resultQuery = null){
-		$result = array();
+		$result = [];
 		$resultQuery = ($resultQuery == null) ? $this->resultQuery : $resultQuery;
 		if(mysqli_num_rows($resultQuery) > 0){
 			$result = mysqli_fetch_assoc($resultQuery);
@@ -180,7 +194,7 @@ class Database{
 		return $result;
 	}
 	
-	// EXIST
+	// EXIST ( Với 1 ĐK WHERE nào đó thì trong database có không?)
 	public function isExist($query){
 		if($query != null) {
 			$this->resultQuery = $this->query($query);
@@ -188,5 +202,14 @@ class Database{
 		if(mysqli_num_rows($this->resultQuery ) > 0) return true;
 		return false;
 	}
+	
+	// // EXIST ( Với 1 ĐK WHERE nào đó thì trong database có không?)
+	// public function isExist($query){
+	// 	if($query != null) {
+	// 		$this->resultQuery = $this->query($query);
+	// 	}
+	// 	if(mysqli_num_rows($this->resultQuery) > 0) return true;
+	// 	return false;
+	// }
 	
 }

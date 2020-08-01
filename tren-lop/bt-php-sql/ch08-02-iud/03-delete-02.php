@@ -5,7 +5,7 @@
 	// DELTE
 	mysqli_select_db($connect, 'manage_user');
 	
-	$ids = array(1, 2, 3);
+	$ids = array(200, 331);
 	$deleteID = '';
 	foreach($ids as $id) {
 		$deleteID .= "'" . $id . "', ";  
@@ -13,6 +13,7 @@
 	$deleteID .= "'0'";
 	
 	$query 	= "DELETE FROM `group` WHERE `id` IN ($deleteID)";
+	// DELETE FROM `group` WHERE `id` IN ('1', '2', '3', '0')
 	$result = mysqli_query($connect, $query);
 
 	if($result){

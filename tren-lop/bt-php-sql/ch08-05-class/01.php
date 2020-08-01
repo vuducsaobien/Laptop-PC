@@ -13,7 +13,7 @@
 	/*
 	SET CONNECT
 	$link = mysqli_connect('localhost', 'root', '');
-	$database =->setConnect($link);
+	$database->setConnect($link);
 	*/
 
 	echo '<pre>';

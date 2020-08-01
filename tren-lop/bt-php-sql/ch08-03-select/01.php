@@ -18,6 +18,7 @@
                 <p class="id">ID</p>
             </div>
 <?php 
+	// error_reporting( error_reporting() & ~E_NOTICE );
 	$connect = @mysqli_connect('localhost', 'root', '');
 	if(!$connect) die('<h3>Fail</h3>');
 	mysqli_select_db($connect, 'manage_user');
@@ -25,7 +26,7 @@
 	mysqli_query($connect,"SET CHARACTER SET 'utf8'");
 
 	// C1
-	$query = "SELECT * FROM `group` ORDER BY `ordering` DESC";
+	// $query = "SELECT * FROM `group` ORDER BY `ordering` DESC";
 	
 	// C2
 	$query[] 	= "SELECT * ";
@@ -36,7 +37,9 @@
 
 	$i 		= 1;
 	$xhtml  = '';
+	// while($row = mysqli_fetch_array($result)){
 	while($row = mysqli_fetch_assoc($result)){
+
 		$class 	= ($i % 2 == 0) ? "odd" : "even";
 		$status = ($row['status'] == 0) ? "Inactive" : "Active";
 		$xhtml .= '<div class="row ' . $class . '">

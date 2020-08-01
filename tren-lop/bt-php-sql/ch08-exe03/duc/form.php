@@ -9,8 +9,7 @@
 	// Giữ lại dữ liệu cho name, ordering
 	// $outValidate = $validate->getResult();
 	$error 			= '';
-	if(isset($_GET['id'])) $id = $_GET['id'];
-	
+	$id				= $_GET['id'];
 	$action			= $_GET['action'];
 	$flagRedirect	= false;
 	$titlePage		= '';
@@ -58,7 +57,9 @@
 
 		$validate->run();
 		$outValidate = $validate->getResult();
-
+		echo '<pre>';
+		print_r($outValidate);
+		echo '</pre>';
 		// Show error name, ordering
 		if(!$validate->isValid()){
 			$error = $validate->showErrors();
@@ -76,19 +77,32 @@
 		}
 	}
 	
-	// Tạo select box tự động
+	// Tạo select box tự động 
+	/*
+	<div class="row">
+		<p>Status</p>
+		<select name="status">
+			<option value="1">Select Status</option>
+			<option value="1">Active</option>
+			<option value="1">Inactive</option>
+		</select>
+	</div>
+	*/
+
+	// select box Status
 	$arrStatus 	= array(2=> 'Select status', 1 => 'Active', 0 => 'Inactive' );
-	$status		= @HTML::createSelectbox($arrStatus, 'status', $outValidate['status']);
+	// OR $arrStatus 	= array(2=> 'Select status', 'Active' => 'Active', 'Inactive' => 'Inactive' );
+	$status		= HTML::createSelectbox($arrStatus, 'status', $outValidate['status']);
 	
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<title><?php echo $titlePage; ?></title>
-<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="js/my-js.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<title><?php echo $titlePage; ?></title>
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/my-js.js"></script>
 </head>
 <body>
 	<?php

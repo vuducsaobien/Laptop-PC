@@ -20,9 +20,6 @@
 	// $flagRedirect	= false;
 	// $titlePage		= '';
 	$time			= time();
-
-
-
 	
 	// if($action == 'edit'){
 		// $id = mysqli_real_escape_string($id); // Attack ịnection

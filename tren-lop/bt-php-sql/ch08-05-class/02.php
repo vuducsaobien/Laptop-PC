@@ -11,6 +11,10 @@
 	
 	$database = new Database($params);
 	
-	$arrData = array('name'=>'Member 1234', 'status' => 0, 'ordering' => 9);
+	$arrData = array(
+						'name'	 	=>'Member 1234', 
+						'status' 	=> 0, 
+						'ordering'  => 9
+					);
 	
 	echo $lastID = $database->insert($arrData);

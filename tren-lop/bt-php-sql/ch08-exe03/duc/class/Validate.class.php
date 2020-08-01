@@ -107,6 +107,7 @@ class Validate{
 		}
 	}
 	
+	// show Errors
 	public function showErrors(){
 		$xhtml = '';
 		if(!empty($this->errors)){
@@ -119,6 +120,7 @@ class Validate{
 		return $xhtml;
 	}
 	
+	// isValid
 	public function isValid(){
 	 	if(count($this->errors)>0) return false;
 	 	return true;	
