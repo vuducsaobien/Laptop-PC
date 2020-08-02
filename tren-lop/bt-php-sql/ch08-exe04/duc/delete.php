@@ -11,7 +11,7 @@
 <?php
 	require_once 'connect.php';
 	$id	= $_GET['id']; 
-	$query = "SELECT `u`.`id`, CONCAT(`u`.`firstname`, ' ', `u`.`lastname`) AS fullname,`u`.`username`, `u`.`email`, `u`.`birthday`,`u`.`status`,`u`.`ordering` FROM `user` AS `u` WHERE `id` = '$id'";
+	$query = "SELECT `u`.`id`, CONCAT_WS('', lastname, ' ', firstname) AS fullname,`u`.`username`, `u`.`email`, `u`.`birthday`,`u`.`status`,`u`.`ordering` FROM `user` AS `u` WHERE `id` = '$id'";
 	$item = $database->singleRecord($query);
 	
 	if(!empty($item)){

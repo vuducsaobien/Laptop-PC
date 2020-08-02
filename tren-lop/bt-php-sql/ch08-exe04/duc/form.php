@@ -91,18 +91,22 @@
 	
 	// Tạo select box STATUS tự động
 	$arrStatus 	= array(2=> 'Select status', 1 => 'Active', 0 => 'Inactive' );
-	$status		= HTML::createSelectbox($arrStatus, 'status', @$outValidate['status']);
+	$status		= HTML::createSelectbox($arrStatus, 'status', $outValidate['status']);
 
 	// Tạo select box Group_Name tự động
 
 	// C1
 	// $query		= "SELECT `id`, `name` FROM `group`";
+	// $arrGroup	= $database->listRecord($query);	
 	// $arrGroup	= $database->listSelectBox($query);
-	// $groupID 	= @HTML::createSelectbox($arrGroup, 'group_id', $outValidate['group_id']);
+	// echo '<pre>';
+	// print_r($arrGroup);
+	// echo '</pre>';
+	// $groupID 	= HTML::createSelectbox($arrGroup, 'group_id', $outValidate['group_id']);
 
 	// C2
 	$query		= "SELECT `id`, `name` FROM `group`";
-	$groupID 	= $database->createSelectbox($query, 'group_id', @$outValidate['group_id']);
+	$groupID 	= $database->createSelectbox($query, 'group_id', $outValidate['group_id']);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -125,24 +129,24 @@
 
 					<div class="row">
 						<p>User Name</p>
-						<input type="text" name="username" value="'.@$outValidate['username'].'">
+						<input type="text" name="username" value="'.$outValidate['username'].'">
 					</div>
 					<div class="row">
 						<p>Email</p>
-						<input type="text" name="email" value="'.@$outValidate['email'].'">
+						<input type="text" name="email" value="'.$outValidate['email'].'">
 					</div>
 					<div class="row">
 						<p>Password</p>
-						<input type="password" name="password" value="'.@$outValidate['password'].'">
+						<input type="password" name="password" value="'.$outValidate['password'].'">
 					</div>
 					<div class="row">
 						<p>Birthday</p>
-						<input type="text" id="birthday" name="birthday" value="'.@$outValidate['birthday'].'">
+						<input type="text" id="birthday" name="birthday" value="'.$outValidate['birthday'].'">
 					</div>
 
 					<div class="row">
 						<p>Ordering</p>
-						<input type="text" name="ordering" value="'.@$outValidate['ordering'].'">
+						<input type="text" name="ordering" value="'.$outValidate['ordering'].'">
 					</div>
 
 					<div class="row">

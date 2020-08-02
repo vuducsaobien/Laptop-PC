@@ -1,5 +1,4 @@
 <?php
-	error_reporting( error_reporting() & ~E_NOTICE );
 	require_once 'class/Database.class.php';
 	$params		= array(
 			'server' 	=> 'localhost',

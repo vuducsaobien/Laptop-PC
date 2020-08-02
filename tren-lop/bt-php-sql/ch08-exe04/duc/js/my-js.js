@@ -22,12 +22,12 @@ $(document).ready(function(){
 	});
 
 	// Show time, day
-	// $( "#birthday" ).datepicker({
-    // 	dateFormat: "dd/mm/yy",
-    // 	defaultDate: "+3d",
-    // 	changeYear: true,
-    // 	changeMonth: true,
-    // 	yearRange: "2005:2020"
-    // });
+	$( "#birthday" ).datepicker({
+    	dateFormat: "dd/mm/yy",
+    	defaultDate: "+3d",
+    	changeYear: true,
+    	changeMonth: true,
+    	yearRange: "1995:2025"
+    });
 
 });

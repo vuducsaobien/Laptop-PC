@@ -23,13 +23,11 @@
 		}
 	}
 	
-	$query[] 	= "SELECT `u`.`id`, CONCAT_WS('', lastname, ' ', firstname) AS fullname, `u`.`status`,`u`.`birthday`,  `u`.`username`, `u`.`email`, `u`.`ordering`, `g`.`name` AS Group_Name"; 
+	$query[] 	= "SELECT `u`.`id`, CONCAT_WS('', lastname, ' ', firstname) AS fullname, `u`.`status`
+						 ,`u`.`birthday`,  `u`.`username`, `u`.`email`, `u`.`ordering`, `g`.`name` AS Group_Name"; 
 	$query[] 	= "FROM `group` AS `g` RIGHT JOIN `user` AS `u` ON `g`.`id` = `u`.`group_id`";
 	$query		= implode(" ", $query);
 	$list		= $database->listRecord($query);
-	echo '<pre>';
-	print_r($list);
-	echo '</pre>';
 
 	$xhtml 		= '';
 	if(!empty($list)){

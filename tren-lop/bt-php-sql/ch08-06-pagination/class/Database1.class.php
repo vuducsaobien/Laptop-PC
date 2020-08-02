@@ -1,18 +1,16 @@
 <?php
 class Database{
-	/* Properties */
+	
 	protected $connect;
 	protected $database;
 	protected $table;
 	protected $resultQuery;
 	
-	/* Methods */
 	// CONNECT DATABASE
 	public function __construct($params){
-		// $connect = @mysqli_connect('localhost', 'root', '');
-		$link = mysqli_connect($params['server'], $params['username'], $params['password']);
+		$link = mysql_connect($params['server'], $params['username'], $params['password']);
 		if(!$link){
-			die('Fail connect: ' . mysqli_error($link));
+			die('Fail connect: ' . mysql_errno());
 		}else{
 			$this->connect 	= $link;
 			$this->database = $params['database'];
@@ -22,30 +20,28 @@ class Database{
 			$this->query("SET CHARACTER SET 'utf8'");
 		}
 	}
-
+	
 	// SET CONNECT
 	public function setConnect($connect){
 		$this->connect = $connect;
 	}
 	
 	// SET DATABASE
-	// mysqli_select_db('manage_user', $connect);
 	public function setDatabase($database = null){
 		if($database != null) {
 			$this->database = $database;
 		}
-		mysqli_select_db($this->connect , $this->database );
+		mysql_select_db($this->database, $this->connect );
 	}
-
+	
 	// SET TABLE
 	public function setTable($table){
 		$this->table = $table;
 	}
-
+	
 	// DISCONNECT DATABASE
-	// mysqli_close($connect);
 	public function __destruct(){
-		mysqli_close($this->connect);
+		mysql_close($this->connect);
 	}
 	
 	// INSERT
@@ -66,9 +62,7 @@ class Database{
 	
 	// CREATE INSERT SQL
 	public function createInsertSQL($data){
-		$newQuery = [];
-		$vals = '';
-		$cols = '';
+		$newQuery = array();
 		if(!empty($data)){
 			foreach($data as $key=> $value){
 				$cols .= ", `$key`";
@@ -82,13 +76,12 @@ class Database{
 
 	// LAST ID
 	public function lastID(){
-		return mysqli_insert_id($this->connect);
+		return mysql_insert_id($this->connect);
 	}
-
+	
 	// QUERY
-	// mysqli_query($connect, $query);
 	public function query($query){
-		$this->resultQuery = mysqli_query($this->connect, $query);
+		$this->resultQuery = mysql_query($query, $this->connect);
 		return $this->resultQuery;
 	}
 
@@ -96,11 +89,11 @@ class Database{
 	public function update($data, $where){
 		$newSet 	= $this->createUpdateSQL($data);
 		$newWhere 	= $this->createWhereUpdateSQL($where);
-		$query 		= "UPDATE `$this->table` SET " . $newSet . " WHERE $newWhere";
+		$query = "UPDATE `$this->table` SET " . $newSet . " WHERE $newWhere";
 		$this->query($query);
 		return $this->affectedRows();
 	}
-
+	
 	// CREATE UPDATE SQL
 	public function createUpdateSQL($data){
 		$newQuery = "";
@@ -115,15 +108,11 @@ class Database{
 	
 	// CREATE WHERE UPDATE SQL
 	public function createWhereUpdateSQL($data){
-		$newWhere = [];
+		$newWhere = '';
 		if(!empty($data)){
 			foreach($data as $value){
-				if (isset($value[0]) && isset($value[1]) && !empty($value[0]) && !empty($value[1] )) {
-					$newWhere[] = "`$value[0]` = '$value[1]'";
-					if (isset($value[2]) && !empty($value[2] )) {
-						$newWhere[] = $value[2];
-					}
-				}
+				$newWhere[] = "`$value[0]` = '$value[1]'";
+				$newWhere[] = $value[2];
 			}
 			$newWhere = implode(" ", $newWhere);
 		}
@@ -132,7 +121,7 @@ class Database{
 	
 	// AFFECTED ROWS
 	public function affectedRows(){
-		return mysqli_affected_rows($this->connect);
+		return mysql_affected_rows($this->connect);
 	}
 	
 	// DELETE
@@ -143,7 +132,7 @@ class Database{
 		return $this->affectedRows();
 	}
 	
-	// CREATE WHERE DELTE SQL 
+	// CREATE WHERE DELTE SQL
 	public function createWhereDeleteSQL($data){
 		$newWhere = '';
 		if(!empty($data)){
@@ -155,52 +144,30 @@ class Database{
 		return $newWhere;
 	}
 	
-	// LIST RECORD Hiển thị tất cả các dòng
-	// Hiển thị tất cả các dòng Query đã hiển thị
-	public function listRecord($query = null){
-		$result = [];
+	// LIST RECORD
+	public function listRecord($query){
+		$result = array();
 		if(!empty($query)){
 			$resultQuery = $this->query($query);
-			if(mysqli_num_rows($resultQuery) > 0){
-				while($row = mysqli_fetch_assoc($resultQuery)){
+			if(mysql_num_rows($resultQuery) > 0){
+				while($row = mysql_fetch_assoc($resultQuery)){
 					$result[] = $row;
 				}
-				mysqli_free_result($resultQuery);
+				mysql_free_result($resultQuery);
 			}
 		}
 		return $result;
 	}
-
-	// LIST SELECT BOX
-	public function listSelectBox($query = null){
-		$result = [];
-		if(!empty($query)){
-			$resultQuery = $this->query($query);
-			if(mysqli_num_rows($resultQuery) > 0){
-				while($row = mysqli_fetch_assoc($resultQuery)){
-					$result[$row['id']] = $row['name'];
-					echo '<pre>';
-					print_r($row);
-					echo '</pre>';
-
-				}
-				mysqli_free_result($resultQuery);
-			}
-		}
-		$result[0] = 'Select a value';
-		ksort($result);
-		return $result;
-	}
-
-	// CREATE SELECT BOX
+	
+	// LIST RECORD
 	public function createSelectbox($query, $name, $keySelected = null, $class = null){
-		$result = [];
+		$result = array();
 		if(!empty($query)){
 			$resultQuery = $this->query($query);
-			if(mysqli_num_rows($resultQuery) > 0){
+			if(mysql_num_rows($resultQuery) > 0){
 				$xhtml = '<select class="'.$class.'" name="'.$name.'">';
 				$xhtml .= '<option value="0">Select a value</option>';
-				while($row = mysqli_fetch_assoc($resultQuery)){
+				while($row = mysql_fetch_assoc($resultQuery)){
 					if($keySelected == $row['id'] && $keySelected != null){
 						$xhtml .= '<option value="'.$row['id'].'" selected="true">'.$row['name'].'</option>';
 					}else{
@@ -208,42 +175,45 @@ class Database{
 					}
 				}
 				$xhtml .= '</select>';
-				mysqli_free_result($resultQuery);
+				mysql_free_result($resultQuery);
 			}
 		}
+		
 		return $xhtml;
+
 	}
 	
-	// SINGLE RECORD Hiển thị dòng đầu tiên
-	// Hiển thị dòng Query đầu tiên đã hiển thị
-	public function singleRecord($query = null){
-		$result = [];
+	// SINGLE RECORD
+	public function singleRecord($query){
+		$result = array();
 		if(!empty($query)){
 			$resultQuery = $this->query($query);
-			if(mysqli_num_rows($resultQuery) > 0){
-				$result = mysqli_fetch_assoc($resultQuery);
+			if(mysql_num_rows($resultQuery) > 0){
+				$result = mysql_fetch_assoc($resultQuery);
 			}
-			mysqli_free_result($resultQuery);
+			mysql_free_result($resultQuery);
 		}
 		return $result;
 	}
-
-	// QUERY
-	// mysqli_query($connect, $query);
-	// public function query($query){
-	// 	$this->resultQuery = mysqli_query($this->connect, $query);
-	// 	return $this->resultQuery;
-	// }
 	
-	// EXIST ( Với 1 ĐK WHERE nào đó thì trong database có không?)
+	// TOTAL ITEM
+	public function totalItem($query){
+		if(!empty($query)){
+			$resultQuery = $this->query($query);
+			if(mysql_num_rows($resultQuery) > 0){
+				$result = mysql_fetch_assoc($resultQuery);
+			}
+			mysql_free_result($resultQuery);
+		}
+		return $result['totalItems'];
+	}
+	
+	// EXIST
 	public function isExist($query){
 		if($query != null) {
 			$this->resultQuery = $this->query($query);
 		}
-		if(mysqli_num_rows($this->resultQuery) > 0) return true;
+		if(mysql_num_rows($this->resultQuery ) > 0) return true;
 		return false;
 	}
-
-
-
 }

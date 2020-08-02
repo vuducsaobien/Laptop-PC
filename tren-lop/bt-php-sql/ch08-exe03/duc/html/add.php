@@ -87,7 +87,7 @@
 		}
 	}
 	
-	// Tạo select box tự động
+	// Tạo select box STATUS tự động
 	$arrStatus 	= array(2=> 'Select status', 1 => 'Active', 0 => 'Inactive' );
 	$status		= HTML::createSelectbox($arrStatus, 'status', $outValidate['status']);
 ?>

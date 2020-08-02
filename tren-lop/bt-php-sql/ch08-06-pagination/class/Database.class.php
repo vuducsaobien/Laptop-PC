@@ -244,6 +244,17 @@ class Database{
 		return false;
 	}
 
-
+	// TOTAL ITEM
+	public function totalItem($query){
+		if(!empty($query)){
+			$resultQuery = $this->query($query);
+			if(mysqli_num_rows($resultQuery) > 0){
+				$result = mysqli_fetch_assoc($resultQuery);
+			}
+			mysqli_free_result($resultQuery);
+		}
+		return $result['totalItems'];
+	}
+	
 
 }

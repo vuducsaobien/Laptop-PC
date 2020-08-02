@@ -179,6 +179,10 @@ class Database{
 			if(mysqli_num_rows($resultQuery) > 0){
 				while($row = mysqli_fetch_assoc($resultQuery)){
 					$result[$row['id']] = $row['name'];
+					echo '<pre>';
+					print_r($row);
+					echo '</pre>';
+
 				}
 				mysqli_free_result($resultQuery);
 			}
@@ -239,5 +243,7 @@ class Database{
 		if(mysqli_num_rows($this->resultQuery) > 0) return true;
 		return false;
 	}
-	
+
+
+
 }
