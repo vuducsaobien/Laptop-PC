@@ -1,2 +1,0 @@
-b>C:\xamse\BackEnd-P> on line <b>57</b><br />||<br />
-<b>Notice</b>:  Undefined variable: description in <b>C:\xampp\htdocs\Laptop-PC\PHP-Course\BackEnd-PHP\02-file\exe\add.php</b> on line <b>63</b><br />
