@@ -35,4 +35,28 @@ class Helper{
             ';
             return $xhtml;
         }
+
+    // public static function searchPost($postElement){
+    //     foreach($postElement as $value){
+    //         $aa = $_POST["$value"];
+
+    //         if($_POST['clear']!=null){
+    //             $aa = '';
+    //         }
+    //     }
+
+    //     return $aa;
+    // }
+
+    public static function searchPost($postElement){
+            // echo '<br>';
+            $aa = $_POST["$postElement"];
+
+            if($_POST['clear']!=null){
+                $aa = '';
+            }
+            
+            return $aa;
+        }
+
 }

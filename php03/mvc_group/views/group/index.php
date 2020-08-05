@@ -1,28 +1,14 @@
 <?php
-	echo '<pre>';
-	print_r($_GET);
-	echo '</pre>';
-
+	Session::init();
 	echo '<pre>';
 	print_r($_POST);
 	echo '</pre>';
-	Session::init();
 
-	if($_POST!=null){
+	// $data = array('searchName', 'searchID');
+	// $search = Helper::searchPost($data);
 
-		$searchName = $_POST['searchName'];
-		$searchID 	= $_POST['searchID'];
-		$clear  = $_POST['clear'];
-
-		if($searchName!=null) Session::set('searchName', $searchName);
-		if($searchID!=null) Session::set('searchID', $searchID);
-
-		// if($clear!=null){
-		// 	Session::destroy();
-		// 	header('location: index.php?controller=group&action=index');
-		// }
-	}
-
+	$searchName = Helper::searchPost('searchName');
+	$searchID 	= Helper::searchPost('searchID');
 
 	if(!empty($this->items)){
 		foreach($this->items as $value){
@@ -44,33 +30,41 @@
 		}
 		$count = Helper::countStatus($this->items);
 	} 
-?>
 
-<div class="content">
-	<h4><?= $count  ?></h4>
 
-	<div id="dialog-confirm" title="Thông báo!" style="display: none;">
-  		<p>Bạn có chắc muốn xóa phần tử này hay không?</p>
-	</div>
+	echo'
+	<div class="content">
+		<h4>'.$count.'</h4>
 
-	<form action="#" method="post" name="form-search" id="form">
-		<p class="no"><input type="text" name="searchName" placeholder="Type Name Here"/></p>
-		<p class="no"><input type="text" name="searchID" placeholder="Type ID Here"/></p>
-
-		<input type="submit" value="Search" />
-		<input type="submit" name="clear" value="Clear" />
-	</from>
-
-	<div class="list">
-		<div class="row head">
-			<p class="w-10"><input type="checkbox" name="check-all" id="check-all"/></p>
-			<p>Group Name</p>
-			<p class="w-10">ID</p>
-			<p class="w-10">Status</p>
-			<p class="w-10">Ordering</p>
-			<p class="w-10">Member</p>
-			<p class="w-10 action">Action</p>
+		<div id="dialog-confirm" title="Thông báo!" style="display: none;">
+			<p>Bạn có chắc muốn xóa phần tử này hay không?</p>
 		</div>
-		<?php echo $xhtml;?>
+
+		<form action="#" method="post" name="form-search" id="form">
+			<p class="no">
+				<input type="text" name="searchName" value="'.$searchName.'" placeholder="Type Name Here" />
+			</p><br>
+
+			<p class="no">
+				<input type="text" name="searchID" value="'.$searchID.'" placeholder="Type ID Here"/>
+			</p><br>
+
+			<input type="submit" value="Search" />
+			<input type="submit" name="clear" value="Clear" />
+		</from>
+
+		<div class="list">
+			<div class="row head">
+				<p class="w-10"><input type="checkbox" name="check-all" id="check-all"/></p>
+				<p>Group Name</p>
+				<p class="w-10">ID</p>
+				<p class="w-10">Status</p>
+				<p class="w-10">Ordering</p>
+				<p class="w-10">Member</p>
+				<p class="w-10 action">Action</p>
+			</div>
+			'.$xhtml.'
+		</div>
 	</div>
-</div>
+	';
+?>

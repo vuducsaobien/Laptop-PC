@@ -18,7 +18,9 @@ class User extends Controller{
 			$password 	= md5($_POST['password']);
 			$validate = new Validate($source);
 			
-			$validate->addRule('username', 'existRecord', array('database' => $this->db, 'query' => "SELECT `id` FROM `user` WHERE `username` = '$username' AND `password` = '$password'"));
+			$validate->addRule('username', 'existRecord', 
+			array('database' => $this->db, 'query' => "SELECT `id` FROM `user` 
+			WHERE `username` = '$username' AND `password` = '$password'"));
 			
 			$validate->run();
 			if($validate->isValid()==true){
