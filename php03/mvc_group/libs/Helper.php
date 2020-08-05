@@ -16,45 +16,32 @@ class Helper{
         return $xhtml;
     }
 
+    // public static function countValue($source, $element, $arrValue){
+    //     $xhtml = '';
+    //     $count = 0; 
 
-    public static function countStatus($status){
-        $xhtml = '';
-        $countActive = 0; 
-        $countInactive = 0; 
-        $countALL = 0; 
-        foreach($status as $value){
-            ($value['status']==1) ? $countActive++ : $countInactive++;
-        }
-        $countALL = $countActive + $countInactive;
-        $xhtml = '
-            <div>
-                <span>Active: '.$countActive.' Group</span></br>
-                <span>Inactive: '.$countInactive.' Group</span></br>
-                <span>ALL: '.$countALL.' Group</span></br>
-            </div>
-            ';
-            return $xhtml;
-        }
-
-    // public static function searchPost($postElement){
-    //     foreach($postElement as $value){
-    //         $aa = $_POST["$value"];
-
-    //         if($_POST['clear']!=null){
-    //             $aa = '';
-    //         }
+    //     foreach($source as $value){
+    //             if($value["$element"]==$arrValue) $count++;
     //     }
-
-    //     return $aa;
+    //     return $count;
     // }
 
+    public static function countValue($source, $element, $arrValue){
+        $xhtml = '';
+        $count = 0; 
+        foreach($source as $value){
+                if($value["$element"]==$arrValue) $count++;
+                ($arrValue==1) ? $name = 'Active' : $name = 'InActive';
+        }
+        $xhtml = '<span><u>Group '.$name.':</u> '. $count.' groups</span><br>';
+        return $xhtml;
+    }
+
+
     public static function searchPost($postElement){
-            // echo '<br>';
             $aa = $_POST["$postElement"];
 
-            if($_POST['clear']!=null){
-                $aa = '';
-            }
+            if($_POST['clear']!=null) $aa = '';
             
             return $aa;
         }

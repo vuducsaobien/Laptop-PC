@@ -165,7 +165,7 @@ class Model{
 		return $result;
 	}
 	
-	// LIST RECORD
+	// create Select box
 	public function createSelectbox($query, $name, $keySelected = null, $class = null){
 		$result = array();
 		if(!empty($query)){

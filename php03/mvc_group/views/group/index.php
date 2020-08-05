@@ -1,23 +1,17 @@
 <?php
-	Session::init();
-	echo '<pre>';
-	print_r($_POST);
-	echo '</pre>';
-
-	// $data = array('searchName', 'searchID');
-	// $search = Helper::searchPost($data);
-
 	$searchName = Helper::searchPost('searchName');
 	$searchID 	= Helper::searchPost('searchID');
 
 	if(!empty($this->items)){
 		foreach($this->items as $value){
-			$id		= $value['id'];
 
+			$resultName = str_replace($searchName, "<mark>$searchName</mark>", $value['name']);
 			$status = Helper::showIconStatus($value['status']);
+			$id		= $value['id'];
+			
 			$xhtml .= '<div class="row" id="item-'.$id.'">
 							<p class="w-10"><input type="checkbox" name="checkbox[]" value="'.$id.'"/></p>
-							<p>'.$value['name'].'</p>
+							<p>'.$resultName.'</p>
 							<p class="w-10">'.$id.'</p>
 							<p class="w-10">'.$status.'</p>
 							<p class="w-10">'.$value['ordering'].'</p>
@@ -28,13 +22,24 @@
 							</p>
 						</div>';
 		}
-		$count = Helper::countStatus($this->items);
-	} 
+	}
+		// $count = Helper::countStatus($this->items);
+		$countActive 	= Helper::countValue($this->items, 'status', 1);
+		$countInActive  = Helper::countValue($this->items, 'status', 0);
+		// $countAll		= $countActive + $countInActive;
 
+		// $arrValue  = array(1, 0);
+		// $countAll  = Helper::countValue($this->items, 'status', $arrValue);
+		// <span><u>Group Active:</u> '. $countActive.' groups</span>
+		// <span><u>Group InActive:</u> '. $countInActive.' groups</span>
+		// <span><u>Group Total:</u> '. $countAll.' groups</span>
 
 	echo'
 	<div class="content">
-		<h4>'.$count.'</h4>
+		<div class="list">
+			'.$countActive.'
+			'.$countInActive.'
+		</div><br>
 
 		<div id="dialog-confirm" title="Thông báo!" style="display: none;">
 			<p>Bạn có chắc muốn xóa phần tử này hay không?</p>
