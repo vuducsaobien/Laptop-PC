@@ -1,11 +1,11 @@
 <?php
 class Cat{
     // 1 2
-    //Properties
-    // public $name;
-    // public $color;
-    // public $age;
-    // public $weight;
+    // Properties
+    public $name;
+    public $color;
+    public $age;
+    public $weight;
 
     // Methods
     //Cách 5: __construct() với tham số là mảng

@@ -21,7 +21,9 @@
 // }
 
 // 2
-class Cat{
+// class Cat{
+final class Cat{
+
     // Methods
     //Cách 5: __construct() với tham số là mảng
     public function __construct($arrayInfo){
@@ -32,7 +34,9 @@ class Cat{
     }
 
     
-    final public function showInfo(){
+    public function showInfo(){
+    // final public function showInfo(){
+
         echo '<br>Name: ' . $this->name;
         echo '<br>Color: ' . $this->color;
         echo '<br>Age: ' . $this->age;

@@ -1,11 +1,12 @@
 <?php
 require_once 'lion.class.php';
 // 1 2
-$arrayInfo = array('name' => 'Lion A', 
-                    'color' => 'yellow', 
-                    'age' => 4, 
-                    'weight' => '15kg'
-                );
+$arrayInfo = 
+array('name' => 'Lion A', 
+    'color' => 'yellow', 
+    'age' => 4, 
+    'weight' => '15kg'
+);
 $lionA = new Lion($arrayInfo);
 
 echo '<pre>';

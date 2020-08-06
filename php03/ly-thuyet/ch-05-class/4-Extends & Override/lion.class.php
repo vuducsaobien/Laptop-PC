@@ -10,6 +10,7 @@ require_once 'cat.class.php';
 class Lion extends Cat{
 
 public $height = '1m3';
+
 public function getHeight(){
     return $this->height;
 }
@@ -19,7 +20,9 @@ public function showInfo(){
     echo '<br>Color: ' . $this->color;
     echo '<br>Age: ' . $this->age;
     echo '<br>Weight: ' . $this->weight;
-    echo '<br>Height: ' . $this->getHeight();
+    // echo '<br>Height: ' . $this->getHeight();
+    echo '<br>Height: ' . $this->height;
+
     echo '<hr>';
 }
 }

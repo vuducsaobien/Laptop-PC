@@ -19,6 +19,7 @@ class Cat{
         $this->color    = $color;
         $this->age      = $age;
         $this->weight   = $weight;
+
     }
 
     public function showInfo(){
