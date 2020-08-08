@@ -4,7 +4,7 @@ class Template{
 	// File config (admin/main/template.ini)
 	private $_fileConfig;
 	
-	// File template (admin/main/inde.php)
+	// File template (admin/main/index.php)
 	private $_fileTemplate;
 	
 	// Folder template (admin/main/)

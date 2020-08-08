@@ -4,7 +4,7 @@ class Bootstrap{
 	private $_url;
 	private $_controller;
 	
-	public function init(){
+	public function init(){     
 		
 		$this->setURL();
 		if(!isset($this->_url['controller'])){

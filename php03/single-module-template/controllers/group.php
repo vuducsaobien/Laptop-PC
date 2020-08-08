@@ -16,7 +16,14 @@ class Group extends Controller{
 		$this->view->js		= array('group/js/group.js', 'group/js/jquery-ui-1.10.3.custom.min.js');
 		$this->view->css	= array('group/css/jquery-ui-1.10.3.custom.min.css');
 		$this->view->render('group/index');
-		
+		// echo '<pre>';
+		// print_r($this->view->items);
+		// echo '</pre>';
+		echo '<pre>';
+		print_r($this->db);
+		echo '</pre>';
+
+
 		
 	}
 

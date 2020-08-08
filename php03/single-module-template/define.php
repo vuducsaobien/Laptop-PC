@@ -9,7 +9,7 @@
 	define ('VIEW_PATH'			, ROOT_PATH . DS . 'views' . DS);			// Định nghĩa đường dẫn đến thư mục views
 	define ('PUBLIC_PATH'		, ROOT_PATH . DS . 'public' . DS);			// Định nghĩa đường dẫn đến thư mục public							
 	
-	define	('ROOT_URL'			, DS . 'Laptop-PC/php03/mvc_group/');
+	define	('ROOT_URL'			, DS . 'Laptop-PC/php03/single-module-template');
 	define	('PUBLIC_URL'		, ROOT_URL . DS . 'public' . DS);
 	define	('VIEW_URL'			, ROOT_URL . DS . 'views' . DS);
 

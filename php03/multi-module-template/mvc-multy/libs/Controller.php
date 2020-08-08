@@ -55,7 +55,7 @@ class Controller{
 		return $this->_templateObj;
 	}
 	
-	// GET PARAMS
+	// SET PARAMS
 	public function setParams($arrParam){
 		$this->_arrParam= $arrParam;
 	}
