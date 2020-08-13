@@ -21,7 +21,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="dashboard.php" class="nav-link" data-active="dashboard">
+                    <a href="<?= $this->_folderTemplate . 'dashboard.php'; ?>" class="nav-link" data-active="dashboard">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -36,14 +36,14 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="list.php" class="nav-link active" data-active="index">
+                            <a href="<?= $this->_folderTemplate . 'list.php'; ?>" class="nav-link active" data-active="index">
                                 <i class="nav-icon fas fa-list-ul"></i>
                                 <p>List</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="form.php" class="nav-link" data-active="form">
+                            <a href="<?= $this->_folderTemplate . 'form.php'; ?>" class="nav-link" data-active="form">
                                 <i class="nav-icon fas fa-edit"></i>
                                 <p>Form</p>
                             </a>

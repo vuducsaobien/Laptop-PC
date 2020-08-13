@@ -21,9 +21,10 @@ class IndexController extends Controller
 		$this->_view->render('index/index');
 	}
 
-	public function addAction()
+	public function listAction()
 	{
-		echo '<h3>' . __METHOD__ . '</h3>';
-		$this->_view->render('index/index');
+
+		$this->_view->_title = 'Group Manager :: List';
+		$this->_view->render('index/list');
 	}
 }

@@ -18,30 +18,26 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+
             <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 text-dark"><?= $this->abc;?></h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php require_once 'html/page-header.php'; ?>
             <!-- /.content-header -->
 
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div class="row justify-content-center">
-                        <!--  LOAD CONTENT -->
-                        <?php 
-                            require_once APPLICATION_PATH. $this->_moduleName . DS . 'views' . DS . $this->_fileView . '.php';
-                        ?>
-                    </div>
+                    <!--  LOAD CONTENT -->
+                    <?php 
+                        require_once APPLICATION_PATH. $this->_moduleName . DS . 'views' . DS . $this->_fileView . '.php';
+                        echo '<pre>';
+                        print_r($this->_folderTemplate . 'dashboard.php');
+                        echo '</pre>';
+                        //TEMPLATE_URL . $this->_moduleName . DS;
+                    ?>
                 </div>
             </section>
             <!-- /.content -->
+
         </div>
         <!-- /.content-wrapper -->
         <?php require_once 'html/footer.php'; ?>

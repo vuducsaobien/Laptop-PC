@@ -17,8 +17,13 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+
             <!-- Content Header (Page header) -->
-            <div class="content-header">
+                <?php require_once 'html/page-header.php'; ?>
+            <!-- /.content-header -->
+
+            <!-- Content Header (Page header) -->
+            <!-- <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -26,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- /.content-header -->
 
             <!-- Main content -->

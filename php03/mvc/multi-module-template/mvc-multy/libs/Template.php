@@ -35,6 +35,7 @@ class Template{
 			$view->_dirImg 		= TEMPLATE_URL . $folderTemplate . $arrCongif['dirImg'] . DS;
 				
 			$view->setTemplatePath(TEMPLATE_PATH . $folderTemplate . $fileTemplate);
+			$view->_folderTemplate = TEMPLATE_PATH . $folderTemplate; // DUC
 		}
 	
 	}

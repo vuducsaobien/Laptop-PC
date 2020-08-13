@@ -9,7 +9,7 @@
 	define ('TEMPLATE_PATH'		, PUBLIC_PATH . 'template' . DS);		// Định nghĩa đường dẫn đến thư mục public							
 	
 	// define	('ROOT_URL'			, DS . 'mvc-multy' . DS);
-	define	('ROOT_URL'			, DS . 'Laptop-PC/php03/mvc/multi-module-template/mvc-multy/' . DS);
+	define	('ROOT_URL'			, DS . 'Laptop-PC/php03/mvc/multi-module-template/mvc-multy' . DS);
 
 	define	('APPLICATION_URL'	, ROOT_URL . 'application' . DS);
 	define	('PUBLIC_URL'		, ROOT_URL . 'public' . DS);

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <?php require_once 'html/head.php'; ?>
+    <?php echo $this->_metaHTTP;?>
+	<?php echo $this->_metaName;?>
+    <?php echo $this->_title;?>
+    <?php echo $this->_cssFiles;?>
 </head>
-
 <body class="hold-transition sidebar-mini layout-fixed text-sm">
     <div class="wrapper">
 
@@ -17,8 +18,13 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+
             <!-- Content Header (Page header) -->
-            <div class="content-header">
+                <?php require_once 'html/page-header.php'; ?>
+            <!-- /.content-header -->
+
+            <!-- Content Header (Page header) -->
+            <!-- <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -26,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- /.content-header -->
 
             <!-- Main content -->
