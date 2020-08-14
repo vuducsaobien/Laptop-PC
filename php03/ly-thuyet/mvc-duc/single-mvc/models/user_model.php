@@ -1,9 +1,9 @@
 <?php
-    class Login_Model {
+    class User_Model extends Model{
 
         public function __construct()
         {
-            echo '<h3>' . __METHOD__ . '</h3>';
+            parent::__construct();
         }
 
         public function index()

@@ -7,7 +7,7 @@
 
         }
 
-        public function load($name)
+        public function loadModel($name)
         {
             $path = MODEL_PATH . $name . '_model.php' ;
             $modelName = ucfirst($name) . '_Model';
@@ -15,8 +15,12 @@
                 require_once $path;
                 $this->db = new $modelName();
             }
+        }
 
-
+        public function redirect($controller = 'index', $action = 'index')
+        {
+            header("location: index.php?controller=$controller&action=$action");
+            exit();
         }
 
 

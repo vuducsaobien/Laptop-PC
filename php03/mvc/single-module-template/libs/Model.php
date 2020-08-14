@@ -16,7 +16,9 @@ class Model{
 		}
 		$link = mysqli_connect($params['server'], $params['username'], $params['password']);
 		if(!$link){
-			die('Fail connect: ' . mysqli_errno());
+			// die('Fail connect: ' . mysqli_error());
+			die('Fail connect: ' . mysqli_connect_error());
+
 		}else{
 			$this->connect 	= $link;
 			$this->database = $params['database'];
@@ -70,6 +72,9 @@ class Model{
 	public function createInsertSQL($data){
 		$newQuery = array();
 		if(!empty($data)){
+			$cols = '';
+			$vals = '';
+
 			foreach($data as $key=> $value){
 				$cols .= ", `$key`";
 				$vals .= ", '$value'";
@@ -82,7 +87,7 @@ class Model{
 	
 	// LAST ID
 	public function lastID(){
-		return mysql_insert_id($this->connect);
+		return mysqli_insert_id($this->connect);
 	}
 	
 	// QUERY
@@ -114,7 +119,7 @@ class Model{
 	
 	// CREATE WHERE UPDATE SQL
 	public function createWhereUpdateSQL($data){
-		$newWhere = '';
+		$newWhere = [];
 		if(!empty($data)){
 			foreach($data as $value){
 				$newWhere[] = "`$value[0]` = '$value[1]'";
@@ -165,7 +170,7 @@ class Model{
 		return $result;
 	}
 	
-	// create Select box
+	// LIST RECORD
 	public function createSelectbox($query, $name, $keySelected = null, $class = null){
 		$result = array();
 		if(!empty($query)){

@@ -7,6 +7,5 @@
     }
 
     $bootstrap = new Bootstrap();
-
-
+    $bootstrap->init();
 ?>
