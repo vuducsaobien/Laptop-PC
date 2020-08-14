@@ -28,25 +28,35 @@ class Helper
     //     return $count;
     // }
 
-    public static function countValue($source, $element, $arrValue)
+    public static function countValue($source, $element)
     {
-        $xhtml = '';
-        $count = 0;
-        foreach ($source as $value) {
-            if ($value["$element"] == $arrValue) $count++;
-            ($arrValue == 1) ? $name = 'Active' : $name = 'InActive';
+        $xhtml      = '';
+        $active     = 0;
+        $inactive   = 0;
+        $all = 0;
+
+        foreach ($source as $value){
+            ($value["$element"] == 1) ? $active++ : $inactive++;
+            $all++;
         }
-        $xhtml = '<span><u>Group ' . $name . ':</u> ' . $count . ' groups</span><br>';
+
+        $xhtml = 
+        '<div class="list">
+            <span>
+                <p>Active: '.$active.' </p>
+                <p>Inactive: '.$inactive.'</p>
+                 <p>All: '. $all .'</p>
+            </span>
+        </div>';
         return $xhtml;
     }
 
 
-    public static function searchPost($postElement)
+    public static function searchPost($namePost)
     {
-        $aa = $_POST["$postElement"];
-
-        if ($_POST['clear'] != null) $aa = '';
-
-        return $aa;
+        $result = (!empty($_POST["$namePost"])) ? $_POST["$namePost"] : '';
+        return $result;
     }
+
+
 }
