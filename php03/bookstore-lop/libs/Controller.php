@@ -81,7 +81,7 @@ class Controller{
 		$this->_pagination['totalItemsPerPage'] = $config['totalItemsPerPage'];
 		$this->_pagination['pageRange']			= $config['pageRange'];
 		$this->_arrParam['pagination']			= $this->_pagination;
-		$this->_view->arrParam					=$this->_arrParam;
+		$this->_view->arrParam					= $this->_arrParam;
 	}
 	
 }

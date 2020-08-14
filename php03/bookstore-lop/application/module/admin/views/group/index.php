@@ -147,7 +147,16 @@ if(!empty($this->Items)){
 		$status		= $value['status'];
 		$group_acp	= $value['group_acp'];
 		$ordering   = $value['ordering'];
-		$createdBy  = $value['createdBy'];
+		
+		$created  = $value['created'];
+		$createdBy  = $value['created_by'];
+
+		$modified  = $value['modified'];
+		$modifiedBy  = $value['modified_by'];
+
+		echo '<pre>';
+		print_r($this->Items);
+		echo '</pre>';
 
 		$classStatus = '';
 		$group_acp	= Helper::cmsGroupACP($value['group_acp'], URL::createLink('admin', 'group', 'ajaxACP', array('id' => $id, 'group_acp' => $value['group_acp'])), $id);
@@ -203,12 +212,12 @@ if(!empty($this->Items)){
 			
 			<td class="text-center">
 				<p class="mb-0 history-by"><i class="far fa-user">'.$createdBy.'</i></p>
-				<p class="mb-0 history-time"><i class="far fa-clock"> B</i></p>
+				<p class="mb-0 history-time"><i class="far fa-clock">'.$created.'</i></p>
 			</td>
 
 			<td class="text-center modified-1">
-				<p class="mb-0 history-by"><i class="far fa-user"></i></p>
-				<p class="mb-0 history-time"><i class="far fa-clock"></i></p>
+				<p class="mb-0 history-by"><i class="far fa-user">'.$modifiedBy.'</i></p>
+				<p class="mb-0 history-time"><i class="far fa-clock">'.$modified.'</i></p>
 			</td>
 
 			<td class="text-center">
