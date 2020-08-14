@@ -18,6 +18,8 @@
 
                 if(method_exists($controller, $actionURL)==true){
                     $controller->$actionURL();
+                    $controller->load($controllerURL);
+
                 } else {
                     $this->error();
                 }
@@ -40,6 +42,7 @@
         {
             require_once 'controller/error.php';
             $error = new Errorr();
+            $error->index();
     }
 
 

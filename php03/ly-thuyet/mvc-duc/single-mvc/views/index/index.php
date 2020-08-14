@@ -1,3 +1,3 @@
-<?php include_once 'views/header.php' ;?>
-    <div class="content">Content</div>
-<?php include_once 'views/footer.php' ;?>
+<div class="content">
+    <?php echo '<h3>' . __FILE__ . '</h3>'; ;?>
+</div>

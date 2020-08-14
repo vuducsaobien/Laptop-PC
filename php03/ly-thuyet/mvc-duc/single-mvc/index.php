@@ -1,11 +1,12 @@
 <?php
-error_reporting(error_reporting() & ~E_NOTICE);
+    error_reporting(error_reporting() & ~E_NOTICE);
+    require_once 'define.php';
 
-echo '<h1>MVC</h1>';
+    function __autoload($className){
+        require_once LIBRARY_PATH . "{$className}.php";
+    }
 
-require_once 'libs/Controller.php';
-require_once 'libs/View.php';
-require_once 'libs/Bootstrap.php';
-$bootstrap = new Bootstrap();
+    $bootstrap = new Bootstrap();
+
 
 ?>
