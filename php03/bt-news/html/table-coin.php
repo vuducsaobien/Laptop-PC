@@ -1,5 +1,5 @@
 <div class="sidebar-box ftco-animate">
-	<h3 class="sidebar-heading">Giá COIN mới nhất</h3>
+	<h3 class="sidebar-heading">Giá COIN mới nhất VĂN ĐỨC</h3>
 	<table>
 		<tr>
 			<th>Coin Name</th>

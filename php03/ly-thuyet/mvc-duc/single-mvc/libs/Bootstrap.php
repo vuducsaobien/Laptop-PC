@@ -60,7 +60,7 @@
             require_once CONTROLLER_PATH . 'error.php';
             $error = new Errorr();
             $error->index();
-    }
+        }
 
 
 

@@ -38,8 +38,8 @@
 
 					<div class="col-xl-4 sidebar ftco-animate bg-light pt-5">
 						<?php 
-							require_once DIR_HTML . 'table-gold.php';
 							require_once DIR_HTML . 'table-coin.php'; 
+							require_once DIR_HTML . 'table-gold.php';
 						?>
 					</div>
 				</div><!-- END COL -->
