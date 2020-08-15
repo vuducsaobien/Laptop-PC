@@ -17,7 +17,7 @@ class Bootstrap
         if (file_exists($filePath)) {
             // require_once $filePath;
             // $controllerObject = new $controllerName();
-            // $controllerObject->loadModel($this->_params['module'], $this->_params['controller']);
+            // $controllerObject->setModel($this->_params['module'], $this->_params['controller']);
             // $controllerObject->setView($this->_params['module']);
             // $controllerObject->setParams($this->_params);
             $this->loadExistController($filePath, $controllerName);
@@ -79,10 +79,11 @@ class Bootstrap
         // $filePath   = APPLICATION_PATH . $this->_params['module'] . DS . 'controllers' . DS . $controllerName . '.php';
         // if (file_exists($filePath)) {
         require_once $filePath;
-        $this->_controllerObject = new $controllerName();
-        $this->_controllerObject->loadModel($this->_params['module'], $this->_params['controller']);
-        $this->_controllerObject->setView($this->_params['module']);
-        $this->_controllerObject->setParams($this->_params);
+        $this->_controllerObject = new $controllerName($this->_params);
+        // $this->_controllerObject->setModel($this->_params['module'], $this->_params['controller']);
+        // $this->_controllerObject->setView($this->_params['module']);
+        // $this->_controllerObject->setTemplate($this->_controllerObject);
+        // $this->_controllerObject->setParams($this->_params);
 
         //     $actionName = $this->_params['action'] . 'Action';
 

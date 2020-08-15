@@ -6,16 +6,13 @@ class UserController extends Controller
 
         parent::__construct();
         echo '<h3>' . __METHOD__ . '</h3>';
-        echo '<pre>AAAAA';
-        print_r($this->_arrParam);
-        echo '</pre>';
 
 
     }
 
     public function indexAction()
     {
-        // $this->loadModel('admin', 'index'); //Truy cập vào Model Khác
+        // $this->setModel('admin', 'index'); //Truy cập vào Model Khác
         // $this->db->listItems();
 
     $this->_view->data = array('PHP', 'Joomla');
