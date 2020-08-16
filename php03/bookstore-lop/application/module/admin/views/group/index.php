@@ -3,20 +3,22 @@
 	// include_once 'submenu/index.php';
 
 	// COLUMN
-	// $columnPost		= $this->arrParam['filter_column'];
-	// $orderPost		= $this->arrParam['filter_column_dir'];
-	// $lblName 		= Helper::cmsLinkSort('Name', 'name', $columnPost, $orderPost);
-	// $lblStatus		= Helper::cmsLinkSort('Status', 'status', $columnPost, $orderPost);
-	// $lblGroupACP	= Helper::cmsLinkSort('Group ACP', 'group_acp', $columnPost, $orderPost);
-	// $lblOrdering	= Helper::cmsLinkSort('Ordering', 'ordering', $columnPost, $orderPost);
-	// $lblCreated		= Helper::cmsLinkSort('Created', 'created', $columnPost, $orderPost);
-	// $lblCreatedBy	= Helper::cmsLinkSort('Created By', 'created_by', $columnPost, $orderPost);
-	// $lblModified	= Helper::cmsLinkSort('Modified', 'modified', $columnPost, $orderPost);
-	// $lblModifiedBy	= Helper::cmsLinkSort('Modified By', 'modified_by', $columnPost, $orderPost);
-	// $lblID			= Helper::cmsLinkSort('ID', 'id', $columnPost, $orderPost);
-$countActive = Helper::countStatus($this->Items, 'status', 1);
-$countInactive = Helper::countStatus($this->Items, 'status', 0);
-$all = $countActive + $countInactive;
+	$columnPost		= $this->arrParam['sort_field'];
+	$orderPost		= $this->arrParam['sort_order'];
+
+	$lblName 		= Helper::cmsLinkSort('Name', 'name', $columnPost, $orderPost);
+	$lblStatus		= Helper::cmsLinkSort('Status', 'status', $columnPost, $orderPost);
+	$lblGroupACP	= Helper::cmsLinkSort('Group ACP', 'group_acp', $columnPost, $orderPost);
+	$lblOrdering	= Helper::cmsLinkSort('Ordering', 'ordering', $columnPost, $orderPost);
+	$lblCreated		= Helper::cmsLinkSort('Created', 'created', $columnPost, $orderPost);
+	$lblCreatedBy	= Helper::cmsLinkSort('Created By', 'created_by', $columnPost, $orderPost);
+	$lblModified	= Helper::cmsLinkSort('Modified', 'modified', $columnPost, $orderPost);
+	$lblModifiedBy	= Helper::cmsLinkSort('Modified By', 'modified_by', $columnPost, $orderPost);
+	$lblID			= Helper::cmsLinkSort('ID', 'id', $columnPost, $orderPost);
+
+	$countActive 	= Helper::countStatus($this->Items, 'status', 1);
+	$countInactive  = Helper::countStatus($this->Items, 'status', 0);
+	$all 			= $countActive + $countInactive;
 
 ?>
 
@@ -96,7 +98,7 @@ $all = $countActive + $countInactive;
 		</div>
 
 		<!-- List Content -->
-		<form action="" method="post" class="table-responsive" id="form-table">
+		<form action="" method="post" class="table-responsive" id="form-table" name="form-table">
 			<table class="table table-bordered table-hover text-nowrap btn-table mb-0">
 
 				<thead>
@@ -127,12 +129,10 @@ $all = $countActive + $countInactive;
 							$name		 = $value['name'];
 							$group_acp	 = $value['group_acp'];
 							$ordering    = $value['ordering'];
-							
 							$created  	 = $value['created'];
 							$createdBy   = $value['created_by'];
 							$modified  	 = $value['modified'];
 							$modifiedBy	 = $value['modified_by'];
-
 
 							// SELECT BOX STATUS
 							// $classStatus = '';
@@ -144,7 +144,7 @@ $all = $countActive + $countInactive;
 							// $arrStatus			= array(1 => 'Active',  0 => 'Inactive');
 							// echo $selectboxStatus	= Helper::cmsSelectbox('filter_state', 'custom-select custom-select-sm text-white bg-'.$classStatus.'', $arrStatus, $status, 'width: unset');
 
-							$status	 = Helper::cmsStatus($value['status'], URL::createLink('admin', 'group', 'ajaxACP', array('id' => $id, 'status' => $value['status'])), $id);
+							$status	 	 = Helper::cmsStatus($value['status'], URL::createLink('admin', 'group', 'ajaxACP', array('id' => $id, 'status' => $value['status'])), $id);
 							$group_acp	 = Helper::cmsGroupACP($value['group_acp'], URL::createLink('admin', 'group', 'ajaxACP', array('id' => $id, 'group_acp' => $value['group_acp'])), $id);
 
 							echo '
@@ -191,7 +191,7 @@ $all = $countActive + $countInactive;
 									</a>
 								</td>
 							</tr>
-						';
+							';
 						}
 					}
 					?>

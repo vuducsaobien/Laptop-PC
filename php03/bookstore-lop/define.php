@@ -9,9 +9,9 @@
 	define ('MODULE_PATH'		, APPLICATION_PATH . 'module' . DS);		// Định nghĩa đường dẫn đến thư mục module							
 	define ('TEMPLATE_PATH'		, PUBLIC_PATH . 'template' . DS);			// Định nghĩa đường dẫn đến thư mục template							
 	
-	define	('ROOT_URL'			, DS . 'Laptop-PC/php03/ly-thuyet/ch11-mvc/bookstore' . DS);
-	define	('APPLICATION_URL'	, 'application' . DS);
-	define	('PUBLIC_URL'		, 'public' . DS);
+	define	('ROOT_URL'			, DS . 'Laptop-PC/php03/bookstore-lop' . DS);
+	define	('APPLICATION_URL'	, ROOT_URL . 'application' . DS);
+	define	('PUBLIC_URL'		, ROOT_URL . 'public' . DS);
 	define	('TEMPLATE_URL'		, PUBLIC_URL . 'template' . DS);
 	
 	
@@ -28,4 +28,4 @@
 
 	// ====================== DATABASE TABLE===========================
 	define ('TBL_GROUP'			, 'group');
-
+	define ('TBL_USER'			, 'user');

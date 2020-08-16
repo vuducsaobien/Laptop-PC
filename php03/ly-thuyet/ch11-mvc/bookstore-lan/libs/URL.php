@@ -3,6 +3,7 @@ class URL{
 	
 	public static function createLink($module, $controller, $action, $params = null){
 		if(!empty($params)){
+			$linkParams = ''; // DUC
 			foreach ($params as $key => $value){
 				$linkParams .= "&$key=$value";
 			}

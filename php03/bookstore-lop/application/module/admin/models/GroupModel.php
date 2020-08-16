@@ -74,7 +74,6 @@ class GroupModel extends Model
 	{
 		$query[]	= "SELECT `id`, `name`, `group_acp`, `status`, `ordering`, `created`, `created_by`, `modified`, `modified_by`";
 		$query[]	= "FROM `$this->table`";
-		$query[]	= "";
 
 		// FILTER : KEYWORD
 		$flagWhere 	= false;
@@ -122,6 +121,14 @@ class GroupModel extends Model
 
 		// CREATED BY NAME LOAD MANAGE_USER
 		// $this->setModel('admin', 'index');
+
+		// $this->setModel('admin', 'index'); //Truy cập vào Model Khác
+		// $this->db->listItems();
+		
+		// $query[]	= "SELECT `id`, `name`, `group_acp`, `status`, `ordering`, `created`, `created_by`, `modified`, `modified_by`";
+		// $query[]	= "FROM `$this->table`";
+
+
 
 		$query		= implode(" ", $query);
 		$result		= $this->listRecord($query);

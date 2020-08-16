@@ -6,6 +6,7 @@
 	// COLUMN
 	$columnPost		= $this->arrParam['filter_column'];
 	$orderPost		= $this->arrParam['filter_column_dir'];
+	
 	$lblName 		= Helper::cmsLinkSort('Name', 'name', $columnPost, $orderPost);
 	$lblStatus		= Helper::cmsLinkSort('Status', 'status', $columnPost, $orderPost);
 	$lblGroupACP	= Helper::cmsLinkSort('Group ACP', 'group_acp', $columnPost, $orderPost);

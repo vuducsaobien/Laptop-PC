@@ -355,8 +355,8 @@ function sortList(field, order) {
 }
 
 function submitForm(link) {
-    $('#admin-form').attr('action', link);
-    $('#admin-form').submit();
+    $('#form-table').attr('action', link);
+    $('#form-table').submit();
 }
 
 function createLink(exceptParams) {

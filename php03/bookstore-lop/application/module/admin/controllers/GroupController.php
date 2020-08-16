@@ -18,7 +18,9 @@ class GroupController extends Controller{
 		$this->setPagination($configPagination);
 		$this->_view->pagination	= new Pagination($totalItems, $this->_pagination);
 
-		// $this->_view->Items 		= $this->_model->cretedByDuc($this->_arrParam, ['task' => 'created']);
+		// $this->setModel('user', 'index'); //Truy cập vào Model Khác
+		// $this->db->listItems();
+
 
 		$this->_view->Items 		= $this->_model->listItem($this->_arrParam, null);
 
