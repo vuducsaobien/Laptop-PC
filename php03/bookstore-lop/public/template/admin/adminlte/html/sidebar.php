@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="index3.html" class="brand-link"><?php echo $this->_dirImg  ;?>
         <img src="<?= $this->_dirImg;?>logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">ZendVN</span>
     </a>
@@ -13,7 +13,7 @@
                 <img src="<?= $this->_dirImg;?>default-user.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Admin ZendVN</a>
+                <a href="#" class="d-block">Admin DUC VU</a>
             </div>
         </div>
 

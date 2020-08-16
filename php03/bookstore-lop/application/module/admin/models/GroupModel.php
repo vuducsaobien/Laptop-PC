@@ -74,6 +74,7 @@ class GroupModel extends Model
 	{
 		$query[]	= "SELECT `id`, `name`, `group_acp`, `status`, `ordering`, `created`, `created_by`, `modified`, `modified_by`";
 		$query[]	= "FROM `$this->table`";
+		$query[]	= "";
 
 		// FILTER : KEYWORD
 		$flagWhere 	= false;
@@ -118,6 +119,9 @@ class GroupModel extends Model
 			$position	= ($pagination['currentPage'] - 1) * $totalItemsPerPage;
 			$query[]	= "LIMIT $position, $totalItemsPerPage";
 		}
+
+		// CREATED BY NAME LOAD MANAGE_USER
+		// $this->setModel('admin', 'index');
 
 		$query		= implode(" ", $query);
 		$result		= $this->listRecord($query);

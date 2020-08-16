@@ -24,15 +24,15 @@ class Template{
 		
 		$pathFileConfig	= TEMPLATE_PATH . $folderTemplate . $fileConfig;
 		if(file_exists($pathFileConfig)){
-			$arrCongif = parse_ini_file($pathFileConfig);
+			$arrConif = parse_ini_file($pathFileConfig);
 
 			$view = $this->_controller->getView();
-			$view->_title 		= $view->createTitle($arrCongif['title']);
-			$view->_metaHTTP 	= $view->createMeta($arrCongif['metaHTTP'], 'http-equiv');
-			$view->_metaName 	= $view->createMeta($arrCongif['metaName'], 'name');
-			$view->_cssFiles 	= $view->createLink($this->_folderTemplate . $arrCongif['dirCss'], $arrCongif['fileCss'], 'css');
-			$view->_jsFiles 	= $view->createLink($this->_folderTemplate . $arrCongif['dirJs'], $arrCongif['fileJs'], 'js');
-			$view->_dirImg 		= $arrCongif['dirImg'];
+			$view->_title 		= $view->createTitle($arrConif['title']);
+			$view->_metaHTTP 	= $view->createMeta($arrConif['metaHTTP'], 'http-equiv');
+			$view->_metaName 	= $view->createMeta($arrConif['metaName'], 'name');
+			$view->_cssFiles 	= $view->createLink($this->_folderTemplate . $arrConif['dirCss'], $arrConif['fileCss'], 'css');
+			$view->_jsFiles 	= $view->createLink($this->_folderTemplate . $arrConif['dirJs'], $arrConif['fileJs'], 'js');
+			$view->_dirImg 		= $arrConif['dirImg'];
 					
 			$view->setTemplatePath(TEMPLATE_PATH . $folderTemplate . $fileTemplate);
 		}
