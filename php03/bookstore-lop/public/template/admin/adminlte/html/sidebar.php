@@ -1,3 +1,10 @@
+<?php
+echo '<pre>';
+print_r($this);
+echo '</pre>';
+
+?>
+
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link"><?php echo $this->_dirImg  ;?>

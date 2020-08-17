@@ -10,6 +10,9 @@ class IndexController extends Controller{
 	}
 	
 	public function indexAction(){
+		// $this->setModel('admin', 'group'); //Truy cập vào Model Khác
+        // $this->db->listItems();
+
 		echo '<h3>' . __METHOD__ . '</h3>';
 	}
 	

@@ -24,7 +24,7 @@
 
 	$data = scandir ( DIR_FILES );
 	$i = 0;
-	
+	$title = '';
 	foreach ($data as $key => $value){
 		if ($value == '.' || $value == '..' || preg_match('#.txt$#imsU', $value) == false) continue;
 			$class		 = ($i % 2 == 0) ? 'odd' : 'even';
@@ -39,11 +39,10 @@
 				'<div class="row '.$class.'">
 
 	            	<p class="no">
-	            		<input type="checkbox" name="checkbox[]" value = "'.$id.".txt"'">
+	            		<input type="checkbox" name="checkbox[]" value = "'.$id.'">
 					</p>
 					
-	                <p class="name">'.$title.'
-						<span>'.$description.'</span>
+	                <p class="name">'.$title.'<span>'.$description.'</span>
 					</p>
 
 					<p class="image"><img src = '. DIR_IMAGES  . $image . '  alt=""></p>

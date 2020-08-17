@@ -89,4 +89,10 @@ class GroupController extends Controller{
 		$this->_model->ordering($this->_arrParam);
 		URL::redirect(URL::createLink('admin', 'group', 'index'));
 	}
+
+	public function listItems(){
+		echo '11';
+		echo '<h3>' . __METHOD__ . '</h3>';
+	}
+
 }
