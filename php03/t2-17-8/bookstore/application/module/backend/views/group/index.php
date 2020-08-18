@@ -1,14 +1,18 @@
 <?php
+
+// Count Status
 $active = Helper::countStatus($this->Items, 'status', 1);
 $inactive = Helper::countStatus($this->Items, 'status', 0);
 $all = $active + $inactive;
-
+// Search Status Form
 $module = $this->arrParam['module'];
 $controller = $this->arrParam['controller'];
 $action = $this->arrParam['action'];
-
 $url = "index.php?module=$module&controller=$controller&action=$action";
 // $url = URL::createLink('backend', 'group', 'index');
+if (!empty($_GET['clear-keyword'])) {
+    $_GET['search_value'] = '';
+}
 
 $columnPost		= $this->arrParam['sort_field'];
 $orderPost		= $this->arrParam['sort_order'];
@@ -24,8 +28,9 @@ $lblModifiedBy	= Helper::cmsLinkSort('Modified By', 'modified_by', $columnPost, 
 $lblID			= Helper::cmsLinkSort('ID', 'id', $columnPost, $orderPost);
 
 // GROUP ACP
-// $arrGroupACP		= array('default' => '- Select Group ACP -', '1' => 'Yes',  '0' => 'No');
-// $selectboxGroupACP	= Helper::cmsSelectbox('filter_groupacp', 'custom-select custom-select-sm mr-1', $arrGroupACP, $this->arrParam['filter_groupacp'], 'width: unset');
+$arrGroupACP		= array('default' => '- Select Group ACP -', '1' => 'Yes',  '0' => 'No');
+$selectboxGroupACP	= Helper::cmsSelectbox('filter_group_acp', 'custom-select custom-select-sm mr-1', $arrGroupACP, $this->arrParam['filter_group_acp'], 'width: unset');
+                                // cmsSelectbox($name, $class, $arrValue, $keySelect = 'default', $style = null, $id = null){
 
 ?>     
                 
@@ -37,34 +42,38 @@ $lblID			= Helper::cmsLinkSort('ID', 'id', $columnPost, $orderPost);
 </select> -->
 
 <div class="card card-info card-outline">
-    <div class="card-header">
-        <h6 class="card-title">Search & Filter</h6>
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                <i class="fas fa-minus"></i></button>
+    
+        <div class="card-header">
+            <h6 class="card-title">Search & Filter</h6>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+            </div>
         </div>
-    </div>
 
-    <div class="card-body">
-        <div class="row justify-content-between">
+        <div class="card-body">
+            <div class="row justify-content-between">
+
+                <div class="mb-1">
+                    <a href="<?= $url ;?>" class="mr-1 btn btn-sm btn-info">All <span class="badge badge-pill badge-light"><?= $all ;?></span></a>
+                    <a href="<?= $url ;?>&status=1" class="mr-1 btn btn-sm btn-secondary">Active <span class="badge badge-pill badge-light"><?= $active ;?></span></a>
+                    <a href="<?= $url ;?>&status=0" class="mr-1 btn btn-sm btn-secondary">Inactive <span class="badge badge-pill badge-light"><?= $inactive ;?></span></a>
+                </div>
+
+                    
+                    <!-- DUC -->
+                <form id="form_filter" name="form_filter">  
+                    <fieldset id="filter-bar">
+                        <div class="mb-1">
+
+                            <?= $selectboxGroupACP ;?>
+                        </div>
+                    </fieldset>
+                </form>
+                    
 
             <div class="mb-1">
-                <a href="<?= $url ;?>" class="mr-1 btn btn-sm btn-info">All <span class="badge badge-pill badge-light"><?= $all ;?></span></a>
-                <a href="<?= $url ;?>&status=1" class="mr-1 btn btn-sm btn-secondary">Active <span class="badge badge-pill badge-light"><?= $active ;?></span></a>
-                <a href="<?= $url ;?>&status=0" class="mr-1 btn btn-sm btn-secondary">Inactive <span class="badge badge-pill badge-light"><?= $inactive ;?></span></a>
-            </div>
-
-            <div class="mb-1">
-                <!-- <select id="filter_groupacp" name="filter_groupacp" class="custom-select custom-select-sm mr-1" style="width: unset">
-                    <option value="default" selected="">- Select Group ACP -</option>
-                    <option value="false">No</option>
-                    <option value="true">Yes</option>
-                </select> -->
-                <?= $selectboxGroupACP ;?>
-            </div>
-
-            <div class="mb-1">
-                <form action="">
+                <form action="#">
                     <div class="input-group">
 
                         <input type="hidden" name="module" value="backend">
@@ -75,7 +84,7 @@ $lblID			= Helper::cmsLinkSort('ID', 'id', $columnPost, $orderPost);
                         
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-sm btn-info" id="btn-search">Search</button>
-                            <button type="button" class="btn btn-sm btn-danger" id="btn-clear-search">Clear</button>
+                            <button type="submit" class="btn btn-sm btn-danger" id="btn-clear-search" name="clear-keyword" value="clear">Clear</button>
                         </div>
                     </div>
                 </form>
@@ -118,18 +127,18 @@ $lblID			= Helper::cmsLinkSort('ID', 'id', $columnPost, $orderPost);
                     <tr>
                         <th class="text-center">
                             <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" id="check-all">
+                                <input class="custom-control-input" type="checkbox" id="check-all" name="checkAllName">
                                 <label for="check-all" class="custom-control-label"></label>
                             </div>
                         </th>
 
-                        <th class="text-center"><?= $lblID ;?></a></th>
-                        <th class="text-center"><?= $lblName ;?></a></th>
-                        <th class="text-center"><?= $lblStatus ;?></a></th>
-                        <th class="text-center"><?= $lblGroupACP ;?></a></th>
-                        <th class="text-center"><?= $lblOrdering ;?></a></th>
-                        <th class="text-center"><?= $lblCreated ;?></a></th>
-                        <th class="text-center"><?= $lblModified ;?></a></th>
+                        <th class="text-center"><?= $lblID ;?></th>
+                        <th class="text-center"><?= $lblName ;?></th>
+                        <th class="text-center"><?= $lblStatus ;?></th>
+                        <th class="text-center"><?= $lblGroupACP ;?></th>
+                        <th class="text-center"><?= $lblOrdering ;?></th>
+                        <th class="text-center"><?= $lblCreated ;?></th>
+                        <th class="text-center"><?= $lblModified ;?></th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
@@ -148,11 +157,8 @@ $lblID			= Helper::cmsLinkSort('ID', 'id', $columnPost, $orderPost);
                                 $modifiedBy	 = $value['modified_by'];
                                 $search 	 = $_GET['search_value'];
 
-                                // $status	 	 = Helper::cmsStatus($value['status'], URL::createLink('admin', 'group', 'ajaxStatus', array('id' => $id, 'status' => $value['status'])), $id);
-
-                                $status	 	 = Helper::cmsAcpStt($value['status'], URL::createLink('backend', 'group', 'ajaxAcpStt', array('id' => $id, 'status' => $value['status'])), $id);
-                                // $group_acp	 = Helper::cmsAcpStt('group-acp', $value['group_acp'], URL::createLink('backend', 'group', 'ajaxAcpStt', array('id' => $id, 'group_acp' => $value['group_acp'])), $id);
-
+                                $status	 	 = Helper::cmsStatus($value['status'], URL::createLink('backend', 'group', 'ajaxStatus', array('id' => $id, 'status' => $value['status'])), $id);
+                                $group_acp	 = Helper::cmsGroupACP($value['group_acp'], URL::createLink('backend', 'group', 'ajaxACP', array('id' => $id, 'group_acp' => $value['group_acp'])), $id);
                                 
                                 $resultName  =  Helper::highLight($search, $value['name']);
                                 $resultID    = Helper::highLight($search, $value['id']);
@@ -173,7 +179,7 @@ $lblID			= Helper::cmsLinkSort('ID', 'id', $columnPost, $orderPost);
                                         '.$status.'
                                     </td>
                                     
-                                    <td class="text-center position-relative">'.$group_acp.'</td>
+                                    <td class="text-center position-relative" name="groupA">'.$group_acp.'</td>
 
 
                                     <td class="text-center position-relative">
@@ -210,8 +216,8 @@ $lblID			= Helper::cmsLinkSort('ID', 'id', $columnPost, $orderPost);
 
             </table>
             <div>
-                <input type="hidden" name="sort_field" value="name">
-                <input type="hidden" name="sort_order" value="asc">
+                <input type="hidden" name="sort_field" value="">
+                <input type="hidden" name="sort_order" value="">
             </div>
         </form>
     </div>

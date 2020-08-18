@@ -25,12 +25,24 @@ class Helper{
 	
 	// Create Title sort
 	public static function cmsLinkSort($name, $column, $columnPost, $orderPost){
-		$img	= '';
+		// $icon	= '';
 		$order	= ($orderPost == 'desc') ? 'asc' : 'desc';
 		if($column == $columnPost){
-			$img	= '<img src="'.TEMPLATE_URL.'admin/main/images/admin/sort_'.$orderPost.'.png" alt="">';
+			// CHANGE
+			$img	= '<img style="width: 30px;" src="'.TEMPLATE_URL.'admin/adminlte/images/sort-'.$orderPost.'.png">';
+			// echo $orderPost;
+			// if($orderPost=='desc'){
+			// 	$classIcons = 'fal fa-sort-amount-down';
+			// }else{
+			// 	$classIcons = 'fal fa-sort-amount-up-alt';
+			// }
+			// echo $classIcons;
+			// echo $icon = '<i class="'.$classIcons.'"></i>';
+
 		}
+		// $xhtml = '<a href="#" onclick="javascript:sortList(\''.$column.'\',\''.$order.'\')">'.$name.'<i class="'.$classIcons.'"></i></a>';
 		$xhtml = '<a href="#" onclick="javascript:sortList(\''.$column.'\',\''.$order.'\')">'.$name.$img.'</a>';
+
 		return $xhtml;
 	}
 	
@@ -64,7 +76,7 @@ class Helper{
 	*/
 
 	public static function cmsSelectbox($name, $class, $arrValue, $keySelect = 'default', $style = null){
-		$xhtml = '<select style="'.$style.'" name="'.$name.'" class="'.$class.'" >';
+		$xhtml = '<select name="'.$name.'" class="'.$class.'" style="'.$style.'">';
 		foreach($arrValue as $key => $value){
 			if($key == $keySelect && is_numeric($keySelect)){
 				$xhtml .= '<option selected="selected" value = "'.$key.'">'.$value.'</option>';
@@ -144,18 +156,18 @@ class Helper{
 		/*  DUC  */
 
 	// Create Icon Status
-	public static function cmsStatus($statusValue, $link, $id)
-	{
-		$classStatus = ($statusValue == 1) ? 'success' : 'danger';
-		$nameStatus = ($statusValue == 1) ? 'Active' : 'Inactive';
+	// public static function cmsStatus($statusValue, $link, $id)
+	// {
+	// 	$classStatus = ($statusValue == 1) ? 'success' : 'danger';
+	// 	$nameStatus = ($statusValue == 1) ? 'Active' : 'Inactive';
 
-		$xhtml		= '
-						<a class="jgrid" id="status-' . $id . '" href="javascript:changeStatus(\'' . $link . '\');">
-							<button type="button" class="btn btn-block btn-'.$classStatus.'">'.$nameStatus.'</button>
-						</a>
-					';
-		return $xhtml;
-	}
+	// 	$xhtml		= '
+	// 					<a class="jgrid" id="status-' . $id . '" href="javascript:changeStatus(\'' . $link . '\');">
+	// 						<button type="button" class="btn btn-block btn-'.$classStatus.'">'.$nameStatus.'</button>
+	// 					</a>
+	// 				';
+	// 	return $xhtml;
+	// }
 	
 	// Count Status
 	public static function countStatus($source, $element, $arrValue)
@@ -167,24 +179,33 @@ class Helper{
         return $count;
 	}
 	
-
-	public static function cmsAcpStt($value, $link, $id)
+	// Create Icon Status
+	public static function cmsStatus($value, $link, $id)
 	{
-			// <a href="#" class="my-btn-state rounded-circle btn btn-sm btn-danger">
-			// 	<i class="fas fa-check"></i>
-			// </a>
-
 		$classA 	= ($value == 1) ? 'success' : 'danger';
-		$classI 	= ($value == 1) ? 'check' : 'minus';
-
-		$xhtml			= '
-<a class="my-btn-state rounded-circle btn btn-sm btn-' . $classA . '" id="status-' . $id . '" href="javascript:changeStatus(\'' . $link . '\');">
-	<i class="fas fa-' . $classI . '" ></i>
-</a>
-						';
+		$classI 	= ($value == 1) ? 'fas fa-check' : 'fas fa-minus';
+		$xhtml		= '
+		<a class="my-btn-state rounded-circle btn btn-sm btn-' . $classA . '" id="status-'.$id.'" href="javascript:changeStatus(\'' . $link . '\');">
+			<i class="'. $classI . '" ></i>
+		</a>
+					';
 		return $xhtml;
 	}
 
+	// Create Icon Group ACP
+	public static function cmsGroupACP($value, $link, $id)
+	{
+		$classA 	= ($value == 1) ? 'success' : 'danger';
+		$classI 	= ($value == 1) ? 'fas fa-check' : 'fas fa-minus';
+		$xhtml		= '
+		<a class="my-btn-state rounded-circle btn btn-sm btn-' . $classA . '" id="group-acp-'.$id.'" href="javascript:changeGroupACP(\'' . $link . '\');">
+			<i class="'. $classI . '" ></i>
+		</a>
+					';
+		return $xhtml;
+	}
+
+	// HighLight Search Value
 	public static function highLight($value, $strValue)
     {
 		$result = str_replace($value, "<mark>$value</mark>", $strValue);

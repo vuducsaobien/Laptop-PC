@@ -1,44 +1,55 @@
 function changeStatus(url){
 	$.get(url, function(data){
-		var element		= 'a#status-' + data[0];
-		var classRemove = 'check';
-		var classAdd 	= 'minus';
-		console.log(data);
+		var element		= 'a#status-' + data['id'];
+		var classRemove = 'fas fa-check';
+		var classAdd 	= 'fas fa-minus';
+
+		var classRemoveA = 'my-btn-state rounded-circle btn btn-sm btn-success';
+		var classAddA 	= 'my-btn-state rounded-circle btn btn-sm btn-danger';
+
 		if(data['status']==1){
-			classRemove = 'minus';
-			classAdd 	= 'check';
+			classRemove = 'fas fa-minus';
+			classAdd 	= 'fas fa-check';
+
+			classRemoveA = 'my-btn-state rounded-circle btn btn-sm btn-danger';
+			classAddA 	= 'my-btn-state rounded-circle btn btn-sm btn-success';
 		}
-		$(element).attr('href', "javascript:changeStatus('"+data[2]+"')");
+		$(element).attr('href', "javascript:changeStatus('"+data['link']+"')").removeClass(classRemoveA).addClass(classAddA);
 		$(element + ' i').removeClass(classRemove).addClass(classAdd);
 	}, 'json');
 }
 
-// function changeGroupACP(url){
-	
-// 	$.get(url, function(data){
-// 		var element		= 'a#group-acp-' + data['id'];
-// 		var classRemove = 'success';
-// 		var classAdd 	= 'danger';
-// 		if(data['group_acp']==1){
-// 			classRemove = 'success';
-// 			classAdd 	= 'danger';
-// 		}
-// 		$(element).attr('href', "javascript:changeGroupACP('"+data['link']+"')");
-// 		$(element + ' span').removeClass(classRemove).addClass(classAdd);
-// 	}, 'json');
-// }
+function changeGroupACP(url){
+	$.get(url, function(data){
+		var element		 = 'a#group-acp-' + data['id'];
+		var classRemove  = 'fas fa-check';
+		var classAdd 	 = 'fas fa-minus';
 
+		var classRemoveA = 'my-btn-state rounded-circle btn btn-sm btn-success';
+		var classAddA 	 = 'my-btn-state rounded-circle btn btn-sm btn-danger';
+
+		if(data['group_acp']==1){
+			classRemove  = 'fas fa-minus';
+			classAdd 	 = 'fas fa-check';
+
+			classRemoveA = 'my-btn-state rounded-circle btn btn-sm btn-danger';
+			classAddA 	 = 'my-btn-state rounded-circle btn btn-sm btn-success';
+		}
+		$(element).attr('href', "javascript:changeGroupACP('"+data['link']+"')").removeClass(classRemoveA).addClass(classAddA);
+		$(element + ' i').removeClass(classRemove).addClass(classAdd);
+	}, 'json');
+}
 
 // function submitForm(url){
 // 	$('#form-table').attr('action', url);
 // 	$('#form-table').submit();
 // }
 
-// function sortList(column, order){
-// 	$('input[name=filter_column]').val(column);
-// 	$('input[name=filter_column_dir]').val(order);
-// 	$('#form-table').submit();
-// }
+function sortList(column, order){
+	$('input[name=sort_field]').val(column);
+	$('input[name=sort_order]').val(order);
+	$('#form-table').submit();
+}
 
 // function changePage(page){
 // 	$('input[name=filter_page]').val(page);
@@ -46,28 +57,30 @@ function changeStatus(url){
 // }
 
 
-// $(document).ready(function(){
-// 	$('input[name=checkall-toggle]').change(function(){
-// 		var checkStatus = this.checked;
-// 		$('#form-table').find(':checkbox').each(function(){
-// 			this.checked = checkStatus;
-// 		});
-// 	})
+$(document).ready(function(){
+
+	$('input[name=checkAllName]').change(function(){
+		var checkStatus = this.checked;
+		$('#form-table').find(':checkbox').each(function(){
+			this.checked = checkStatus;
+		});
+	})
 	
-// 	$('#filter-bar button[name=submit-keyword]').click(function(){
-// 		$('#form-table').submit();
-// 	})
+	// Search & Clear
+	// $('#filter-bar button[name=submit-keyword]').click(function(){
+	// 	$('#form-table').submit();
+	// })
 	
-// 	$('#filter-bar button[name=clear-keyword]').click(function(){
-// 		$('#filter-bar input[name=filter_search]').val('');
-// 		$('#form-table').submit();
-// 	})
+	// $('#filter-bar button[name=clear-keyword]').click(function(){
+	// 	$('#filter-bar input[name=search_value]').val('');
+	// 	$('#form-table').submit();
+	// })
 	
 // 	$('#filter-bar select[name=filter_state]').change(function(){
 // 		$('#form-table').submit();
 // 	})
 	
-// 	$('#filter-bar select[name=filter_group_acp]').change(function(){
-// 		$('#form-table').submit();
-// 	})
-// })
+	$('#filter-bar select[name=filter_group_acp]').change(function(){
+		$('#form_filter').submit();
+	})
+})

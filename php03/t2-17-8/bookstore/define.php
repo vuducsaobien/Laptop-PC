@@ -1,5 +1,6 @@
 <?php 
 	// ====================== PATHS ===========================
+	// define ('DS'				, DIRECTORY_SEPARATOR);
 	define ('DS'				, '/');
 	define ('ROOT_PATH'			, dirname(__FILE__));						// Định nghĩa đường dẫn đến thư mục gốc
 	define ('LIBRARY_PATH'		, ROOT_PATH . DS . 'libs' . DS);			// Định nghĩa đường dẫn đến thư mục thư viện

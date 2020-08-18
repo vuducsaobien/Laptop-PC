@@ -50,7 +50,8 @@
                         <div class="filter-select fltrt">
                             <?php echo $selectboxStatus . $selectboxGroupACP;?>
                         </div>
-                    </fieldset>
+					</fieldset>
+					
 					<div class="clr"> </div>
 
                     <table class="adminlist" id="modules-mgr">
@@ -87,7 +88,7 @@
 									$i = 0;
 									foreach($this->Items as $key => $value){
 										$id 		= $value['id'];
-										// $ckb		= '<input type="checkbox" name="cid[]" value="'.$id.'">';
+										$ckb		= '<input type="checkbox" name="cid[]" value="'.$id.'">';
 										// $name		= $value['name'];
 										// $row		= ($i % 2 == 0) ? 'row0' : 'row1';
 										$status		= Helper::cmsStatus($value['status'], URL::createLink('admin', 'group', 'ajaxStatus', array('id' => $id, 'status' => $value['status'])), $id);

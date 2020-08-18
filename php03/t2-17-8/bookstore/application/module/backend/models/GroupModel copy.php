@@ -5,13 +5,6 @@ class GroupModel extends Model
 	private $_columns = array('id', 'name', 'group_acp', 'created', 'created_by', 'modified', 'modified_by', 'status', 'ordering');
 	private $_userInfo;
 
-	public function __construct()
-	{
-		parent::__construct();
-		$this->setTable(TBL_GROUP);
-	}
-
-
 	public function countItem($arrParam, $option = null)
 	{
 		$query[]	= "SELECT COUNT(`id`) AS `total`";
@@ -25,66 +18,84 @@ class GroupModel extends Model
 
 	public function listItem($arrParam, $option = null)
 	{
-		// Session::init();
-		// echo '<pre>';
-		// print_r($arrParam);
-		// echo '</pre>';
-
-		// echo '<pre>';
-		// print_r($_GET);
-		// echo '</pre>';
-
-			$flagWhere 	= false;
+		Session::init();
+		if ($option['task'] == 'index') {
 
 			$search = '';
 
 			$query[]	= "SELECT `id`, `name`, `group_acp`, `status`, `ordering`, `created`, `created_by`, `modified`, `modified_by`";
 			$query[]	= "FROM `$this->table`";
 			$query[]	= "WHERE `id` > '0'";
+		}
+		// $flagSearch = false;
+		// $flagStatus = false;
+		// $flag 		= false;
 
+		// $a = 0;
+		// $b = 0;
 
 		// Search
 		if (!empty($_GET['search_value'])) {
 			$search = $_GET['search_value'];
-
-			// Clear
-			if (!empty($_GET['clear-keyword'])) {
-				$search = '';
-			}
-
 			$query[]	= "AND `name` LIKE '%$search%'";
 			$query[]	= "OR `id` LIKE '%$search%'";
 			$query[]	= "OR `ordering` LIKE '%$search%'";
-			$flagWhere 	= true;
-
 		}
 
 		// Status
-		// if (isset($_GET['status'])) {
-		// 	$status = $_GET['status'];
-		// 	$query[]	= "AND `status` = '$status'";
-		// 	$flagWhere 	= true;
+		if (isset($_GET['status'])) {
+			$status = $_GET['status'];
+			$query[]	= "AND `status` = '$status'";
+		}
 
+		// ALL
+		// if($flagSearch==true){
+		// 	$flag 		= false;
+		// 	echo '<h3>SearchIF' . $flagSearch . '</h3>';
+
+		// 	$query[]	= "AND `name` LIKE '%$search%'";
+		// 	$query[]	= "OR `id` LIKE '%$search%'";
+		// 	$query[]	= "OR `ordering` LIKE '%$search%'";
+
+		// 	if($flagStatus==true){
+		// 		$flag = true;
+		// 		echo '<h3>StatusIF' . $flagStatus . '</h3>';
+
+		// 		// $query[]	= "AND `name` LIKE '%$search%'";
+		// 		// $query[]	= "OR `id` LIKE '%$search%'";
+		// 		// $query[]	= "OR `ordering` LIKE '%$search%'";
+
+		// 		$query[]	= "OR `status` = '$status'";
+		// 	}else{
+		// 		$flag = false;
+		// 	}
 		// }
 
-		// FILTER : GROUP ACP
-		if (isset($arrParam['filter_group_acp']) && $arrParam['filter_group_acp'] != 'default') {
-			if($flagWhere==false){
-				$query[]	= "WHERE `group_acp` = '" . $arrParam['filter_group_acp'] . "'";
-			}else{
-				$query[]	= "AND `group_acp` = '" . $arrParam['filter_group_acp'] . "'";
-			}
-		}
-		
-		
+		// if($flagSearch==true && $flagStatus==false ){
+		// 	$query[]	= "AND `name` LIKE '%$search%'";
+		// 	$query[]	= "OR `id` LIKE '%$search%'";
+		// 	$query[]	= "OR `ordering` LIKE '%$search%'";
+		// 	// $query[]	= "AND `status` = '$status'";
+		// }
+
+		// if($flagStatus==true && $flagSearch==false){
+		// 	echo '11';
+		// 	$query[]	= "AND `status` = '$status'";
+		// }elseif($flagStatus==false && $flagSearch==false){
+		// 	echo '0-0';
+		// 	echo '<h3>StatusIF' . $flagStatus . '</h3>';
+		// 	echo '<h3>StearchIF' . $flagSearch . '</h3>';
+		// }
+
 		// SORT
 		if (!empty($arrParam['sort_field']) && !empty($arrParam['sort_order'])) {
-			$sort_field	= $arrParam['sort_field'];
-			$sort_order	= $arrParam['sort_order'];
-			$query[]	= "ORDER BY `$sort_field` $sort_order";
+			$column		= $arrParam['sort_field'];
+			$columnDir	= $arrParam['sort_order'];
+			$query[]	= "ORDER BY `$column` $columnDir";
 		} else {
-			$query[]	= "ORDER BY `id` ASC";
+			$query[]	= "ORDER BY `id` DESC";
 		}
+		
 
 
 
