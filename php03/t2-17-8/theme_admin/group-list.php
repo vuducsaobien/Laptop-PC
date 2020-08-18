@@ -124,8 +124,10 @@
                                             </td>
                                             <td class="text-center">1</td>
                                             <td class="text-center">Admin</td>
+
+                                            <td class="text-center position-relative"><a href="#" class="my-btn-state rounded-circle btn btn-sm btn-danger"><i class="fas fa-check"></i></a></td>
                                             <td class="text-center position-relative"><a href="#" class="my-btn-state rounded-circle btn btn-sm btn-success"><i class="fas fa-check"></i></a></td>
-                                            <td class="text-center position-relative"><a href="#" class="my-btn-state rounded-circle btn btn-sm btn-success"><i class="fas fa-check"></i></a></td>
+                                            
                                             <td class="text-center">
                                                 <p class="mb-0 history-by"><i class="far fa-user"></i></p>
                                                 <p class="mb-0 history-time"><i class="far fa-clock"></i></p>

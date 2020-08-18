@@ -87,17 +87,17 @@
 									$i = 0;
 									foreach($this->Items as $key => $value){
 										$id 		= $value['id'];
-										$ckb		= '<input type="checkbox" name="cid[]" value="'.$id.'">';
-										$name		= $value['name'];
-										$row		= ($i % 2 == 0) ? 'row0' : 'row1';
+										// $ckb		= '<input type="checkbox" name="cid[]" value="'.$id.'">';
+										// $name		= $value['name'];
+										// $row		= ($i % 2 == 0) ? 'row0' : 'row1';
 										$status		= Helper::cmsStatus($value['status'], URL::createLink('admin', 'group', 'ajaxStatus', array('id' => $id, 'status' => $value['status'])), $id);
 										$group_acp	= Helper::cmsGroupACP($value['group_acp'], URL::createLink('admin', 'group', 'ajaxACP', array('id' => $id, 'group_acp' => $value['group_acp'])), $id);
-										$ordering	= '<input type="text" name="order['.$id.']" size="5" value="'.$value['ordering'].'" class="text-area-order">';
-										$created	= Helper::formatDate('d-m-Y', $value['created']);
-										$created_by	= $value['created_by'];
-										$modified	= Helper::formatDate('d-m-Y', $value['modified']);
-										$modified_by= $value['modified_by'];
-										$linkEdit	= URL::createLink('admin', 'group', 'form', array('id' => $id));
+										// $ordering	= '<input type="text" name="order['.$id.']" size="5" value="'.$value['ordering'].'" class="text-area-order">';
+										// $created	= Helper::formatDate('d-m-Y', $value['created']);
+										// $created_by	= $value['created_by'];
+										// $modified	= Helper::formatDate('d-m-Y', $value['modified']);
+										// $modified_by= $value['modified_by'];
+										// $linkEdit	= URL::createLink('admin', 'group', 'form', array('id' => $id));
 									
 										echo  '<tr class="'.$row.'">
 												<td class="center">'.$ckb.'</td>

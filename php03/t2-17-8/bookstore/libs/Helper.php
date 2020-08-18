@@ -23,7 +23,6 @@ class Helper{
 		return $xhtml;
 	}
 	
-	
 	// Create Title sort
 	public static function cmsLinkSort($name, $column, $columnPost, $orderPost){
 		$img	= '';
@@ -52,6 +51,18 @@ class Helper{
 	}
 	
 	// Create Selectbox
+	/*
+	<select id="filter_groupacp" name="filter_groupacp" class="custom-select custom-select-sm mr-1" style="width: unset">
+		<option value="default" selected="">- Select Group ACP -</option>
+		<option value="false">No</option>
+		<option value="true">Yes</option>
+	</select>
+
+	$arrGroupACP		= array('default' => '- Select Group ACP -', 'true' => 'Yes',  'false' => 'No');
+	$selectboxGroupACP	= Helper::cmsSelectbox('filter_groupacp', 'custom-select custom-select-sm mr-1', $arrGroupACP, $this->arrParam['filter_groupacp'], 'width: unset');
+
+	*/
+
 	public static function cmsSelectbox($name, $class, $arrValue, $keySelect = 'default', $style = null){
 		$xhtml = '<select style="'.$style.'" name="'.$name.'" class="'.$class.'" >';
 		foreach($arrValue as $key => $value){
@@ -157,15 +168,19 @@ class Helper{
 	}
 	
 
-	public static function cmsGroupACP($groupAcpValue, $link, $id)
+	public static function cmsAcpStt($value, $link, $id)
 	{
-		$classA 	= ($groupAcpValue == 1) ? 'success' : 'danger';
-		$classI 	= ($groupAcpValue == 1) ? 'fas fa-check' : 'fas fa-minus';
+			// <a href="#" class="my-btn-state rounded-circle btn btn-sm btn-danger">
+			// 	<i class="fas fa-check"></i>
+			// </a>
+
+		$classA 	= ($value == 1) ? 'success' : 'danger';
+		$classI 	= ($value == 1) ? 'check' : 'minus';
 
 		$xhtml			= '
-							<a class="my-btn-state rounded-circle btn btn-sm btn-' . $classA . '" id="group-acp-' . $id . '" href="javascript:changeGroupACP(\'' . $link . '\');">
-								<i class="fas fa-' . $classI . '"></i>
-							</a>
+<a class="my-btn-state rounded-circle btn btn-sm btn-' . $classA . '" id="status-' . $id . '" href="javascript:changeStatus(\'' . $link . '\');">
+	<i class="fas fa-' . $classI . '" ></i>
+</a>
 						';
 		return $xhtml;
 	}

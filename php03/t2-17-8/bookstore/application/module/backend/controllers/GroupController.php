@@ -26,6 +26,31 @@ class GroupController extends Controller{
 		
 		$this->_view->render('group/form');
 		}
+		
+	// ACTION: AJAX STATUS (*)
+	public function ajaxAcpSttAction(){
+		$result = $this->_model->changeStatus($this->_arrParam, array('task' => 'change-ajax-status'));
+		echo json_encode($result);
+	}
+
+	// ACTION: AJAX STATUS (*)
+	// public function ajaxStatusAction(){
+	// 	$result = $this->_model->changeStatus($this->_arrParam, array('task' => 'change-ajax-status'));
+	// 	echo json_encode($result);
+	// }
+	
+	// ACTION: AJAX GROUP ACP (*)
+	// public function ajaxACPAction(){
+	// 	$result = $this->_model->changeStatus($this->_arrParam, array('task' => 'change-ajax-group-acp'));
+	// 	echo json_encode($result);
+	// }
+	
+	// // ACTION: STATUS (*)
+	// public function statusAction(){
+	// 	$this->_model->changeStatus($this->_arrParam, array('task' => 'change-status'));
+	// 	URL::redirect('admin', 'group', 'index');
+	// }
+	
 
 
 	
