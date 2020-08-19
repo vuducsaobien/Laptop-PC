@@ -26,22 +26,16 @@ class GroupModel extends Model
 	public function listItem($arrParam, $option = null)
 	{
 		// Session::init();
-		// echo '<pre>';
-		// print_r($arrParam);
-		// echo '</pre>';
+		echo '<pre>';
+		print_r($arrParam);
+		echo '</pre>';
 
-		// echo '<pre>';
-		// print_r($_GET);
-		// echo '</pre>';
+		$query[]	= "SELECT `id`, `name`, `group_acp`, `status`, `ordering`, `created`, `created_by`, `modified`, `modified_by`";
+		$query[]	= "FROM `$this->table`";
+		$query[]	= "WHERE `id` > '0'";
 
-			$flagWhere 	= false;
-
-			$search = '';
-
-			$query[]	= "SELECT `id`, `name`, `group_acp`, `status`, `ordering`, `created`, `created_by`, `modified`, `modified_by`";
-			$query[]	= "FROM `$this->table`";
-			$query[]	= "WHERE `id` > '0'";
-
+		$search = '';
+		$flagWhere 	= false;
 
 		// Search
 		if (!empty($_GET['search_value'])) {
@@ -55,24 +49,37 @@ class GroupModel extends Model
 			$query[]	= "AND `name` LIKE '%$search%'";
 			$query[]	= "OR `id` LIKE '%$search%'";
 			$query[]	= "OR `ordering` LIKE '%$search%'";
-			$flagWhere 	= true;
+			$flagWhere 	= false;
 
 		}
 
 		// Status
 		// if (isset($_GET['status'])) {
+		// 	echo '33';
 		// 	$status = $_GET['status'];
 		// 	$query[]	= "AND `status` = '$status'";
 		// 	$flagWhere 	= true;
 
 		// }
 
+		// FILTER : STATUS
+		if (isset($arrParam['filter_status']) && $arrParam['filter_status'] != 'default') {
+			if($flagWhere==false){
+				$query[]	= "AND `status` = '" . $arrParam['filter_status'] . "'";
+			}else{
+				$query[]	= "WHERE `status` = '" . $arrParam['filter_status'] . "'";
+				// $flagWhere	= true;
+
+			}
+		}
+		
+
 		// FILTER : GROUP ACP
 		if (isset($arrParam['filter_group_acp']) && $arrParam['filter_group_acp'] != 'default') {
 			if($flagWhere==false){
-				$query[]	= "WHERE `group_acp` = '" . $arrParam['filter_group_acp'] . "'";
-			}else{
 				$query[]	= "AND `group_acp` = '" . $arrParam['filter_group_acp'] . "'";
+			}else{
+				$query[]	= "WHERE `group_acp` = '" . $arrParam['filter_group_acp'] . "'";
 			}
 		}
 		
@@ -83,7 +90,7 @@ class GroupModel extends Model
 			$sort_order	= $arrParam['sort_order'];
 			$query[]	= "ORDER BY `$sort_field` $sort_order";
 		} else {
-			$query[]	= "ORDER BY `id` ASC";
+			$query[]	= "ORDER BY `id` DESC";
 		}
 
 

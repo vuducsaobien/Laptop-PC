@@ -13,33 +13,55 @@ $url = "index.php?module=$module&controller=$controller&action=$action";
 if (!empty($_GET['clear-keyword'])) {
     $_GET['search_value'] = '';
 }
+// echo '<pre>';
+// print_r($this->arrParam);
+// echo '</pre>';
 
-$columnPost		= $this->arrParam['sort_field'];
-$orderPost		= $this->arrParam['sort_order'];
+$columnPost		    = $this->arrParam['sort_field'];
+$orderPost		    = $this->arrParam['sort_order'];
 
-$lblName 		= Helper::cmsLinkSort('Name', 'name', $columnPost, $orderPost);
-$lblStatus		= Helper::cmsLinkSort('Status', 'status', $columnPost, $orderPost);
-$lblGroupACP	= Helper::cmsLinkSort('Group ACP', 'group_acp', $columnPost, $orderPost);
-$lblOrdering	= Helper::cmsLinkSort('Ordering', 'ordering', $columnPost, $orderPost);
-$lblCreated		= Helper::cmsLinkSort('Created', 'created', $columnPost, $orderPost);
-$lblCreatedBy	= Helper::cmsLinkSort('Created By', 'created_by', $columnPost, $orderPost);
-$lblModified	= Helper::cmsLinkSort('Modified', 'modified', $columnPost, $orderPost);
-$lblModifiedBy	= Helper::cmsLinkSort('Modified By', 'modified_by', $columnPost, $orderPost);
-$lblID			= Helper::cmsLinkSort('ID', 'id', $columnPost, $orderPost);
+$lblName 		    = Helper::cmsLinkSort('Name', 'name', $columnPost, $orderPost);
+$lblStatus		    = Helper::cmsLinkSort('Status', 'status', $columnPost, $orderPost);
+$lblGroupACP	    = Helper::cmsLinkSort('Group ACP', 'group_acp', $columnPost, $orderPost);
+$lblOrdering	    = Helper::cmsLinkSort('Ordering', 'ordering', $columnPost, $orderPost);
+$lblCreated		    = Helper::cmsLinkSort('Created', 'created', $columnPost, $orderPost);
+$lblCreatedBy	    = Helper::cmsLinkSort('Created By', 'created_by', $columnPost, $orderPost);
+$lblModified	    = Helper::cmsLinkSort('Modified', 'modified', $columnPost, $orderPost);
+$lblModifiedBy	    = Helper::cmsLinkSort('Modified By', 'modified_by', $columnPost, $orderPost);
+$lblID			    = Helper::cmsLinkSort('ID', 'id', $columnPost, $orderPost);
 
-// GROUP ACP
+// SELECT BOX GROUP ACP
 $arrGroupACP		= array('default' => '- Select Group ACP -', '1' => 'Yes',  '0' => 'No');
 $selectboxGroupACP	= Helper::cmsSelectbox('filter_group_acp', 'custom-select custom-select-sm mr-1', $arrGroupACP, $this->arrParam['filter_group_acp'], 'width: unset');
-                                // cmsSelectbox($name, $class, $arrValue, $keySelect = 'default', $style = null, $id = null){
+
+// SELECT BOX STATUS
+$arrStatus		    = array('default' => '- Select Status -', '1' => 'Active',  '0' => 'Inactive');
+$selectboxStatus	= Helper::cmsSelectbox('filter_status', 'custom-select custom-select-sm mr-1', $arrStatus, $this->arrParam['filter_status'], 'width: unset');
+
+
+
+
+// <div class="d-flex flex-wrap align-items-center justify-content-between mb-2">
+    // <div class="mb-1">
+    //     <select id="bulk-action" name="bulk_action" class="custom-select custom-select-sm mr-1" style="width: unset">
+    //         <option value="" selected="">Bulk Action</option>
+    //         <option value="multi-delete">Multi Delete</option>
+    //         <option value="multi-active">Multi Active</option>
+    //         <option value="multi-inactive">Multi Inactive</option>
+    //     </select>
+    // <button id="bulk-apply" class="btn btn-sm btn-info">
+    //     Apply
+    //     <span class="badge badge-pill badge-danger navbar-badge" style="display: none"></span>
+    // </button>
+    // </div>
+
+// <a href="group-form.php" class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Add New</a>
+// </div>
+
 
 ?>     
                 
 <!-- Search & Filter -->
-<!-- <select id="filter_groupacp" name="filter_groupacp" class="custom-select custom-select-sm mr-1" style="width: unset">
-    <option value="default" selected="">- Select Group ACP -</option>
-    <option value="false">No</option>
-    <option value="true">Yes</option>
-</select> -->
 
 <div class="card card-info card-outline">
     
@@ -61,19 +83,18 @@ $selectboxGroupACP	= Helper::cmsSelectbox('filter_group_acp', 'custom-select cus
                 </div>
 
                     
-                    <!-- DUC -->
-                <form id="form_filter" name="form_filter">  
+                <!-- DUC ADD NEW HTML TAG -->
+                <form id="form_filter" name="form_filter" method="post" action="#">  
                     <fieldset id="filter-bar">
                         <div class="mb-1">
-
-                            <?= $selectboxGroupACP ;?>
+                            <?=  $selectboxStatus . $selectboxGroupACP;?>
                         </div>
                     </fieldset>
                 </form>
                     
 
             <div class="mb-1">
-                <form action="#">
+                <form action="#" method="get">
                     <div class="input-group">
 
                         <input type="hidden" name="module" value="backend">
@@ -109,12 +130,33 @@ $selectboxGroupACP	= Helper::cmsSelectbox('filter_group_acp', 'custom-select cus
 
         <div class="d-flex flex-wrap align-items-center justify-content-between mb-2">
             <div class="mb-1">
-                <select id="bulk-action" name="bulk-action" class="custom-select custom-select-sm mr-1" style="width: unset">
-                    <option value="" selected="">Bulk Action</option>
-                    <option value="multi-delete">Multi Delete</option>
-                    <option value="multi-active">Multi Active</option>
-                    <option value="multi-inactive">Multi Inactive</option>
-                </select> <button id="bulk-apply" class="btn btn-sm btn-info">Apply <span class="badge badge-pill badge-danger navbar-badge" style="display: none"></span></button>
+                <?php
+                    // SELECT BOX ACTION
+                    $arrAction		    = array('default' => '- Bulk Action -', 'trash' => 'Multi Delete',  'status_active' => 'Multi Active', 'status_inactive' => 'Multi Inactive');
+                    $selectboxAction	= Helper::cmsSelectbox('bulk_action', 'custom-select custom-select-sm mr-1', $arrAction, $this->arrParam['bulk_action'], 'width: unset');
+
+                    // Button Apply
+                    $linkApply          = URL::createLink($module, $controller, $this->arrParam['bulk_action'], array('type' => 'submit'));
+                    // $btnApply	        = Helper::cmsButton('apply', 'toolbar-apply', $linkApply, 'icon-32-apply', 'submit');
+                    $btnApply	        = Helper::cmsButton('Apply', 'bulk-apply', $linkApply, 'submit');
+
+                ?>
+
+                <!-- DUC ADD NEW HTML TAG -->
+                <form id="form-apply" name="form-apply" method="post" action="#">  
+
+                    <?php echo $selectboxAction ;?>
+
+                    <?php echo $btnApply ;?>
+
+
+                    <!-- <button id="bulk-apply" class="btn btn-sm btn-info">
+                        Apply
+                        <span class="badge badge-pill badge-danger navbar-badge" style="display: none"></span>
+                    </button> -->
+
+                </form>
+
             </div>
 
             <a href="group-form.php" class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Add New</a>
@@ -221,6 +263,7 @@ $selectboxGroupACP	= Helper::cmsSelectbox('filter_group_acp', 'custom-select cus
             </div>
         </form>
     </div>
+
     <div class="card-footer clearfix">
         <ul class="pagination pagination-sm m-0 float-right">
             <li class="page-item disabled"><a href="" class="page-link"><i class="fas fa-angle-double-left"></i></a></li>

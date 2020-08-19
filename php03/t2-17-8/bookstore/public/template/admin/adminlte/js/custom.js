@@ -40,10 +40,13 @@ function changeGroupACP(url){
 	}, 'json');
 }
 
-// function submitForm(url){
-// 	$('#form-table').attr('action', url);
-// 	$('#form-table').submit();
-// }
+// CMS Button
+function submitForm(url){
+	console.log(url);
+	$('#form-apply').attr('action', url);
+	$('#form-apply').submit();
+	alert (11);
+}
 
 function sortList(column, order){
 	$('input[name=sort_field]').val(column);
@@ -76,9 +79,9 @@ $(document).ready(function(){
 	// 	$('#form-table').submit();
 	// })
 	
-// 	$('#filter-bar select[name=filter_state]').change(function(){
-// 		$('#form-table').submit();
-// 	})
+	$('#filter-bar select[name=filter_status]').change(function(){
+		$('#form_filter').submit();
+	})
 	
 	$('#filter-bar select[name=filter_group_acp]').change(function(){
 		$('#form_filter').submit();
