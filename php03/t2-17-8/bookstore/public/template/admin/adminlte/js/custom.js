@@ -42,10 +42,17 @@ function changeGroupACP(url){
 
 // CMS Button
 function submitForm(url){
-	console.log(url);
+	alert(22);
+	// $.get(url, function(data){
+	// 	var value = 'option';
+	// }
 	$('#form-apply').attr('action', url);
+	console.log(url);
 	$('#form-apply').submit();
-	alert (11);
+	$('#form-table').submit();
+
+
+
 }
 
 function sortList(column, order){
@@ -62,7 +69,7 @@ function sortList(column, order){
 
 $(document).ready(function(){
 
-	$('input[name=checkAllName]').change(function(){
+	$('input[name=check-all]').change(function(){
 		var checkStatus = this.checked;
 		$('#form-table').find(':checkbox').each(function(){
 			this.checked = checkStatus;
@@ -78,6 +85,11 @@ $(document).ready(function(){
 	// 	$('#filter-bar input[name=search_value]').val('');
 	// 	$('#form-table').submit();
 	// })
+
+	// $('#form-apply select[name=bulk_action]').change(function(){
+	// 	$('#form-apply').submit();
+	// })
+
 	
 	$('#filter-bar select[name=filter_status]').change(function(){
 		$('#form_filter').submit();
@@ -86,4 +98,10 @@ $(document).ready(function(){
 	$('#filter-bar select[name=filter_group_acp]').change(function(){
 		$('#form_filter').submit();
 	})
+
+	// $('#filter-bar input[name=cid]').change(function(){
+	// 	alert(55);
+	// 	$('#form_filter').submit();
+	// })
+
 })

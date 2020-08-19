@@ -93,7 +93,7 @@ class GroupModel extends Model
 			$columnDir	= $arrParam['sort_order'];
 			$query[]	= "ORDER BY `$column` $columnDir";
 		} else {
-			$query[]	= "ORDER BY `id` DESC";
+			$query[]	= "ORDER BY `id` ASC";
 		}
 		
 

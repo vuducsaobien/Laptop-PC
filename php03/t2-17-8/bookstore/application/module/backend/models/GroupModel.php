@@ -53,6 +53,17 @@ class GroupModel extends Model
 
 		}
 
+		// SELECT BOX FILTER
+		// if (!empty($arrParam['bulk_action']) ) {
+		// 	$bulkAction	= $arrParam['bulk_action'];
+		// 	$query[]	= "AND `$sort_field` $sort_order";
+		// 	$flagWhere 	= false;
+
+		// } else {
+			// $query[]	= "ORDER BY `id` DESC";
+		// }
+
+
 		// Status
 		// if (isset($_GET['status'])) {
 		// 	echo '33';
@@ -68,7 +79,7 @@ class GroupModel extends Model
 				$query[]	= "AND `status` = '" . $arrParam['filter_status'] . "'";
 			}else{
 				$query[]	= "WHERE `status` = '" . $arrParam['filter_status'] . "'";
-				// $flagWhere	= true;
+				$flagWhere	= true;
 
 			}
 		}
@@ -92,6 +103,8 @@ class GroupModel extends Model
 		} else {
 			$query[]	= "ORDER BY `id` DESC";
 		}
+
+		
 
 
 
@@ -137,15 +150,21 @@ class GroupModel extends Model
 
 		if ($option['task'] == 'change-status') {
 			$status 		= $arrParam['type'];
-			$modified_by	= $this->_userInfo['username'];
-			$modified		= date('Y-m-d', time());
+			// $modified_by	= $this->_userInfo['username'];
+			// $modified		= date('Y-m-d', time());
 			if (!empty($arrParam['cid'])) {
-				$ids		= $this->createWhereDeleteSQL($arrParam['cid']);
-				$query		= "UPDATE `$this->table` SET `status` = $status, `modified` = '$modified', `modified_by` = '$modified_by'  WHERE `id` IN ($ids)";
-				$this->query($query);
-				Session::set('message', array('class' => 'success', 'content' => 'Có ' . $this->affectedRows() . ' phần tử được thay đổi trạng thái!'));
+				echo '<pre style = "color: red;">';
+				print_r($arrParam);
+				echo '</pre>';
+				// $ids		= $this->createWhereDeleteSQL($arrParam['cid']);
+				// $query		= "UPDATE `$this->table` SET `status` = $status, `modified` = '$modified', `modified_by` = '$modified_by'  WHERE `id` IN ($ids)";
+				// $query		= "UPDATE `$this->table` SET `status` = $status WHERE `id` IN ($ids)";
+
+				// $this->query($query);
+				// Session::set('message', array('class' => 'success', 'content' => 'Có ' . $this->affectedRows() . ' phần tử được thay đổi trạng thái!'));
 			} else {
-				Session::set('message', array('class' => 'error', 'content' => 'Vui lòng chọn vào phần tử muỗn thay đổi trạng thái!'));
+				echo 'cancel';
+				// Session::set('message', array('class' => 'error', 'content' => 'Vui lòng chọn vào phần tử muỗn thay đổi trạng thái!'));
 			}
 		}
 	}

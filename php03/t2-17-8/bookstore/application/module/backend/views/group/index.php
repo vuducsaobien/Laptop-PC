@@ -13,9 +13,6 @@ $url = "index.php?module=$module&controller=$controller&action=$action";
 if (!empty($_GET['clear-keyword'])) {
     $_GET['search_value'] = '';
 }
-// echo '<pre>';
-// print_r($this->arrParam);
-// echo '</pre>';
 
 $columnPost		    = $this->arrParam['sort_field'];
 $orderPost		    = $this->arrParam['sort_order'];
@@ -87,14 +84,14 @@ $selectboxStatus	= Helper::cmsSelectbox('filter_status', 'custom-select custom-s
                 <form id="form_filter" name="form_filter" method="post" action="#">  
                     <fieldset id="filter-bar">
                         <div class="mb-1">
-                            <?=  $selectboxStatus . $selectboxGroupACP;?>
+                            <?php echo  $selectboxStatus . $selectboxGroupACP;?>
                         </div>
                     </fieldset>
                 </form>
                     
 
             <div class="mb-1">
-                <form action="#" method="get">
+                <form action="#" method="get" id="UUUU">
                     <div class="input-group">
 
                         <input type="hidden" name="module" value="backend">
@@ -130,20 +127,26 @@ $selectboxStatus	= Helper::cmsSelectbox('filter_status', 'custom-select custom-s
 
         <div class="d-flex flex-wrap align-items-center justify-content-between mb-2">
             <div class="mb-1">
-                <?php
-                    // SELECT BOX ACTION
-                    $arrAction		    = array('default' => '- Bulk Action -', 'trash' => 'Multi Delete',  'status_active' => 'Multi Active', 'status_inactive' => 'Multi Inactive');
-                    $selectboxAction	= Helper::cmsSelectbox('bulk_action', 'custom-select custom-select-sm mr-1', $arrAction, $this->arrParam['bulk_action'], 'width: unset');
 
+                <!-- DUC ADD NEW HTML TAG -->
+                <form id="form-apply" name="form-apply" method="post" action="#">  
+                <?php
+
+
+
+                    // SELECT BOX ACTION
+                    $arrAction		    = array('default' => '- Bulk Action -', 'trash' => 'Multi Delete',  'statusactive' => 'Multi Active', 'statusinactive' => 'Multi Inactive');
+                    $selectboxAction	= Helper::cmsSelectbox('bulk_action', 'custom-select custom-select-sm mr-1', $arrAction, $this->arrParam['bulk_action'], 'width: unset');
                     // Button Apply
-                    $linkApply          = URL::createLink($module, $controller, $this->arrParam['bulk_action'], array('type' => 'submit'));
-                    // $btnApply	        = Helper::cmsButton('apply', 'toolbar-apply', $linkApply, 'icon-32-apply', 'submit');
+                    // echo $actionBtn  = (!empty($arr)) ? $arr : 'index';
+
+                    echo $linkApply          = ($actionBtn!='index') ? URL::createLink($module, $controller, $actionBtn, array('type' => '1')) : '';
+                    // echo $linkApply          = URL::createLink($module, $controller,  $this->arrParam['bulk_action'], array('type' => '1'));
+
                     $btnApply	        = Helper::cmsButton('Apply', 'bulk-apply', $linkApply, 'submit');
 
                 ?>
 
-                <!-- DUC ADD NEW HTML TAG -->
-                <form id="form-apply" name="form-apply" method="post" action="#">  
 
                     <?php echo $selectboxAction ;?>
 
@@ -163,13 +166,14 @@ $selectboxStatus	= Helper::cmsSelectbox('filter_status', 'custom-select custom-s
         </div>
 
         <!-- List Content -->
-        <form action="" method="post" class="table-responsive" id="form-table" name="form-table">
+        <form action="#" method="post" class="table-responsive" id="form-table" name="form-table">
             <table class="table table-bordered table-hover text-nowrap btn-table mb-0">
                 <thead>
                     <tr>
                         <th class="text-center">
                             <div class="custom-control custom-checkbox">
-                                <input class="custom-control-input" type="checkbox" id="check-all" name="checkAllName">
+                                <!-- CHECK ALL -->
+                                <input class="custom-control-input" type="checkbox" id="check-all" name="check-all">
                                 <label for="check-all" class="custom-control-label"></label>
                             </div>
                         </th>
@@ -185,75 +189,78 @@ $selectboxStatus	= Helper::cmsSelectbox('filter_status', 'custom-select custom-s
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                        if(!empty($this->Items)){
+<?php
+if(!empty($this->Items)){
 
-                            foreach($this->Items as $key => $value){
-                                $id 		 = $value['id'];
-                                $name		 = $value['name'];
-                                $group_acp	 = $value['group_acp'];
-                                $ordering    = $value['ordering'];
-                                $created  	 = $value['created'];
-                                $createdBy   = $value['created_by'];
-                                $modified  	 = $value['modified'];
-                                $modifiedBy	 = $value['modified_by'];
-                                $search 	 = $_GET['search_value'];
+    foreach($this->Items as $key => $value){
+        $id 		 = $value['id'];
+        $ckb		= '<input id="checkbox-'.$id.'" name="cid[]" value="'.$id.'" type="checkbox"  class="custom-control-input">
+                        <label for="checkbox-'.$id.'" class="custom-control-label"></label>';
+        $name		 = $value['name'];
+        $ordering    = $value['ordering'];
+        
+        $created	= Helper::formatDate('d-m-Y', $value['created']);
+        $createdBy   = $value['created_by'];
 
-                                $status	 	 = Helper::cmsStatus($value['status'], URL::createLink('backend', 'group', 'ajaxStatus', array('id' => $id, 'status' => $value['status'])), $id);
-                                $group_acp	 = Helper::cmsGroupACP($value['group_acp'], URL::createLink('backend', 'group', 'ajaxACP', array('id' => $id, 'group_acp' => $value['group_acp'])), $id);
-                                
-                                $resultName  =  Helper::highLight($search, $value['name']);
-                                $resultID    = Helper::highLight($search, $value['id']);
+        $modified	= Helper::formatDate('d-m-Y', $value['modified']);
+        $modifiedBy	 = $value['modified_by'];
+        $search 	 = $_GET['search_value'];
 
-                                echo '
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" id="checkbox-'.$id.'" name="checkbox[]" value="'.$id.'">
-                                            <label for="checkbox-'.$id.'" class="custom-control-label"></label>
-                                        </div>
-                                    </td>
+        $status	 	 = Helper::cmsStatus($value['status'], URL::createLink('backend', 'group', 'ajaxStatus', array('id' => $id, 'status' => $value['status'])), $id);
+        $group_acp	 = Helper::cmsGroupACP($value['group_acp'], URL::createLink('backend', 'group', 'ajaxACP', array('id' => $id, 'group_acp' => $value['group_acp'])), $id);
+        
+        $resultName  =  Helper::highLight($search, $value['name']);
+        $resultID    = Helper::highLight($search, $value['id']);
+        // <input id="checkbox-3" name="checkbox[]" value="3" class="custom-control-input" type="checkbox" >
 
-                                    <td class="text-center">'.$resultID.'</td>
-                                    <td class="text-center">'.$resultName.'</td>
+        echo '
+        <tr>
+            <td class="text-center">
+                <div class="custom-control custom-checkbox">
+                    '.$ckb.'
+                </div>
+            </td>
 
-                                    <td class="text-center">
-                                        '.$status.'
-                                    </td>
-                                    
-                                    <td class="text-center position-relative" name="groupA">'.$group_acp.'</td>
+            <td class="text-center">'.$resultID.'</td>
+            <td class="text-center">'.$resultName.'</td>
+
+            <td class="text-center">
+                '.$status.'
+            </td>
+            
+            <td class="text-center position-relative" name="groupA">'.$group_acp.'</td>
 
 
-                                    <td class="text-center position-relative">
-                                        <input type="number" name="chkOrdering['.$id.']" 
-                                        value="'.$ordering.'" class="chkOrdering form-control form-control-sm m-auto text-center" style="width: 65px" id="chkOrdering['.$id.']" 
-                                        data-id="'.$id.'" min="1">
-                                    </td>
-                                    
-                                    <td class="text-center">
-                                        <p class="mb-0 history-by"><i class="far fa-user">'.$createdBy.'</i></p>
-                                        <p class="mb-0 history-time"><i class="far fa-clock">'.$created.'</i></p>
-                                    </td>
+            <td class="text-center position-relative">
+                <input type="number" name="chkOrdering['.$id.']" 
+                value="'.$ordering.'" class="chkOrdering form-control form-control-sm m-auto text-center" style="width: 65px" id="chkOrdering['.$id.']" 
+                data-id="'.$id.'" min="1">
+            </td>
+            
+            <td class="text-center">
+                <p class="mb-0 history-by"><i class="far fa-user">'.$createdBy.'</i></p>
+                <p class="mb-0 history-time"><i class="far fa-clock">'.$created.'</i></p>
+            </td>
 
-                                    <td class="text-center modified-1">
-                                        <p class="mb-0 history-by"><i class="far fa-user">'.$modifiedBy.'</i></p>
-                                        <p class="mb-0 history-time"><i class="far fa-clock">'.$modified.'</i></p>
-                                    </td>
+            <td class="text-center modified-1">
+                <p class="mb-0 history-by"><i class="far fa-user">'.$modifiedBy.'</i></p>
+                <p class="mb-0 history-time"><i class="far fa-clock">'.$modified.'</i></p>
+            </td>
 
-                                    <td class="text-center">
-                                        <a href="" class="rounded-circle btn btn-sm btn-info" title="Edit">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </a>
+            <td class="text-center">
+                <a href="" class="rounded-circle btn btn-sm btn-info" title="Edit">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
 
-                                        <a href="#" class="rounded-circle btn btn-sm btn-danger" title="Delete">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                ';
-                            }
-                        }
-                    ?>
+                <a href="#" class="rounded-circle btn btn-sm btn-danger" title="Delete">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            </td>
+        </tr>
+        ';
+    }
+}
+?>
                 </tbody>
 
             </table>

@@ -1,27 +1,6 @@
 <?php
 class Helper
 {
-	// <!-- <button id="bulk-apply" class="btn btn-sm btn-info">
-	// 	Apply
-	// 	<span class="badge badge-pill badge-danger navbar-badge" style="display: none"></span>
-	// </button> -->
-
-
-
-	// Create Button
-	public static function cmsButton($name, $id, $link, $type = 'new')
-	{
-		$xhtml  = '<button class="btn btn-sm btn-info" id="' . $id . '">';
-		if ($type == 'new') {
-			$xhtml .= '<a class="modal" href="' . $link . '"><span class="' . $link . '"></span>' . $name . '</a>';
-		} else if ($type == 'submit') {
-			// $xhtml .= '<a class="modal" href="#" onclick="javascript:submitForm(\'' . $link . '\');"><span class="' . $icon . '"></span>' . $name . '</a>';
-			$xhtml .= '<a class="modal" href="' . $link . '"><span class="badge badge-pill badge-danger navbar-badge" style="display: none></span>' . $name . '</a>';
-		}
-		$xhtml .= '</button>';
-
-		return $xhtml;
-	}
 
 	public static function cmsButton2($name, $id, $link, $icon, $type = 'new')
 	{
@@ -100,7 +79,7 @@ class Helper
 
 	*/
 
-	public static function cmsSelectbox($name, $class, $arrValue, $keySelect = 'default', $style = null, $id = null)
+	public static function cmsSelectbox($name, $class, $arrValue, $keySelect = 'default', $style = null)
 	{
 		$xhtml = '<select name="' . $name . '" class="' . $class . '" style="' . $style . '">';
 		foreach ($arrValue as $key => $value) {
@@ -113,6 +92,33 @@ class Helper
 		$xhtml .= '</select>';
 		return $xhtml;
 	}
+
+		// <!-- <button id="bulk-apply" class="btn btn-sm btn-info">
+	// 	Apply
+	// 	<span class="badge badge-pill badge-danger navbar-badge" style="display: none"></span>
+	// </button> -->
+
+	// Create Button
+	public static function cmsButton($name, $id, $link, $type = 'new')
+	{
+		$xhtml = '';
+		if ($type == 'new') {
+			// $xhtml  .= '<button onclick="location.href='.$link.'" class="btn btn-sm btn-info" id="' . $id . '">';
+		} else if ($type == 'submit') { 
+			$xhtml .= 
+			'<a href="" onclick="javascript:submitForm(\'' . $link . '\');">
+				<button id="'.$id.'" class="btn btn-sm btn-info">'.$name.'
+				</button>
+			</a>';
+
+
+			// $xhtml .= '<a class="modal" href="#" onclick="javascript:submitForm(\'' . $link . '\');"><span class="' . $icon . '"></span>' . $name . '</a>';
+			// $xhtml  .= '<button type="submit" onclick="javascript:submitForm(\'' . $link . '\');      class="btn btn-sm btn-info" id="' . $id . '"  >'.$name.'</button>';
+		}
+
+		return $xhtml;
+	}
+
 
 	// Create Input
 	public static function cmsInput($type, $name, $id, $value, $class = null, $size = null)

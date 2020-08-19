@@ -62,26 +62,35 @@ class GroupController extends Controller
 	public function statusAction()
 	{
 		$this->_model->changeStatus($this->_arrParam, array('task' => 'change-status'));
-		URL::redirect('backend', 'group', 'index');
+		// URL::redirect('backend', 'group', 'index');
 	}
 
-	public function statusActiveAction()
+	public function statusactiveAction()
 	{
+		echo '<pre>';
+		print_r($this->_arrParam);
+		echo '</pre>';
+
 		$this->_model->changeStatus($this->_arrParam, array('task' => 'change-status'));
-		URL::redirect('backend', 'group', 'index');
+		// URL::redirect('backend', 'group', 'index');
 	}
 
-	public function statusInactiveAction()
+	public function statusinactiveAction()
 	{
+		echo '<pre>';
+		print_r($this->_arrParam);
+		echo '</pre>';
+		echo '11';
+
 		$this->_model->changeStatus($this->_arrParam, array('task' => 'change-status'));
-		URL::redirect('backend', 'group', 'index');
+		// URL::redirect('backend', 'group', 'index');
 	}
 
 	// ACTION: TRASH (*)
 	public function trashAction()
 	{
 		$this->_model->deleteItem($this->_arrParam);
-		echo $aa = URL::createLink('backend', 'group', 'index');
+		// echo $aa = URL::createLink('backend', 'group', 'index');
 		// URL::redirect("$aa");
 		// URL::createLink(URL::createLink('backend', 'group', 'index'));
 	}
